@@ -24,8 +24,8 @@ div[id^=menu] a:hover {
     font-family: "Comic Sans MS";
 }
 
-#menu_conn_box {
-    visibility: hidden;
+.menu_box {
+    display: none;
     position: absolute;
 }
 
