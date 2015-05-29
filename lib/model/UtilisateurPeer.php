@@ -8,6 +8,13 @@ class UtilisateurPeer extends BaseUtilisateurPeer
         return parent::doSelect($crit);
     }
     
+    public static function retrieveByPseudo($pseudo)
+    {
+        $crit = new Criteria();
+        $crit->add(self::PSEUDO,$pseudo,Criteria::EQUAL);
+        return parent::doSelectOne($crit);
+    }
+    
     //exemple de recherche
     public static function retrieveJean()
     {
