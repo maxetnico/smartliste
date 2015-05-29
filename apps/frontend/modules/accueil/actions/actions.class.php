@@ -37,4 +37,8 @@ class accueilActions extends sfActions
 <?php
     }
   }
+  public function executeObjectif(sfWebRequest $request)
+  {
+
+  }
 }
