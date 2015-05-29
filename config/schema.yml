@@ -1,0 +1,10 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  utilisateur:
+    _attributes: { phpName: Utilisateur }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    pseudo: { type: VARCHAR, size: '25', required: true }
+    pwd: { type: VARCHAR, size: '40', required: true }
+    datecreate: { type: TIMESTAMP, required: true }
