@@ -13,6 +13,7 @@ div[id^=menu], div[id^=menu] a {
     font-size:14px;
     font-weight: 600;
 }
+
 div[id^=menu] a:hover {
     color: #0f0;
 }

@@ -1023,3 +1023,299 @@ May 29 11:26:39 symfony [info] {sfWebDebugLogger} Action "accueil/index" 1.77 ms
 May 29 11:26:39 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 68.00 ms (1)
 May 29 11:26:39 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 12.75 ms (1)
 May 29 11:26:39 symfony [info] {sfWebResponse} Send content (81040 o)
+May 29 14:46:11 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 14:46:11 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 14:46:11 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 14:46:11 symfony [info] {sfPatternRouting} Match route "default_index" (/:module) for /liste with parameters array (  'module' => 'liste',  'action' => 'index',)
+May 29 14:46:11 symfony [info] {myUser} Automatic user logout due to timeout
+May 29 14:46:11 symfony [info] {myUser} User is not authenticated
+May 29 14:46:12 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 14:46:12 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 14:46:12 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 14:46:12 symfony [info] {listeActions} Call "listeActions->executeIndex()"
+May 29 14:46:12 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/liste/templates/indexSuccess.php"
+May 29 14:46:12 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:12 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:12 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 14:46:12 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 14:46:12 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 14:46:12 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 14:46:12 symfony [info] {sfWebDebugLogger} Configuration 8947.82 ms (9)
+May 29 14:46:12 symfony [info] {sfWebDebugLogger} Action "liste/index" 0.00 ms (1)
+May 29 14:46:12 symfony [info] {sfWebDebugLogger} View "Success" for "liste/index" 109.20 ms (1)
+May 29 14:46:12 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 14:46:12 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 14:46:12 symfony [info] {sfWebResponse} Send content (94924 o)
+May 29 14:46:17 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 14:46:17 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 14:46:17 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 14:46:17 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 14:46:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 14:46:17 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 14:46:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 14:46:17 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 14:46:17 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 14:46:17 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:17 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:17 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 14:46:17 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 14:46:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 14:46:17 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 14:46:17 symfony [info] {sfWebDebugLogger} Configuration 124.80 ms (10)
+May 29 14:46:17 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 14:46:17 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 124.80 ms (1)
+May 29 14:46:17 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 14:46:17 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 14:46:17 symfony [info] {sfWebResponse} Send content (88351 o)
+May 29 14:46:20 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 14:46:20 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 14:46:20 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 14:46:20 symfony [info] {sfPatternRouting} Match route "default_index" (/:module) for /liste with parameters array (  'module' => 'liste',  'action' => 'index',)
+May 29 14:46:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 14:46:20 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 14:46:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 14:46:20 symfony [info] {listeActions} Call "listeActions->executeIndex()"
+May 29 14:46:20 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/liste/templates/indexSuccess.php"
+May 29 14:46:20 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:20 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:20 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 14:46:20 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 14:46:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 14:46:20 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 14:46:20 symfony [info] {sfWebDebugLogger} Configuration 62.40 ms (9)
+May 29 14:46:20 symfony [info] {sfWebDebugLogger} Action "liste/index" 0.00 ms (1)
+May 29 14:46:20 symfony [info] {sfWebDebugLogger} View "Success" for "liste/index" 62.40 ms (1)
+May 29 14:46:20 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 15.60 ms (1)
+May 29 14:46:20 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 0.00 ms (1)
+May 29 14:46:20 symfony [info] {sfWebResponse} Send content (88271 o)
+May 29 14:46:22 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 14:46:22 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 14:46:22 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 14:46:22 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 14:46:23 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 14:46:23 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 14:46:23 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 14:46:23 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 14:46:23 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 14:46:23 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:23 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:46:23 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 14:46:23 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 14:46:23 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 14:46:23 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 14:46:23 symfony [info] {sfWebDebugLogger} Configuration 0.00 ms (9)
+May 29 14:46:23 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 14:46:23 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 62.40 ms (1)
+May 29 14:46:23 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 14:46:23 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 14:46:23 symfony [info] {sfWebResponse} Send content (88346 o)
+May 29 14:52:50 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 14:52:50 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 14:52:50 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 14:52:50 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 14:52:50 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 14:52:50 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 14:52:50 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 14:52:50 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 14:52:50 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 14:52:50 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:52:50 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:52:50 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 14:52:50 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 14:52:50 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 14:52:50 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 14:52:50 symfony [info] {sfWebDebugLogger} Configuration 15.60 ms (9)
+May 29 14:52:50 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 14:52:50 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 156.00 ms (1)
+May 29 14:52:50 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 15.60 ms (1)
+May 29 14:52:50 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 0.00 ms (1)
+May 29 14:52:51 symfony [info] {sfWebResponse} Send content (88380 o)
+May 29 15:05:46 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:05:46 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:05:46 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:05:46 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /accueil/objectif with parameters array (  'module' => 'accueil',  'action' => 'objectif',)
+May 29 15:05:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:05:46 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:05:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:05:46 symfony [info] {accueilActions} Call "accueilActions->executeObjectif()"
+May 29 15:05:46 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/objectifSuccess.php"
+May 29 15:05:46 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:05:46 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:05:46 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:05:46 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:05:46 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:05:46 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:05:46 symfony [info] {sfWebDebugLogger} Configuration 62.40 ms (9)
+May 29 15:05:46 symfony [info] {sfWebDebugLogger} Action "accueil/objectif" 0.00 ms (1)
+May 29 15:05:46 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/objectif" 109.20 ms (1)
+May 29 15:05:46 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:05:46 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 15:05:47 symfony [info] {sfWebResponse} Send content (88291 o)
+May 29 15:06:47 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:06:47 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:06:47 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:06:47 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /accueil/objectif with parameters array (  'module' => 'accueil',  'action' => 'objectif',)
+May 29 15:06:47 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:06:47 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:06:47 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:06:47 symfony [info] {accueilActions} Call "accueilActions->executeObjectif()"
+May 29 15:06:47 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/objectifSuccess.php"
+May 29 15:06:47 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:06:47 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:06:47 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:06:47 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:06:47 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:06:47 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:06:47 symfony [info] {sfWebDebugLogger} Configuration 31.20 ms (9)
+May 29 15:06:47 symfony [info] {sfWebDebugLogger} Action "accueil/objectif" 0.00 ms (1)
+May 29 15:06:47 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/objectif" 93.60 ms (1)
+May 29 15:06:47 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:06:47 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 15:06:47 symfony [info] {sfWebResponse} Send content (88461 o)
+May 29 15:07:04 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:04 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:04 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:04 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 15:07:04 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:04 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:04 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:04 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 15:07:04 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 15:07:04 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:04 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:04 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:04 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:04 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:04 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:04 symfony [info] {sfWebDebugLogger} Configuration 46.80 ms (9)
+May 29 15:07:04 symfony [info] {sfWebDebugLogger} Action "accueil/index" 15.60 ms (1)
+May 29 15:07:04 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 62.40 ms (1)
+May 29 15:07:04 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 15.60 ms (1)
+May 29 15:07:04 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 0.00 ms (1)
+May 29 15:07:04 symfony [info] {sfWebResponse} Send content (88519 o)
+May 29 15:07:07 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:07 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:07 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:07 symfony [info] {sfPatternRouting} Match route "default_index" (/:module) for /liste with parameters array (  'module' => 'liste',  'action' => 'index',)
+May 29 15:07:07 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:07 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:07 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:07 symfony [info] {listeActions} Call "listeActions->executeIndex()"
+May 29 15:07:07 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/liste/templates/indexSuccess.php"
+May 29 15:07:07 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:07 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:07 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:07 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:07 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:07 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:07 symfony [info] {sfWebDebugLogger} Configuration 31.20 ms (9)
+May 29 15:07:07 symfony [info] {sfWebDebugLogger} Action "liste/index" 0.00 ms (1)
+May 29 15:07:07 symfony [info] {sfWebDebugLogger} View "Success" for "liste/index" 62.40 ms (1)
+May 29 15:07:07 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:07:07 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 15:07:07 symfony [info] {sfWebResponse} Send content (88431 o)
+May 29 15:07:12 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:12 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:12 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:12 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /accueil/objectif with parameters array (  'module' => 'accueil',  'action' => 'objectif',)
+May 29 15:07:12 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:12 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:12 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:12 symfony [info] {accueilActions} Call "accueilActions->executeObjectif()"
+May 29 15:07:12 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/objectifSuccess.php"
+May 29 15:07:12 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:12 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:12 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:12 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:12 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:12 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:12 symfony [info] {sfWebDebugLogger} Configuration 0.00 ms (9)
+May 29 15:07:12 symfony [info] {sfWebDebugLogger} Action "accueil/objectif" 0.00 ms (1)
+May 29 15:07:12 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/objectif" 78.00 ms (1)
+May 29 15:07:12 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 15.60 ms (1)
+May 29 15:07:12 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 0.00 ms (1)
+May 29 15:07:12 symfony [info] {sfWebResponse} Send content (88511 o)
+May 29 15:07:14 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:14 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:14 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:14 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 15:07:14 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:14 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:14 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:14 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 15:07:14 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 15:07:14 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:14 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:14 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:14 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:14 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:14 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:14 symfony [info] {sfWebDebugLogger} Configuration 47.80 ms (9)
+May 29 15:07:14 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 15:07:14 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 62.40 ms (1)
+May 29 15:07:14 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:07:14 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 15:07:14 symfony [info] {sfWebResponse} Send content (88519 o)
+May 29 15:07:15 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:15 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:15 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:15 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 15:07:15 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:15 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:15 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:15 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 15:07:15 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 15:07:15 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:15 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:15 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:15 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:15 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:15 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:15 symfony [info] {sfWebDebugLogger} Configuration 15.60 ms (9)
+May 29 15:07:15 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 15:07:15 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 62.40 ms (1)
+May 29 15:07:15 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:07:15 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 15:07:16 symfony [info] {sfWebResponse} Send content (88502 o)
+May 29 15:07:17 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:17 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:17 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:17 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 15:07:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:17 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:17 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 15:07:17 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 15:07:17 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:17 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:17 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:17 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:17 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:17 symfony [info] {sfWebDebugLogger} Configuration 15.60 ms (9)
+May 29 15:07:17 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 15:07:17 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 62.40 ms (1)
+May 29 15:07:17 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:07:17 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 15.60 ms (1)
+May 29 15:07:17 symfony [info] {sfWebResponse} Send content (88502 o)
+May 29 15:07:19 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 15:07:19 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 15:07:19 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 15:07:19 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 15:07:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 15:07:19 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 15:07:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 15:07:19 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 15:07:19 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 15:07:19 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:19 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 15:07:19 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 15:07:19 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 15:07:19 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 15:07:19 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 15:07:19 symfony [info] {sfWebDebugLogger} Configuration 62.40 ms (9)
+May 29 15:07:19 symfony [info] {sfWebDebugLogger} Action "accueil/index" 0.00 ms (1)
+May 29 15:07:19 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 62.40 ms (1)
+May 29 15:07:19 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 0.00 ms (1)
+May 29 15:07:19 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 0.00 ms (1)
+May 29 15:07:19 symfony [info] {sfWebResponse} Send content (88502 o)

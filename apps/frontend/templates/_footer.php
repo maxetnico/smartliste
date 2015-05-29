@@ -1,7 +1,7 @@
 <div id="menu_page_bas">
     <ul>
-        <li>Objectif</li>
-        <li>Plan du site</li>
-        <li>Contact</li>
+        <li><a href="<?php echo url_for1('accueil/objectif') ?>">Objectif</a></li>
+        <li><a href="<?php echo url_for1('accueil/index') ?>">Plan du site</a></li>
+        <li><a href="<?php echo url_for1('accueil/index') ?>">Contact</a></li>
     </ul>
 </div>
