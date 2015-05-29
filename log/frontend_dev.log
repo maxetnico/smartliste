@@ -1023,3 +1023,26 @@ May 29 11:26:39 symfony [info] {sfWebDebugLogger} Action "accueil/index" 1.77 ms
 May 29 11:26:39 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 68.00 ms (1)
 May 29 11:26:39 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 12.75 ms (1)
 May 29 11:26:39 symfony [info] {sfWebResponse} Send content (81040 o)
+May 29 14:38:29 symfony [info] {sfPatternRouting} Connect sfRoute "homepage" (/)
+May 29 14:38:29 symfony [info] {sfPatternRouting} Connect sfRoute "default_index" (/:module)
+May 29 14:38:29 symfony [info] {sfPatternRouting} Connect sfRoute "default" (/:module/:action/*)
+May 29 14:38:29 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'accueil',  'action' => 'index',)
+May 29 14:38:29 symfony [info] {myUser} Automatic user logout due to timeout
+May 29 14:38:29 symfony [info] {myUser} User is not authenticated
+May 29 14:38:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+May 29 14:38:29 symfony [info] {sfFilterChain} Executing filter "sfCommonFilter"
+May 29 14:38:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+May 29 14:38:29 symfony [info] {accueilActions} Call "accueilActions->executeIndex()"
+May 29 14:38:29 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/indexSuccess.php"
+May 29 14:38:29 symfony [info] {sfPHPView} Decorate content with "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:38:29 symfony [info] {sfPHPView} Render "C:\wamp\www\smartliste\apps\frontend\templates/layout.php"
+May 29 14:38:29 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu.php"
+May 29 14:38:30 symfony [info] {sfPartialView} Render "C:\wamp\www\smartliste\apps\frontend\modules/accueil/templates/_menu_Connected.php"
+May 29 14:38:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+May 29 14:38:30 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+May 29 14:38:30 symfony [info] {sfWebDebugLogger} Configuration 42.72 ms (9)
+May 29 14:38:30 symfony [info] {sfWebDebugLogger} Action "accueil/index" 1.98 ms (1)
+May 29 14:38:30 symfony [info] {sfWebDebugLogger} View "Success" for "accueil/index" 92.48 ms (1)
+May 29 14:38:30 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu" 5.55 ms (1)
+May 29 14:38:30 symfony [info] {sfWebDebugLogger} Partial "accueil/_menu_Connected" 12.74 ms (1)
+May 29 14:38:30 symfony [info] {sfWebResponse} Send content (94795 o)
