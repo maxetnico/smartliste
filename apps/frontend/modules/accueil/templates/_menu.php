@@ -1,4 +1,11 @@
-<div style="background-color: #f00">
-    <a id="menu1" href="<?php echo url_for1('liste/index') ?>">Connexion</a>
-    <a href="<?php echo url_for1('accueil/index') ?>">Menu 2</a>
+<?php  //onclick="<?php echo url_for1('liste/index')" 
+
+?>
+<div id="menu_1">
+    <button type="button" id="bouton_connexion">Connexion</button>
+    <div id="menu_conn_box">
+        <button type="button" id="bouton_valider">OK</button>
+        <button type="button" id="bouton_anuler">Anuler</button>
+    </div>
 </div>
+

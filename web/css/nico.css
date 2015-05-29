@@ -1,3 +1,36 @@
-#menu1 {
-    color:red;
+body, a {
+    /*color:black;*/
+    font-size: 14px;
+    font-family: "Comic Sans MS";
+}
+
+header, footer {
+    background-color: #084;
+}
+
+div[id^=menu], div[id^=menu] a {
+    color: #ffffff;
+    font-size:14px;
+    font-weight: 600;
+}
+div[id^=menu] a:hover {
+    color: #0f0;
+}
+
+.style_police {
+    color:white;
+    font-size: 2em;
+    font-family: "Comic Sans MS";
+}
+
+#menu_conn_box {
+    visibility: hidden;
+    position: absolute;
+}
+
+button {
+    background-color: #5cb85c;
+    border: 5px solid white;
+    border-radius: 15px;
+    padding: 3px 10px;
 }

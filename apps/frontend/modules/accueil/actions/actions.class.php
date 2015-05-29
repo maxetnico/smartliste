@@ -19,10 +19,22 @@ class accueilActions extends sfActions
   {
       //Le $this->variable sert à passer des paramètres au template
 //      $this->jeans = UtilisateurPeer::retrieveJean();
-//      
+//    
 //      $user = new Utilisateur();
 //      $user->setPseudo("bibi");      
 //      $user->save();     
-     $this->jeans = array();
+      //var_dump($this->getUser());die;
+  }
+  public function executeConnexion(sfWebRequest $request)
+  {
+    var_dump($this->getUser()->isAuthenticated());
+    var_dump($this->getUser()->setAuthenticated(true));
+    var_dump($this->getUser()->isAuthenticated());
+    if($this->getUser()->isAuthenticated())
+    {
+        ?>
+        $('#menu1').css('visibility','hidden');
+<?php
     }
+  }
 }
