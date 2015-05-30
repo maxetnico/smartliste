@@ -7,7 +7,16 @@ body, a {
 header, footer {
     background-color: #084;
 }
-
+footer {
+    height: 20px;
+}
+footer li {
+    float:right;
+    padding: 0 20px;
+}
+span.clear {
+    clear: both;
+}
 div[id^=menu], div[id^=menu] a {
     color: #ffffff;
     font-size:14px;
