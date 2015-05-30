@@ -1,5 +1,4 @@
-<div style="background-color: #0f0">
-    <span>
+<div id="test">
     <?php 
 //        if(count($jeans) > 0)
 //        {
@@ -10,6 +9,10 @@
 //            echo "Aucun jean n'a été trouvé";
 //        }
         ?>        
-        Teste de super 1.
-    </span>
+    <div id="block_info">
+        block description
+    </div>    
+    <div id="block_actu">
+        block actu
+    </div>
 </div>

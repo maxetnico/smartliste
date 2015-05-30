@@ -19,7 +19,7 @@
                 <input type="text" name="pseudo" placeholder="Pseudo">
                 <input type="password" name="mdp" placeholder="Mot de passe">
                 <input type="text" name="mail" placeholder="Mail (facultatif)">
-                <button type="submit">S'inscrire</button>
+                <button type="submit" id="bouton_inscrire">S'inscrire</button>
                 <button type="button" class="bouton_annuler">Annuler</button>
             </form>
         </div>
