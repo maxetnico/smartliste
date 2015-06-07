@@ -9,10 +9,12 @@
     </head>
     <body>
         <header>
-            <div id="banniere"></div>
-            <?php echo image_tag('logo_v2.png'); ?>
+            <div id="b_banniere">
             <?php include_partial('accueil/menu');?>
+                <?php echo image_tag('logo_v2.png'); ?>
+            </div>
         </header>
+        <div class="clean"></div>
         <div id='navigation'></div>
         <div id='corps'>
         <?php 

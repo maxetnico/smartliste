@@ -15,4 +15,5 @@
     <div id="block_actu">
         block actu
     </div>
+    <div class="clean"></div>
 </div>

@@ -1,23 +1,31 @@
 body {
     /*color:black;*/
-    background-color: #084;
+    --background-color: #084;
+    background-image: url("../images/fond.png");
+    background-size: 60%;
     font-size: 14px;
     font-family: "Comic Sans MS";
+    margin: 0;
+    padding: 0;
 }
 
 header {
     background-color: #084;
-    padding: 15px;
+    margin: 0;
+    padding: 0;
 }
-header #banniere {
-    background-image: url("/images/banniere.png");
-    background-size: 100%
+header , footer {
+    background-image: url("../images/banniere.jpg");
+    background-size: 100%;
+    padding:15px;
+    
 }
 header img {
     /*position: absolute;*/
-    display: block;
+    display: inline-block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    text-align: center;
     
 }
 footer {
@@ -29,6 +37,7 @@ footer {
     padding: 5px;
 }
 footer li {
+    color:white;
     float: right;
     margin: 2px 15px;
 }
@@ -42,10 +51,15 @@ a {
     font-family: "Comic Sans MS";
 }
 
+#menu_1{
+    display:inline-block;
+}
+
 div[id^=menu] a, button {
     color: #ffffff;
     font-size:14px;
     font-weight: 600;
+    padding: 0 5px;
 }
 
 div[id^=menu] a:hover {
@@ -87,4 +101,12 @@ button {
 
 button:hover {
     background-color: #0a0;
+}
+
+div[id^=block_] {
+    float:left;
+    border: 5px solid white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 10px;
 }
