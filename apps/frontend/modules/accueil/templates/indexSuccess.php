@@ -1,5 +1,4 @@
-<div id="test">
-    <h1>Accueil</h1>
+<div id="test">    
     <?php 
 //        if(count($jeans) > 0)
 //        {

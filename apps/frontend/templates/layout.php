@@ -15,7 +15,7 @@
             </div>
         </header>
         <div class="clean"></div>
-        <div id='navigation'></div>
+        <div id='navigation'><?php if($sf_user->isAuthenticated()) { include_partial("accueil/menu_connected"); } ?></div>
         <div id='corps'>
         <?php 
         //Ecrit le rendu de l'action
