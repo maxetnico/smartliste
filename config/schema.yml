@@ -2,9 +2,71 @@ propel:
   _attributes:
     package: lib.model
     defaultIdMethod: native
+  categorie:
+    _attributes: { phpName: Categorie }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true, index: unique }
+    nom: { type: VARCHAR, size: '128', required: true }
+    id_parent: { type: INTEGER, size: '11', required: false }
+    img: { type: LONGVARCHAR, required: false }
+    id_utilisateur: { type: INTEGER, size: '11', required: false }
+    id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '1' }
+    id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '1' }
+  etat:
+    _attributes: { phpName: Etat }
+    id: { type: TINYINT, size: '4', primaryKey: true, autoIncrement: true, required: true }
+    code: { type: VARCHAR, size: '3', required: true }
+    nom: { type: VARCHAR, size: '30', required: true }
+  liste:
+    _attributes: { phpName: Liste }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
+    nom: { type: VARCHAR, size: '255', required: true }
+    id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_partage: { type: BLOB, required: false }
+    date_creation: { type: TIMESTAMP, required: true }
+    date_modification: { type: TIMESTAMP, required: false }
+    _indexes: { id_utilisateur_idx: [id_utilisateur] }
+  liste_produit_link:
+    _attributes: { phpName: ListeProduitLink }
+    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    id_liste: { type: BIGINT, size: '20', required: true, foreignTable: liste, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_produit: { type: BIGINT, size: '20', required: true, foreignTable: produit, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    quantite: { type: INTEGER, size: '11', required: false }
+    id_magazin: { type: BIGINT, size: '20', required: false, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    coche: { type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    coche_date: { type: TIMESTAMP, required: false }
+    coche_id_utilisteur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { fk_lpl_magasin_idx: [id_magazin], fk_lpl_utilisateur_idx: [coche_id_utilisteur], fk_lpl_produit_idx: [id_produit], fk_lpl_liste_idx: [id_liste] }
+  magasin:
+    _attributes: { phpName: Magasin }
+    id: { type: BIGINT, size: '20', primaryKey: true, required: true }
+    nom: { type: VARCHAR, size: '128', required: true }
+    img: { type: VARCHAR, size: '45', required: false }
+  produit:
+    _attributes: { phpName: Produit }
+    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    nom: { type: VARCHAR, size: '128', required: true }
+    img: { type: LONGVARCHAR, required: false }
+    id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_categorie: { type: INTEGER, size: '11', required: false, foreignTable: categorie, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: etat, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { id_etat_idx: [id_etat], fk_produit_utilisateur1_idx: [id_utilisateur], fk_produit_categorie1_idx: [id_categorie], fk_produit_visibilite_idx: [id_visibilite] }
   utilisateur:
     _attributes: { phpName: Utilisateur }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     pseudo: { type: VARCHAR, size: '25', required: true }
     pwd: { type: VARCHAR, size: '40', required: true }
     datecreate: { type: TIMESTAMP, required: true }
+    mail: { type: VARCHAR, size: '100', required: false }
+    datelastconn: { type: TIMESTAMP, required: false }
+  utilisateur_liste_link:
+    _attributes: { phpName: UtilisateurListeLink }
+    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    id_liste: { type: BIGINT, size: '20', required: true, foreignTable: liste, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { fk_partage_utilisateur1_idx: [id_utilisateur], fk_partage_liste1_idx: [id_liste] }
+  visibilite:
+    _attributes: { phpName: Visibilite }
+    id: { type: TINYINT, size: '4', primaryKey: true, autoIncrement: true, required: true }
+    code: { type: VARCHAR, size: '3', required: true }
+    nom: { type: VARCHAR, size: '30', required: true }
