@@ -10,7 +10,7 @@ default:
     #robots:       index, follow
     charset:      UTF-8
     
-  stylesheets:    [bootstrap.min.css, bootstrap-theme.min.css, nico.css, max.css]
+  stylesheets:    [bootstrap.min.css, bootstrap-theme.min.css, font-awesome.min.css, nico.css, max.css]
 
   javascripts:    [jquery-1.11.2.js, bootstrap.min.js, max.js, nico.js]
 

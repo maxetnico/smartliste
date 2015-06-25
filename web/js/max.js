@@ -8,6 +8,7 @@ function onloadMax()
         $('#menu_insc_box').toggle();
         $('#menu_conn_box').hide();
     });
-    //$('#bouton_valider').click(function () {$('#menu_conn_box').hide();});
+    
     $('.bouton_annuler').click(function () {$('.menu_box').hide();});
+    $('#bouton_addliste').click(function () {$('#menu_addliste_box').toggle();});
 }

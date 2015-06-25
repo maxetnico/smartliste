@@ -19,9 +19,11 @@ propel:
   liste:
     _attributes: { phpName: Liste }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
+    icone: { type: VARCHAR, size: '100', required: false }
     nom: { type: VARCHAR, size: '255', required: true }
+    couleur: { type: VARCHAR, size: '10', required: false }
     id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    id_partage: { type: BLOB, required: false }
+    id_partage: { type: VARCHAR, size: '15', required: false }
     date_creation: { type: TIMESTAMP, required: true }
     date_modification: { type: TIMESTAMP, required: false }
     _indexes: { id_utilisateur_idx: [id_utilisateur] }
