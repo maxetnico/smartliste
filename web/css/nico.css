@@ -118,21 +118,25 @@ ul {
     position: absolute;
     background-color: #47D147;
     border: 5px solid white;
-    border-radius: 15px;
-    padding: 5px 10px;
-    margin: 10px 0 0 0;
+    border-radius: 10px;
+    padding: auto;
+    margin: 5px 0 0 0;
 }
-
+#menu_conn_box { width:50%;max-width: 300px;min-width:180px;z-index: 998;}
+#menu_insc_box { width:50%;max-width: 300px;min-width:180px;z-index: 999;}
+.menu_box span { width: 81px;text-align: right;display: inline-block;padding-right: 5px;}
 .menu_box input {
-    display:block;
-    margin-bottom:10px;
+    display:inline;
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
+    text-align: center;
 }
-
 button {
     background-color: #5cb85c;
     border: 5px solid white;
     border-radius: 15px;
     padding: 3px 10px;
+    margin:3px;
 }
 
 button:hover {

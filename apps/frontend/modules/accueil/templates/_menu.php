@@ -7,8 +7,8 @@
         <button type="button" id="bouton_connexion" class="bouton_connexion">Connexion</button>
         <div id="menu_conn_box" class="menu_box">
             <form method="post" action="<?php echo url_for('accueil/connexion') ?>">
-                <input type="text" name="pseudo" placeholder="Pseudo">
-                <input type="password" name="mdp" placeholder="Mot de passe">
+                <span>Login : </span><input type="text" name="pseudo" placeholder="Pseudo"><br>
+                <span>Password : </span><input type="password" name="mdp" placeholder="Mot de passe"><br>
                 <button type="submit" id="bouton_valider">OK</button>
                 <button type="button" class="bouton_annuler">Annuler</button>
             </form>
@@ -16,9 +16,9 @@
         <button type="button" id="bouton_inscription" class="bouton_connexion">Inscription</button>
         <div id="menu_insc_box" class="menu_box">
             <form method="post" action="<?php echo url_for('accueil/inscription') ?>">
-                <input type="text" name="pseudo" placeholder="Pseudo">
-                <input type="password" name="mdp" placeholder="Mot de passe">
-                <input type="text" name="mail" placeholder="Mail (facultatif)">
+                <span>Login : </span><input type="text" name="pseudo" placeholder="Pseudo"><br>
+                <span>Password : </span><input type="password" name="mdp" placeholder="Mot de passe"><br>
+                <span>Mail : </span><input type="text" name="mail" placeholder="Mail (facultatif)"><br>
                 <button type="submit" id="bouton_inscrire">S'inscrire</button>
                 <button type="button" class="bouton_annuler">Annuler</button>
             </form>
