@@ -26,7 +26,7 @@ footer {
     background-size: 100%;
     padding:15px 0;
 }
-.rotate {  
+.rotation {  
     transform: rotate(-9deg); 
     -ms-transform: rotate(-9deg); /* IE 9 */
     -webkit-transform: rotate(-9deg); /* Chrome, Safari, Opera */
@@ -37,20 +37,27 @@ footer {
     font-weight: 900;
     padding: 0 5px 0 0;
     display:inline-block;
+    text-align: center;
 }
-header #b_banniere {
-    min-width: 800px;
+
+#logo {
+    width:120px;
 }
-header #b_p1 {
+.ban1 {
     display: inline-block;
-    width: 19%;
-    margin:auto 10px;
-    
+    width: 20%;
+    min-width: 220px;
+    text-align: center; 
+    padding: auto;
 }
-header #b_p2 {
-    display:inline-block;
-    width: 80%;
-    text-align: right;
+.ban2a {
+    display: inline-block;
+    width: 20%;
+}
+.ban2b {
+    display: inline-block;
+    min-width: 300px;
+    padding: auto;
 }
 
 .clean {
@@ -116,6 +123,11 @@ ul {
     margin: 10px 0 0 0;
 }
 
+.menu_box input {
+    display:block;
+    margin-bottom:10px;
+}
+
 button {
     background-color: #5cb85c;
     border: 5px solid white;
@@ -134,4 +146,3 @@ div[id^=block_] {
     padding: 5px 10px;
     margin: 10px;
 }
-

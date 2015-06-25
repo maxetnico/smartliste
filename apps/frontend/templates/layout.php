@@ -11,8 +11,9 @@
     <body>
         <header>
             <div id="b_banniere">
-                <div id="b_p1"><?php include_partial('accueil/menu');?></div>
-                <div id="b_p2"><span class="rotate">Smartlist</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
+                <div class="ban1"><?php include_partial('accueil/menu');?></div>
+                <div class="ban2a"></div>
+                <div class="ban2b"><span class="rotation">Smartlist</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
             </div>
         </header>
         <div class="clean"></div>
