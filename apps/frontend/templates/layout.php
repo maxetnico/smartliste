@@ -12,11 +12,9 @@
         <header>
             <div id="b_banniere">
                 <div class="ban1"><?php include_partial('accueil/menu');?></div>
-                <div class="ban2a"></div>
-                <div class="ban2b"><span class="rotation">Smartlist</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
+                <div class="ban2b"><span class="rotation">Smartliste</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
             </div>
         </header>
-        <div class="clean"></div>
         <div id='navigation'><?php if($sf_user->isAuthenticated()) { include_partial("accueil/menu_connected"); } ?></div>
         <div id='corps'>
         <?php 
