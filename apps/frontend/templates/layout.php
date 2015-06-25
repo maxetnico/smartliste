@@ -3,6 +3,7 @@
     <head>
 
       <link rel="shortcut icon" href="http://localhost/smartliste/web/images/logo-mini.png" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php include_http_metas() ?>
       <?php include_metas() ?>
       <?php include_title() ?>
@@ -10,8 +11,8 @@
     <body>
         <header>
             <div id="b_banniere">
-            <?php include_partial('accueil/menu');?>
-                <?php echo image_tag('logo_v2.png'); ?>
+                <div id="b_p1"><?php include_partial('accueil/menu');?></div>
+                <div id="b_p2"><span class="rotate">Smartlist</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
             </div>
         </header>
         <div class="clean"></div>

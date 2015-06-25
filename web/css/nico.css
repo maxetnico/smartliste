@@ -1,6 +1,4 @@
 body {
-    /*color:black;*/
-    --background-color: #084;
     background-image: url("../images/fond.png");
     background-size: 60%;
     font-size: 14px;
@@ -8,29 +6,58 @@ body {
     margin: 0;
     padding: 0;
 }
-
+div {
+    margin: 0;
+    padding: 0;
+}
 header {
     background-color: #084;
     margin: 0;
     padding: 0;
 }
-header , footer {
+header {
     background-image: url("../images/banniere.jpg");
-    background-size: 100%;
-    padding:15px;
-    
-}
-header img {
-    /*position: absolute;*/
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+    background-size: 100% 100%;
+    padding:15px 0;
     
 }
 footer {
+    background-image: url("../images/banniere.jpg");
+    background-size: 100%;
+    padding:15px 0;
+}
+.rotate {  
+    transform: rotate(-9deg); 
+    -ms-transform: rotate(-9deg); /* IE 9 */
+    -webkit-transform: rotate(-9deg); /* Chrome, Safari, Opera */
+    -o-transform: rotate(-9deg); /* Opera old*/
+    -moz-transform: rotate(-9deg); /* firefox */
+    color: #ffffff;
+    font-size:32px;
+    font-weight: 900;
+    padding: 0 5px 0 0;
+    display:inline-block;
+}
+header #b_banniere {
+    min-width: 800px;
+}
+header #b_p1 {
+    display: inline-block;
+    width: 19%;
+    margin:auto 10px;
+    
+}
+header #b_p2 {
+    display:inline-block;
+    width: 80%;
+    text-align: right;
+}
+
+.clean {
+    clear: both;
+}
+footer {
     background-color: #084;
-    border: 0px solid black;
     position:fixed;
     width: 100%;
     bottom: 0;
@@ -42,9 +69,6 @@ footer li {
     margin: 2px 15px;
 }
 
-.clean{
-    clear: both;
-}
 
 a {
     font-size: 14px;
@@ -73,7 +97,7 @@ ul {
 }
 
 #corps {
-    background-image: url("/images/fond.png");
+    ___background-image: url("/images/fond.png");
 }
 
 .style_police {
@@ -110,3 +134,4 @@ div[id^=block_] {
     padding: 5px 10px;
     margin: 10px;
 }
+
