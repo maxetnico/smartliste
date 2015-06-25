@@ -24,6 +24,7 @@
             </form>
         </div>
     <?php } else { ?>
-        <button type="button" id="bouton_deconnexion">Déconnexion</button>
+        <h4 class="presentation_pseudo">Bonjour <?php echo $sf_user->getModelUtilisateur()->getPseudo() ?></h4>
+        <a href="<?php echo url_for("accueil/deconnexion") ?>"><button type="button" id="bouton_deconnexion">Déconnexion</button></a>
     <?php } ?>
 </div>

@@ -25,6 +25,14 @@ class accueilActions extends sfActions
 //      $user->save();     
       //var_dump($this->getUser());die;
   }
+  
+  public function executeDeconnexion(sfWebRequest $request)
+  {
+    $this->getUser()->setModelUtilisateur(null);
+    $this->getUser()->setAuthenticated(false);
+    $this->redirect('accueil/index');
+  }
+  
   public function executeConnexion(sfWebRequest $request)
   {
     if($request->hasParameter('pseudo') && $request->hasParameter('mdp'))
@@ -37,7 +45,7 @@ class accueilActions extends sfActions
             $this->getUser()->setModelUtilisateur($modelUtilisateur);
             $this->getUser()->setAuthenticated(true);
             //termine le script et affiche la page d'acceuil
-            $this->redirect('acceuil/index');            
+            $this->redirect('accueil/index');            
         }           
     }               
     // s'il y a un problème, l'utilisateur n'est plus authentifié
