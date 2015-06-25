@@ -12,7 +12,10 @@ $backgroundNom = ' background: -webkit-linear-gradient(left, '.$liste->getCouleu
   background: linear-gradient(to right, '.$liste->getCouleur().', #fff);';
 
 ?>
-<div class="liste">
-    <div class="icone" style="<?php echo $bakckgroundIcone ?>"><span class="<?php echo $liste->getIcone() ?>"></span></div>
-    <div class="nom" style="<?php echo $bakckgroundNom ?>"><span class="<?php echo $liste->getNom() ?>"></span></div>
+<div class="liste row" onclick="allerALUrl(<?php echo "'".url_for("liste/detail").'/liste/'.$liste->getId()."'"; ?>)">
+    <div class="icone col-xs-offset-1 col-xs-1" style="<?php echo $backgroundIcone ?>"><span class="<?php echo $liste->getIcone() ?> hidden-sm hidden-xs"></span></div>
+    <div class="nom col-xs-9" style="<?php echo $backgroundNom ?>">
+        <span><?php echo $liste->getNom() ?></span>
+        <a href="<?php echo url_for("liste/quitter").'/liste/'.$liste->getId() ?>" title="Quitter"><span class="quitter fa fa-share-square-o"></span></a>
+    </div>
 </div>

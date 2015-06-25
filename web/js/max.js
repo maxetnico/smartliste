@@ -12,3 +12,8 @@ function onloadMax()
     $('.bouton_annuler').click(function () {$('.menu_box').hide();});
     $('#bouton_addliste').click(function () {$('#menu_addliste_box').toggle();});
 }
+
+function allerALUrl(strUrl)
+{
+    document.location.href = strUrl;
+}

@@ -13,4 +13,17 @@
 #menu_connected ul {text-align: center;}
 #menu_connected .active a{font-size: 6em; text-decoration: underline;}
 
-#menu_addliste_box input {display:block;}
+.block {display:block;}
+
+#corps {color: #fff; padding-top: 10px; padding-bottom: 60px;}
+#corps input {color: #222;}
+
+/* Partie des listes */
+.liste {margin: 20px 0px; line-height: 45px; font-size:22px; cursor:pointer;}
+.liste .quitter {display:none; color:#f00; font-size: 28px; float: right; line-height: 45px;}
+.liste:hover .quitter {display:inline-block !important;}
+
+.liste > div {height: 50px; border: 2px #984807 solid; overflow: hidden;}
+.liste .icone {border-top-left-radius: 40px; border-bottom-left-radius: 40px; min-width: 40px;}
+.liste .nom {margin-left: 2%; border-top-right-radius: 40px; border-bottom-right-radius: 40px;}
+.liste .icone {text-align: right; font-size: 30px;}
