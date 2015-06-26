@@ -1,7 +1,7 @@
 <?php  //onclick="<?php echo url_for1('liste/index')" 
 
 ?>
-<div id="menu_1">
+<div id="menu_1" align="center">
     <?php if(!$sf_user->isAuthenticated())
     { ?>
         <button type="button" id="bouton_connexion" class="bouton_connexion">Connexion</button>
