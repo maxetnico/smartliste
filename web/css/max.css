@@ -38,6 +38,15 @@
 .message_flash .error {border: 2px #f12 solid; background-color: #fbb;}
 .message_flash .error span {color: #f10;}
 .message_flash .info {border: 2px #2f2 solid; background-color: #bfb;}
-.message_flash .info span {color: #0f1;} 
+.message_flash .info span {color: #0A1;} 
 .message_flash .warning {border: 2px #f9C solid; background-color: #fc6;}
 .message_flash .warning span {color: #f90;} 
+
+.invitation .titre {margin-left: 20px;}
+.invitation .titre strong {color: #084;}
+.invitation .col-md-3 {margin-bottom: 15px;}
+.invitation .menu_box {
+    position:initial;
+    display: block;
+}
+.invitation .menu_box form {padding-left: 10px; padding-bottom: 10px;}

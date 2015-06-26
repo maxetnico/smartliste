@@ -50,13 +50,37 @@ class accueilActions extends sfActions
             $modelUtilisateur->save();
             $this->getUser()->setModelUtilisateur($modelUtilisateur);
             $this->getUser()->setAuthenticated(true);
+            
+            if($request->hasParameter("ticket"))
+            {
+                $modelListe = ListePeer::retrieveOneParIdPartage($request->getParameter("ticket"));
+                if($modelListe != null)
+                {
+                    $this->liste = $modelListe;
+                    $modelUtilisateurListeLink = UtilisateurListeLinkPeer::retrieveParIdUtilisateurEtIdListe($this->getUser()->getModelUtilisateur()->getId(), $modelListe->getId());                 
+                     if($modelUtilisateurListeLink == null)
+                     {
+                         $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelListe->getId());
+                         $this->getUser()->setFlash("info", "Vous avez rejoint une nouvelle liste");                         
+                     }
+                     else
+                     {
+                       $this->getUser()->setFlash("info", "Vous faites déjà partie de cette liste");                       
+                     }                   
+                }
+                else
+                {
+                  $this->getUser()->setFlash("warning", "Votre code d'invitation est erroné");                  
+                }
+            } 
             //termine le script et affiche la page d'acceuil
-            $this->redirect('accueil/index');            
+            $this->redirect('accueil/index');
         }           
     }               
     // s'il y a un problème, l'utilisateur n'est plus authentifié
+    $this->getUser()->setFlash("error", "Votre identifiant ou votre mot de passe est incorrect");
     $this->getUser()->setAuthenticated(false);
-    //$('#menu1').css('visibility','hidden');
+    $this->redirect('accueil/index');
   }
   
   public function executeInscription(sfWebRequest $request)
@@ -81,28 +105,61 @@ class accueilActions extends sfActions
                 $modelUtilisateur->save();
                 $this->getUser()->setModelUtilisateur($modelUtilisateur);
                 $this->getUser()->setAuthenticated(true);
-                $this->msg = "Inscription réussie";
+                $this->getUser()->setFlash("info", "Inscription réussie");
+                
+                if($request->hasParameter("ticket"))
+                {
+                    $modelListe = ListePeer::retrieveOneParIdPartage($request->getParameter("ticket"));
+                    if($modelListe != null)
+                    {
+                        $this->liste = $modelListe;                       
+                        $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelListe->getId());
+                        $this->getUser()->setFlash("info", "Vous avez rejoint une nouvelle liste");
+                        $this->redirect("liste/index");                                           
+                    }
+                    else
+                    {
+                      $this->getUser()->setFlash("warning", "Votre code d'invitation est erroné");                      
+                    }
+                }
             }
             else
             {
-                $this->msg = "Vous devez entrer un mot de passe";
+                 $this->getUser()->setFlash("error", "Vous devez entrer un mot de passe");                 
             }            
         }
         else
         {
-            $this->msg = "Votre nom d'utilisateur est déjà utilisé";
+             $this->getUser()->setFlash("error", "Votre nom d'utilisateur est déjà utilisé");            
         }
-    }  
+    }
+    $this->redirect("accueil/index");
   }
   
   public function executeInvitation(sfWebRequest $request)
   {
       if($request->hasParameter("ticket"))
       {
-          $modelListe = ListePeer::retrieveByPK($request->getParameter("ticket"));
+          $modelListe = ListePeer::retrieveOneParIdPartage($request->getParameter("ticket"));
           if($modelListe != null)
           {
               $this->liste = $modelListe;
+              if($this->getUser()->isAuthenticated())
+              {                  
+                  $modelUtilisateurListeLink = UtilisateurListeLinkPeer::retrieveParIdUtilisateurEtIdListe($this->getUser()->getModelUtilisateur()->getId(), $modelListe->getId());                 
+                  if($modelUtilisateurListeLink == null)
+                  {
+                      $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelListe->getId());
+                      $this->getUser()->setFlash("info", "Vous avez rejoint une nouvelle liste");
+                      $this->redirect("liste/index");
+                  }
+                  else
+                  {
+                    $this->getUser()->setFlash("info", "Vous faites déjà partie de cette liste");
+                    $this->redirect("liste/index");
+                  }
+              }
+              //On affiche la page
           }
           else
           {

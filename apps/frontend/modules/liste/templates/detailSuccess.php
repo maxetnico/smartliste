@@ -1,6 +1,6 @@
 <div class="row ma-no-h">
     <div class="col-md-offset-2 col-md-4 col-xs-12">
-        <a class="button"><i class="fa fa-reply"></i> Retour aux listes</a>
+        <a class="button" href="<?php echo url_for("liste/index") ?>"><i class="fa fa-reply"></i> Retour aux listes</a>
     </div>
     <div class="col-md-offset-2 col-md-4 col-xs-12">
         <button id="bouton_invitation" class=""><i class="fa fa-plus-circle"></i> Inviter quelqu'un</button>

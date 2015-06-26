@@ -17,7 +17,7 @@ if($hasFlash)
     foreach ($arrFlash as $flashName) {
         if($sf_user->hasFlash($flashName))
         { ?>
-            <div class="<?php echo $flashName ?>"><span><?php echo $sf_user->getFlash("error") ?></span></div>
+            <div class="<?php echo $flashName ?>"><span><?php echo $sf_user->getFlash($flashName) ?></span></div>
         <?php }
     } ?>  
 </div>

@@ -20,4 +20,12 @@ class UtilisateurListeLinkPeer extends BaseUtilisateurListeLinkPeer
             ListePeer::doDelete($crit);
         }
     }
+    
+    public static function retrieveParIdUtilisateurEtIdListe($idUtilisateur, $idListe)
+    {        
+        $crit = new Criteria();
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur, Criteria::EQUAL);
+        $crit->add(self::ID_LISTE,$idListe, Criteria::EQUAL);
+        return parent::doSelectOne($crit);        
+    }
 }

@@ -20,10 +20,20 @@
             </select>
             
             <label class="block">Icone :</label>
-            <input type="radio" name="icone" value="fa fa-beer">
+            <input type="radio" name="icone" value="fa fa-home">
+            <span class="fa fa-home"></span>
+            <input type="radio" name="icone" checked="true" value="fa fa-beer">
             <span class="fa fa-beer"></span>           
             <input type="radio" name="icone" value="fa fa-ambulance">
             <span class="fa fa-ambulance"></span>
+            <input type="radio" name="icone" value="fa fa-film">
+            <span class="fa fa-film"></span>
+            <input type="radio" name="icone" value="fa fa-music">
+            <span class="fa fa-music"></span>
+            <input type="radio" name="icone" value="fa fa-plane">
+            <span class="fa fa-plane"></span>
+            <input type="radio" name="icone" value="fa fa-users">
+            <span class="fa fa-users"></span>
             
             <button class="block" type="submit" id="bouton_valider">Créer</button>            
         </form>
