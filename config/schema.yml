@@ -69,7 +69,7 @@ propel:
     datelastconn: { type: TIMESTAMP, required: false }
   utilisateur_liste_link:
     _attributes: { phpName: UtilisateurListeLink }
-    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
     id_liste: { type: BIGINT, size: '20', required: true, foreignTable: liste, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     _indexes: { fk_partage_utilisateur1_idx: [id_utilisateur], fk_partage_liste1_idx: [id_liste] }

@@ -19,16 +19,7 @@
   <div align="center" class="col-xs-6"><span class="rotation col-md-5">Smartliste</span><?php echo image_tag('logo_v2.png',array("id"=>"logo","class"=>"col-md-7")); ?></div>
 </div>-->
         </header>
-        <div class="message_flash">
-            <?php if($sf_user->hasFlash("error"))
-            { ?>
-            <div class="error"><span><?php echo $sf_user->getFlash("error") ?></span></div>
-            <?php } ?>
-            <?php if($sf_user->hasFlash("info"))
-            { ?>
-            <div class="info"><span><?php echo $sf_user->getFlash("info") ?></span></div>
-            <?php } ?>
-        </div>
+        <?php include_partial("accueil/messageflash") ?>       
         <div id='navigation'><?php if($sf_user->isAuthenticated()) { include_partial("accueil/menu_connected"); } ?></div>
         <div id='corps'>
         <?php 

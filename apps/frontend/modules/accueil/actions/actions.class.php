@@ -95,8 +95,30 @@ class accueilActions extends sfActions
     }  
   }
   
+  public function executeInvitation(sfWebRequest $request)
+  {
+      if($request->hasParameter("ticket"))
+      {
+          $modelListe = ListePeer::retrieveByPK($request->getParameter("ticket"));
+          if($modelListe != null)
+          {
+              $this->liste = $modelListe;
+          }
+          else
+          {
+            $this->getUser()->setFlash("warning", "Votre code d'invitation est erroné");
+            $this->redirect("accueil/index");
+          }
+      }
+      else
+      {
+        $this->getUser()->setFlash("warning", "Il manque votre code d'invitation");
+        $this->redirect("accueil/index");
+      }
+  }
+  
   public function executeObjectif(sfWebRequest $request)
   {
 
-  }
+  }   
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 26 Juin 2015 à 11:08
+-- Généré le :  Ven 26 Juin 2015 à 11:41
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -77,14 +77,16 @@ CREATE TABLE IF NOT EXISTS `liste` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_utilisateur_idx` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `liste`
 --
 
 INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_partage`, `date_creation`, `date_modification`) VALUES
-(4, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL);
+(4, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL),
+(5, 'fa fa-ambulance', 'test', '#dc2127', 3, '4mnl2fa5pywshaq', '0000-00-00 00:00:00', NULL),
+(6, 'fa fa-ambulance', 'test', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -166,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `mail` varchar(100) DEFAULT NULL,
   `datelastconn` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `utilisateur`
@@ -174,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
 (1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 10:52:21'),
-(2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06');
+(2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06'),
+(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-06-26 11:30:43');
 
 -- --------------------------------------------------------
 
@@ -183,21 +186,22 @@ INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelas
 --
 
 CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_liste` bigint(20) NOT NULL,
   `id_utilisateur` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_partage_utilisateur1_idx` (`id_utilisateur`),
   KEY `fk_partage_liste1_idx` (`id_liste`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `utilisateur_liste_link`
 --
 
 INSERT INTO `utilisateur_liste_link` (`id`, `id_liste`, `id_utilisateur`) VALUES
-(0, 4, 1);
+(1, 4, 1),
+(2, 6, 3);
 
 -- --------------------------------------------------------
 

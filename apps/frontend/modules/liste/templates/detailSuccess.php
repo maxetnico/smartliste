@@ -6,7 +6,7 @@
         <button id="bouton_invitation" class=""><i class="fa fa-plus-circle"></i> Inviter quelqu'un</button>
         <div id="menu_inv_box" class="menu_box">           
                 <span>Voici le lien d'invitation :</span><br>
-                <input type="text" readonly="true" name="lien" value="<?php echo url_for("accueil/invitation")."/ticket/".$liste->getPartage() ?>" >
+                <input type="text" readonly="true" name="lien" value="<?php echo url_for("accueil/invitation",true)."/ticket/".$liste->getIdPartage() ?>" >
         </div>
     </div>
 </div>

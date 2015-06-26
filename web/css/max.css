@@ -33,5 +33,11 @@
 
 .message_flash {width:90%; margin-left: 5%; margin-top: 12px;}
 .message_flash div {width: 100%; padding: 10px; border-radius: 10px; text-align: center;}
+.message_flash span {font-size: 18px;} 
+
 .message_flash .error {border: 2px #f12 solid; background-color: #fbb;}
-.message_flash .error span {color: #f10; font-size: 18px;} 
+.message_flash .error span {color: #f10;}
+.message_flash .info {border: 2px #2f2 solid; background-color: #bfb;}
+.message_flash .info span {color: #0f1;} 
+.message_flash .warning {border: 2px #f9C solid; background-color: #fc6;}
+.message_flash .warning span {color: #f90;} 
