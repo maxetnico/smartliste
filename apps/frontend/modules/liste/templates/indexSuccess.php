@@ -34,6 +34,11 @@
             <span class="fa fa-plane"></span>
             <input type="radio" name="icone" value="fa fa-users">
             <span class="fa fa-users"></span>
+            <input type="radio" name="icone" value="fa fa-suitcase">
+            <span class="fa fa-suitcase"></span>
+            <input type="radio" name="icone" value="fa fa--money">
+            <span class="fa fa-money"></span>
+            
             
             <button class="block" type="submit" id="bouton_valider">Créer</button>            
         </form>
