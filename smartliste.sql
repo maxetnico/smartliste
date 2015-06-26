@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 26 Juin 2015 à 10:38
+-- Généré le :  Ven 26 Juin 2015 à 11:08
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -123,9 +123,11 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   `id_visibilite` tinyint(4) NOT NULL DEFAULT '6',
   `date_creation` datetime DEFAULT NULL,
   `nb_ajout` bigint(20) NOT NULL DEFAULT '0',
+  `id_etat` tinyint(4) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`),
-  KEY `id_visibilite` (`id_visibilite`)
+  KEY `id_visibilite` (`id_visibilite`),
+  KEY `id_etat` (`id_etat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -171,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
-(1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 09:53:15'),
+(1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 10:52:21'),
 (2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06');
 
 -- --------------------------------------------------------
@@ -242,8 +244,9 @@ ALTER TABLE `liste_produit_link`
 -- Contraintes pour la table `magasin`
 --
 ALTER TABLE `magasin`
-  ADD CONSTRAINT `magasin_ibfk_2` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`),
-  ADD CONSTRAINT `magasin_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `magasin_ibfk_3` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `magasin_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `magasin_ibfk_2` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`);
 
 --
 -- Contraintes pour la table `produit`

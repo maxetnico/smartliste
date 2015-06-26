@@ -11,6 +11,7 @@ function onloadMax()
     
     $('.bouton_annuler').click(function () {$('.menu_box').hide();});
     $('#bouton_addliste').click(function () {$('#menu_addliste_box').toggle();});
+    $('#bouton_invitation').click(function () {$('#menu_inv_box').toggle();});
 }
 
 function allerALUrl(strUrl)

@@ -47,7 +47,8 @@ propel:
     id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '6', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     date_creation: { type: TIMESTAMP, required: false }
     nb_ajout: { type: BIGINT, size: '20', required: true, defaultValue: '0' }
-    _indexes: { id_utilisateur: [id_utilisateur], id_visibilite: [id_visibilite] }
+    id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '5', foreignTable: etat, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    _indexes: { id_utilisateur: [id_utilisateur], id_visibilite: [id_visibilite], id_etat: [id_etat] }
   produit:
     _attributes: { phpName: Produit }
     id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
