@@ -26,6 +26,12 @@ class accueilActions extends sfActions
       //var_dump($this->getUser());die;
   }
   
+  public function executeIndexdepuissecure(sfWebRequest $request)
+  {
+      $this->getUser()->setFlash("error", "vous devez vous connecter pour accéder aux fonctionnalités du site");
+      $this->redirect('accueil/index');
+  }
+  
   public function executeDeconnexion(sfWebRequest $request)
   {
     $this->getUser()->setModelUtilisateur(null);

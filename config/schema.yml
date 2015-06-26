@@ -43,6 +43,11 @@ propel:
     id: { type: BIGINT, size: '20', primaryKey: true, required: true }
     nom: { type: VARCHAR, size: '128', required: true }
     img: { type: VARCHAR, size: '45', required: false }
+    id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '6', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    date_creation: { type: TIMESTAMP, required: false }
+    nb_ajout: { type: BIGINT, size: '20', required: true, defaultValue: '0' }
+    _indexes: { id_utilisateur: [id_utilisateur], id_visibilite: [id_visibilite] }
   produit:
     _attributes: { phpName: Produit }
     id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }

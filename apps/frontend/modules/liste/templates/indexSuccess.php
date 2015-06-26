@@ -30,11 +30,11 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row ma-no-h">
     <div class="col-xs-12">
         <?php
         foreach ($listes as $liste) {
-            include_partial("liste/liste",array("liste"=>$liste));
+            include_partial("liste/liste",array("boolEnDetail" => false, "liste"=>$liste));
         }
         ?>
     </div>

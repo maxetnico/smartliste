@@ -10,7 +10,7 @@ class ListePeer extends BaseListePeer
         return parent::doSelect($crit);
     }
     
-    public static function retrieveOneByIdPartage($idPartage)
+    public static function retrieveOneParIdPartage($idPartage)
     {
         $crit = new Criteria();        
         $crit->add(self::ID_PARTAGE,$idPartage);

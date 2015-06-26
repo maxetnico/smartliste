@@ -10,7 +10,7 @@ class Liste extends BaseListe
             {
                 $id = $this->random_str(15);
                 // on teste si il n'existe pas déjà
-                if(ListePeer::retrieveOneByIdPartage($id) == null)
+                if(ListePeer::retrieveOneParIdPartage($id) == null)
                 {
                     $boolOk = true;
                     parent::setIdPartage($id);

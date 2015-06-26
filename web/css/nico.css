@@ -130,23 +130,31 @@ ul {
 }
 #menu_conn_box { width:50%;max-width: 300px;min-width:180px;z-index: 998;}
 #menu_insc_box { width:50%;max-width: 300px;min-width:180px;z-index: 999;}
-.menu_box span { width: 81px;text-align: right;display: inline-block;padding-right: 5px;}
+.menu_box span { text-align: right;display: inline-block;padding-right: 5px;}
+header .menu_box span { width: 81px;}
 .menu_box input {
     display:inline;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
     text-align: center;
 }
-button {
+button,a.button {
+    display: inline-block;
     background-color: #5cb85c;
     border: 5px solid white;
     border-radius: 15px;
     padding: 3px 10px;
     margin:3px;
+    color: #fff;
+    text-decoration: none;
+    cursor:pointer;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-button:hover {
+button:hover, a.button:hover {
     background-color: #0a0;
+    color: #fff;
 }
 
 #principal {

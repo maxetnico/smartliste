@@ -4,7 +4,7 @@ class Utilisateur extends BaseUtilisateur
 {
     public function quitterListe($idListe)
     {
-        UtilisateurListeLinkPeer::deleteByIdUserAndIdListe(parent::getId(),$idListe);
+        UtilisateurListeLinkPeer::deleteParIdUtilisateurEtIdListe(parent::getId(),$idListe);
     }
     
     public function ajouterALaListe($idListe)

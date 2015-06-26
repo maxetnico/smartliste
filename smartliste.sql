@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 25 Juin 2015 à 11:06
+-- Généré le :  Ven 26 Juin 2015 à 10:38
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -77,14 +77,14 @@ CREATE TABLE IF NOT EXISTS `liste` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_utilisateur_idx` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `liste`
 --
 
 INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_partage`, `date_creation`, `date_modification`) VALUES
-(1, NULL, 'liste de test', NULL, 1, NULL, '2015-06-25 00:00:00', NULL);
+(4, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,13 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   `id` bigint(20) NOT NULL,
   `nom` varchar(128) NOT NULL,
   `img` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_utilisateur` bigint(20) DEFAULT NULL,
+  `id_visibilite` tinyint(4) NOT NULL DEFAULT '6',
+  `date_creation` datetime DEFAULT NULL,
+  `nb_ajout` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_visibilite` (`id_visibilite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -158,14 +164,15 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `mail` varchar(100) DEFAULT NULL,
   `datelastconn` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
-(1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-25 09:38:06');
+(1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 09:53:15'),
+(2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06');
 
 -- --------------------------------------------------------
 
@@ -182,6 +189,13 @@ CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
   KEY `fk_partage_utilisateur1_idx` (`id_utilisateur`),
   KEY `fk_partage_liste1_idx` (`id_liste`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `utilisateur_liste_link`
+--
+
+INSERT INTO `utilisateur_liste_link` (`id`, `id_liste`, `id_utilisateur`) VALUES
+(0, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -223,6 +237,13 @@ ALTER TABLE `liste_produit_link`
   ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magazin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_utilisateur` FOREIGN KEY (`coche_id_utilisteur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `magasin`
+--
+ALTER TABLE `magasin`
+  ADD CONSTRAINT `magasin_ibfk_2` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`),
+  ADD CONSTRAINT `magasin_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `produit`

@@ -15,11 +15,14 @@
 
 .block {display:block;}
 
+.menu_box {z-index:30;}
+
 #corps {color: #fff; padding-top: 10px; padding-bottom: 60px;}
 #corps input {color: #222;}
 
 /* Partie des listes */
 .liste {margin: 20px 0px; line-height: 45px; font-size:22px; cursor:pointer;}
+.liste_details .liste {cursor:default;}
 .liste .quitter {display:none; color:#f00; font-size: 28px; float: right; line-height: 45px;}
 .liste:hover .quitter {display:inline-block !important;}
 
@@ -27,3 +30,8 @@
 .liste .icone {border-top-left-radius: 40px; border-bottom-left-radius: 40px; min-width: 40px;}
 .liste .nom {margin-left: 2%; border-top-right-radius: 40px; border-bottom-right-radius: 40px;}
 .liste .icone {text-align: right; font-size: 30px;}
+
+.message_flash {width:90%; margin-left: 5%; margin-top: 12px;}
+.message_flash div {width: 100%; padding: 10px; border-radius: 10px; text-align: center;}
+.message_flash .error {border: 2px #f12 solid; background-color: #fbb;}
+.message_flash .error span {color: #f10; font-size: 18px;} 

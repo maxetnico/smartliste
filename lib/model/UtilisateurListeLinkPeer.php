@@ -2,7 +2,7 @@
 
 class UtilisateurListeLinkPeer extends BaseUtilisateurListeLinkPeer
 {
-    public static function deleteByIdUserAndIdListe($idUtilisateur, $idListe)
+    public static function deleteParIdUtilisateurEtIdListe($idUtilisateur, $idListe)
     {
         $crit = new Criteria();
         $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
