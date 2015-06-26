@@ -93,25 +93,28 @@ a {
     display:inline-block;
 }
 
-div[id^=menu] a, button {
+div[id^=menu] a, a.button,button {
     color: #ffffff;
     font-size:14px;
     font-weight: 600;
     padding: 0 5px;
+    
+    -moz-transition: all 0.5s ease-in-out 0s;
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+    -ms-transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
+    opacity: 1;
 }
 
 div[id^=menu] a:hover {
-    color: #0f0;
+    color: #47D147;
     text-decoration: none;
 }
 
 ul {
     padding: 0;
     margin: 0;
-}
-
-#corps {
-    ___background-image: url("/images/fond.png");
 }
 
 .style_police {
@@ -126,19 +129,22 @@ ul {
     background-color: #47D147;
     border: 5px solid white;
     border-radius: 10px;
-    padding: auto;
+    padding: 5px;
     margin: 5px 0 0 0;
 }
+
 #menu_conn_box { width:50%;max-width: 300px;min-width:180px;z-index: 998;}
 #menu_insc_box { width:50%;max-width: 300px;min-width:180px;z-index: 999;}
 .menu_box span { text-align: right;display: inline-block;padding-right: 5px;}
 header .menu_box span { width: 81px;}
+
 .menu_box input {
     display:inline;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
     text-align: center;
 }
+
 button,a.button {
     display: inline-block;
     background-color: #5cb85c;
@@ -158,11 +164,21 @@ button:hover, a.button:hover {
     color: #fff;
 }
 
-#principal {
+.presentation {
     text-align: center;
     color:#2e2e2e;
 }
-#principal h3 { color:#084;}
+
+.presentation h3 {
+    color:#084;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top:5px;
+    margin-left:5px;
+    text-decoration: underline;
+    text-shadow: -1px 0 2px white, 0 1px 2px white, 1px 0 2px white, 0 -1px 2px white;
+}
+
 div[id^=block_] {
     border: 5px solid white;
     border-radius: 15px;
@@ -193,37 +209,18 @@ div[id^=block_] {
     vertical-align: top;
 }
 
-#principal li {
-    list-style-type: circle;
-    margin: 0 0 0 25px;
-}
-#principal ul {
-    margin: 5px 0 5px 0;
-}
-
-#nous {
-    text-align: center;
-    color:#2e2e2e;
-}
-
-#nous div {
+.presentation div {
     width: 70%;
     text-align: left;
     content:"";
     margin:0 auto 0 auto;
 }
 
-#nous h3 {
-    font-size: 24px;
-    color:#084;
-    text-decoration: underline;
-    font-weight: bold;
-    text-shadow: -1px 0 2px white, 0 1px 2px white, 1px 0 2px white, 0 -1px 2px white;
-}
-#nous p {
+.presentation p {
     padding-left: 10px;
 }
-#nous ul {
+
+.presentation ul {
     list-style-type: circle;
     padding-left: 10px;
     margin-left: 30px;
