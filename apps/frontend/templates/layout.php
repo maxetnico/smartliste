@@ -32,6 +32,13 @@
                   <li><a href="<?php echo url_for1('accueil/objectif') ?>">Qui sommes nous ?</a></li>
                   <li><a href="<?php echo url_for1('accueil/index') ?>">Plan du site</a></li>
                   <li><a href="<?php echo url_for1('accueil/index') ?>">Contact</a></li>
+                  <?php
+                  if(!$sf_user->isAuthenticated()){
+                  ?>
+                  <li><a href="<?php echo url_for1('accueil/index') ?>">Accueil</a></li>
+                  <?php
+                  }
+                  ?>
               </ul>
           </div>
           <span class="clean"></span>

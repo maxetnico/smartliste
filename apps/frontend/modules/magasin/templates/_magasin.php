@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 ?>
-<button type="button" id="bouton_addliste"><span class="fa fa-plus"></span> Ajouter un magasin</button>
-<div class="liste row">
-
-</div>
+<li>
+    <?php
+        echo $magasin->getNom();
+    ?>
+</li>

@@ -1,4 +1,4 @@
-<div id="principal">    
+<div class="presentation">    
     <?php 
 //        if(count($jeans) > 0)
 //        {
@@ -17,6 +17,6 @@
         <ul><li>Course ponctuelle</li><li>Course quotidienne, hébdomadaire, ...</li></ul>         
     </div>
     <div id="block_actu"><h3>File d'actu</h3>
-        block actu
+        <p>block actu</p>
     </div>
 </div>
