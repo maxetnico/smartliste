@@ -7,11 +7,11 @@
 
 .presentation_pseudo{ color: #fff;}
 
-#menu_connected {width:100%;}
+#menu_connected {width:100%;vertical-align: top;}
 #menu_connected li {display: inline; margin:0% 3%;}
-#menu_connected li a {font-size: 4em;}
+#menu_connected li a {font-size: 1.7em;}
 #menu_connected ul {text-align: center;}
-#menu_connected .active a{font-size: 6em; text-decoration: underline;}
+#menu_connected .active a{font-size: 3em; text-decoration: underline;}
 
 .block {display:block;}
 

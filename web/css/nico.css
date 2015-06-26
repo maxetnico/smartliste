@@ -160,6 +160,7 @@ button:hover, a.button:hover {
 
 #principal {
     text-align: center;
+    color:#2e2e2e;
 }
 #principal h3 { color:#084;}
 div[id^=block_] {
@@ -185,11 +186,11 @@ div[id^=block_] {
     overflow: auto;
     width: 280px;
     min-width: 200px;
-    height: 200px;
     padding: 1px;
     margin-left: 1%;
     margin-right: 1%;
     margin-top:10px;
+    vertical-align: top;
 }
 
 #principal li {
@@ -202,6 +203,14 @@ div[id^=block_] {
 
 #nous {
     text-align: center;
+    color:#2e2e2e;
+}
+
+#nous div {
+    width: 70%;
+    text-align: left;
+    content:"";
+    margin:0 auto 0 auto;
 }
 
 #nous h3 {
@@ -210,4 +219,12 @@ div[id^=block_] {
     text-decoration: underline;
     font-weight: bold;
     text-shadow: -1px 0 2px white, 0 1px 2px white, 1px 0 2px white, 0 -1px 2px white;
+}
+#nous p {
+    padding-left: 10px;
+}
+#nous ul {
+    list-style-type: circle;
+    padding-left: 10px;
+    margin-left: 30px;
 }
