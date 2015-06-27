@@ -1,4 +1,4 @@
-<div id="menu_1" align="center">
+<div id="menu_1">
     <?php if(!$sf_user->isAuthenticated())
     { ?>
         <button type="button" id="bouton_connexion" class="bouton_connexion">Connexion</button>
