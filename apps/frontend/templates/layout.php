@@ -10,14 +10,11 @@
     </head>
     <body>
         <header>
-            <div id="b_banniere">
-                <div align="left" class="ban1"><?php include_partial('accueil/menu');?></div>
-                <div align="center" class="ban2"><span class="rotation">Smartliste</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
+            <div class="ban0 row ma-no-h pa-no-h">
+              <div class="ban1 col-sm-3 col-sm-offset-1 col-xs-12 pa-no-h"><?php include_partial('accueil/menu');?></div>
+              <div class="clearfix visible-xs-block"></div>
+              <div class="ban2 col-sm-4 col-sm-offset-0 col-xs-12 pa-no-h"><span class="rotation">Smartliste</span><?php echo image_tag('logo_v2.png',array("id"=>"logo")); ?></div>
             </div>
-<!--<div align="center" class="row ma-no-h">
-  <div align="left" class="col-xs-5"><?php include_partial('accueil/menu');?></div>
-  <div align="center" class="col-xs-6"><span class="rotation col-md-5">Smartliste</span><?php echo image_tag('logo_v2.png',array("id"=>"logo","class"=>"col-md-7")); ?></div>
-</div>-->
         </header>
         <?php include_partial("accueil/messageflash") ?>       
         <div id='navigation'><?php if($sf_user->isAuthenticated()) { include_partial("accueil/menu_connected"); } ?></div>

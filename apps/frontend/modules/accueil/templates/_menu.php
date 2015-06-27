@@ -1,6 +1,3 @@
-<?php  //onclick="<?php echo url_for1('liste/index')" 
-
-?>
 <div id="menu_1" align="center">
     <?php if(!$sf_user->isAuthenticated())
     { ?>
@@ -24,7 +21,9 @@
             </form>
         </div>
     <?php } else { ?>
-        <h4 class="presentation_pseudo">Bonjour <?php echo $sf_user->getModelUtilisateur()->getPseudo() ?></h4>
-        <a href="<?php echo url_for("accueil/deconnexion") ?>"><button type="button" id="bouton_deconnexion">Déconnexion</button></a>
+        <div class="row">
+            <div class="col-sm-12 col-xs-6"><h4 class="presentation_pseudo">Bonjour <?php echo $sf_user->getModelUtilisateur()->getPseudo() ?></h4></div>
+            <div class="col-sm-12 col-xs-6"><a href="<?php echo url_for("accueil/deconnexion") ?>"><button type="button" id="bouton_deconnexion">Déconnexion</button></a></div>
+        </div>
     <?php } ?>
 </div>

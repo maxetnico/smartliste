@@ -14,9 +14,12 @@ header {
     background-color: #084;
     margin: 0;
     padding: 0;
+}
+header {
     background-image: url("../images/banniere.jpg");
-    background-size: 100% 100%; 
-    vertical-align: middle;
+    background-size: 100% 100%;
+    padding:15px 10px;
+    
 }
 footer {
     background-image: url("../images/banniere.jpg");
@@ -26,8 +29,7 @@ footer {
 .rotation {  
     display:inline-block;
     color: #ffffff;
-    font-size:25pt;
-    font-size:200%;
+    font-size:32px;
     font-weight: 900;
     padding: 0 5px 0 0;
     text-align: center;
@@ -38,35 +40,32 @@ footer {
     -moz-transform: rotate(-9deg); /* firefox */
 }
 
-.ban2 img {
-    //width:120px;
-    height:100%;
-}
-
-.ban0 {
-    height: 100px;
-    vertical-align: middle;
-    white-space: nowrap;
+#logo {
+    width:120px;
 }
 .ban1 {
-    height: 100%;
-    min-width: 220px;
-    padding: 0;
-    text-align: center;
-    vertical-align: middle;
+    min-width: 280px;
+    padding: 2px 0 2px 0;
+    text-align: center; 
 }
 .ban2 {
-    height: 100%;
+    margin-left: 18%;
     padding: 0;
     text-align: center;
-    vertical-align: middle;
 }
-@media only screen and (max-width : 767px) {
-    #menu_1 {white-space: nowrap;}
-    .ban1,.ban2 { white-space:normal;height:50%;}
-    .ban2 span {font-size: 150%;}
+@media screen and (max-width: 400px) {
+  .ban2 {
+    margin: 0;
+  }
 }
-
+@media screen and (min-width: 400px) and (max-width: 640px) {
+  .ban2 {
+    margin: 0;
+  }
+}
+.clean {
+    clear: both;
+}
 footer {
     background-color: #084;
     position:fixed;
@@ -123,25 +122,19 @@ ul {
 .menu_box {
     display: none;
     position: absolute;
+    background-color: #47D147;
     border: 5px solid white;
     border-radius: 10px;
     padding: 5px;
     margin: 5px 0 0 0;
-    
-    background-color: #47D147;
-    background: -webkit-linear-gradient( -40deg, #009100, #47D147);
-    background:    -moz-linear-gradient( -40deg, #009100, #47D147);
-    background:     -ms-linear-gradient( -40deg, #009100, #47D147);
-    background:      -o-linear-gradient( -40deg, #009100, #47D147);
-    background:         linear-gradient( -40deg, #009100, #47D147);
 }
 
 .magasin .menu_box{
-    //max-width: 700px;
+    max-width: 700px;
 }
 
-#menu_conn_box { max-width: 300px;min-width:180px;z-index: 998;}
-#menu_insc_box { max-width: 300px;min-width:180px;z-index: 999;}
+#menu_conn_box { width:50%;max-width: 300px;min-width:180px;z-index: 998;}
+#menu_insc_box { width:50%;max-width: 300px;min-width:180px;z-index: 999;}
 .menu_box span { text-align: right;display: inline-block;padding-right: 5px;}
 header .menu_box span { width: 81px;}
 
@@ -176,57 +169,58 @@ button:hover, a.button:hover {
     color:#2e2e2e;
 }
 
-.block h3 {
+.presentation h3 {
     color:#084;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    margin-left: 5px;
+    margin-top:5px;
+    margin-left:5px;
     text-decoration: underline;
     text-shadow: -1px 0 2px white, 0 1px 2px white, 1px 0 2px white, 0 -1px 2px white;
+    text-shadow: -1px 0 2px #F2F2F2, 0 1px 2px #F2F2F2, 1px 0 2px #F2F2F2, 0 -1px 2px #F2F2F2;
 }
 
-.block {
+div[id^=block_] {
     border: 5px solid white;
-    overflow: auto;
-    //background-color: #47D147;
-    background-color: rgba(71,209,71,0.3);
     border-radius: 15px;
-    font-size: 16px;
-    padding: 10px 10px;
+    padding: 5px 10px;
+    __margin: 10px;
     text-align: left;
-    margin-top: 10px;
+}
+#block_info {
+    __display: inline-block;
+    overflow: auto;
+    min-width: 250px;
+    max-width: 600px;
+    padding: 5px;
+    __margin-top:10px;
     vertical-align: top;
 }
 
-.block li {padding-left: 5px; padding-top: 5px; }
-.block ul {
-    list-style-type: circle;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: 5px 0 10px 20px;
-}
-
-.actu ul ,.utile ul{
-    list-style-type: circle;
-    padding: 0 0 0 15px;
-    margin: 0 0 5px 5px;
-}
-.actu i {
-    font-size: 10px;
-}
-.utile ul {
-    list-style-type: none;
-}
-.utile {}
-.actu {
+#block_actu {
     __display: inline-block;
     overflow: auto;
-    max-height: 180px;
-    __padding: 5px;
+    width: 280px;
+    min-width: 200px;
+    padding: 5px;
     __margin-left:10px;
     __margin-top:10px;
+    vertical-align: top;
 }
 
+.presentation div {
+    width: 70%;
+    text-align: left;
+    content:"";
+    margin:0 auto 0 auto;
+}
+
+.presentation p {
+    padding-left: 10px;
+}
+
+.presentation ul {
+    list-style-type: circle;
+    padding-left: 10px;
+    margin-left: 30px;
+}
