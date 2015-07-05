@@ -17,6 +17,7 @@ class listeActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->getContext()->getResponse()->addMeta('description', 'mes listes de courses');
     $this->listes = ListePeer::retrievePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
     //$this->visibilites = VisibilitePeer::retrieveAll();
   }

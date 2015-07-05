@@ -17,10 +17,39 @@ class magasinActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+        $this->getContext()->getResponse()->addMeta('description', 'liste des magasins disponibles ou a compléter');
+
     //$this->forward('default', 'module');
-    $this->magasins = MagasinPeer::retriveTous(); 
+  //  $this->magasins = MagasinPeer::retriveTous(); 
   }
   
+  public function executeMag(sfWebRequest $request)
+  {
+      
+  } 
+  
+  public function executeSearch(sfWebRequest $request)
+  {
+  //$this->forwardUnless($query = $request->getParameter('query'),'magasin', 'index');
+ 
+    if (!$query = $request->getParameter('query'))
+    {
+        echo "ok2".$query;
+        return $this->forward('magasin', 'index');
+    }
+      return "ok3".$query;
+  //$this->magasins = MagasinPeer::retriveTous();
+ 
+  if ($request->isXmlHttpRequest())
+  {
+    if ('*' == $query || !$this->magasins)
+    {
+      return $this->renderText('No results.');
+    }
+    //return $this->renderPartial("magasin/magasin",array("magasins" => $this->magasins));
+    return $this->renderPartial("magasin/magasin");
+  }
+}
   
   public function executeNouveauMagasin(sfWebRequest $request)
   {
