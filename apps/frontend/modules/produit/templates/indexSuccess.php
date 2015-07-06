@@ -8,7 +8,7 @@
 <div class="presentation">
     <div id="menu_mag" class="menu_mag row ma-no-h pa-no-h">
         <div class="col-xs-8 col-xs-offset-2 pa-no-h">
-            <button id="bouton_ajout" type="button"><i class="fa fa-plus-circle"></i> Ajouter un produit</button>
+            <button id="bouton_ajout_produit" type="button"><i class="fa fa-plus-circle"></i> Ajouter un produit</button>
             <div id="menu_ajout_box" class="menu_box">
                 <form method="post" action="<?php echo url_for('produit/ajouter') ?>">
                     <span>nom : </span><input type="text" name="nommag" placeholder="Nom du magasin" value=""></br>
@@ -27,23 +27,23 @@
             
             <table class="table table-hover">
                     <tr>
+                        <th>Etat</th>
                         <th>Catégorie</th>
                         <th>Nom</th>
                         <th>Partage</th>
                     </tr>
-                <?php
-                var_dump($produits);
+                <?php                
                 foreach ($produits as $produit) { ?>
                     <tr>
                         <td width='37px'>
-                            <?php echo $magasin->getEtatNom()=="VAL"?"<i class='mag_val fa fa-check-circle'></i>":($magasin->getEtatNom()=="ATT"?"<i class='mag_att fa fa-clock-o'></i>":"<i class='mag_ref fa fa-times-circle'></i>"); ?>
+                            <?php echo $produit->getEtatNom()=="VAL"?"<i class='mag_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='mag_att fa fa-clock-o'></i>":"<i class='mag_ref fa fa-times-circle'></i>"); ?>
                         </td>
                         <td>
-                        <?php echo image_tag('magasins/'.$magasin->getImg(),array("width"=>"35px")); 
-                              echo $magasin->getNom(); ?>
+                        <?php echo image_tag($produit->getImg(),array("width"=>"35px")); 
+                              echo $produit->getNom(); ?>
                         </td>
                         <td>
-                        <?php echo $magasin->getVisibleNom(); ?>
+                        <?php echo $produit->getVisibleNom(); ?>
                         </td>
                     </tr>
                 <?php } ?>

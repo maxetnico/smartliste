@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Juillet 2015 à 15:19
+-- Généré le :  Lun 06 Juillet 2015 à 16:01
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -31,12 +31,26 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `nom` varchar(128) NOT NULL,
   `id_parent` int(11) DEFAULT NULL,
   `img` text,
-  `id_utilisateur` int(11) DEFAULT NULL,
+  `id_utilisateur` bigint(20) DEFAULT NULL,
   `id_etat` tinyint(4) NOT NULL DEFAULT '1',
   `id_visibilite` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `id_parent` (`id_parent`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_etat` (`id_etat`),
+  KEY `id_visibilite` (`id_visibilite`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `nom`, `id_parent`, `img`, `id_utilisateur`, `id_etat`, `id_visibilite`) VALUES
+(1, 'Autre', NULL, NULL, NULL, 1, 3),
+(2, 'Frais', NULL, NULL, NULL, 1, 3),
+(3, 'Maison', NULL, NULL, NULL, 1, 3),
+(4, 'Consommable', NULL, NULL, NULL, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -49,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `etat` (
   `code` varchar(3) NOT NULL,
   `nom` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `etat`
@@ -57,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `etat` (
 
 INSERT INTO `etat` (`id`, `code`, `nom`) VALUES
 (1, 'VAL', 'Validé'),
-(2, 'ATT', 'En attente');
+(2, 'ATT', 'En attente'),
+(3, 'REF', 'Refusé');
 
 -- --------------------------------------------------------
 
@@ -77,17 +92,17 @@ CREATE TABLE IF NOT EXISTS `liste` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_utilisateur_idx` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `liste`
 --
 
 INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_partage`, `date_creation`, `date_modification`) VALUES
-(4, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL),
-(5, 'fa fa-ambulance', 'test', '#dc2127', 3, '4mnl2fa5pywshaq', '0000-00-00 00:00:00', NULL),
-(6, 'fa fa-ambulance', 'test', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL),
-(7, 'fa fa-home', 'test', '#fbd75b', 4, '9o9orfl4km83lux', '0000-00-00 00:00:00', NULL);
+(1, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL),
+(2, 'fa fa-ambulance', 'test', '#dc2127', 3, '4mnl2fa5pywshaq', '0000-00-00 00:00:00', NULL),
+(3, 'fa fa-ambulance', 'test2', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL),
+(4, 'fa fa-home', 'test3', '#fbd75b', 4, '9o9orfl4km83lux', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -96,21 +111,21 @@ INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_part
 --
 
 CREATE TABLE IF NOT EXISTS `liste_produit_link` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_liste` bigint(20) NOT NULL,
   `id_produit` bigint(20) NOT NULL,
   `quantite` int(11) DEFAULT NULL,
-  `id_magazin` bigint(20) DEFAULT NULL,
+  `id_magasin` bigint(20) DEFAULT NULL,
   `coche` tinyint(1) NOT NULL DEFAULT '0',
   `coche_date` datetime DEFAULT NULL,
   `coche_id_utilisteur` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_lpl_magasin_idx` (`id_magazin`),
+  KEY `fk_lpl_magasin_idx` (`id_magasin`),
   KEY `fk_lpl_utilisateur_idx` (`coche_id_utilisteur`),
   KEY `fk_lpl_produit_idx` (`id_produit`),
   KEY `fk_lpl_liste_idx` (`id_liste`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -128,18 +143,20 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   `nb_ajout` bigint(20) NOT NULL DEFAULT '0',
   `id_etat` tinyint(4) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_magasin` (`id`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_visibilite` (`id_visibilite`),
   KEY `id_etat` (`id_etat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `magasin`
 --
 
 INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `date_creation`, `nb_ajout`, `id_etat`) VALUES
-(1, 'penny', 'penny.jpg', 3, 1, '2015-07-06 09:11:23', 0, 1),
-(2, 'Match', 'match.jpg', 3, 2, '2015-07-06 09:11:23', 0, 1);
+(1, 'penny', 'penny.jpg', 3, 1, '2015-07-04 09:11:23', 0, 1),
+(2, 'Auchan', 'auchan.jpg', 3, 3, '2015-07-05 10:11:23', 0, 2),
+(3, 'Match', 'match.jpg', 3, 2, '2015-07-06 11:11:23', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -152,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `nom` varchar(128) NOT NULL,
   `img` text COMMENT 'lien vers l''image',
   `id_utilisateur` bigint(20) DEFAULT NULL,
-  `id_categorie` int(11) DEFAULT NULL,
+  `id_categorie` int(11) NOT NULL DEFAULT '1',
   `id_etat` tinyint(4) NOT NULL DEFAULT '1',
   `id_visibilite` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'visible par qui',
   PRIMARY KEY (`id`),
@@ -168,11 +185,11 @@ CREATE TABLE IF NOT EXISTS `produit` (
 --
 
 INSERT INTO `produit` (`id`, `nom`, `img`, `id_utilisateur`, `id_categorie`, `id_etat`, `id_visibilite`) VALUES
-(1, 'beurre', 'produits/beurre.jpg', 4, NULL, 1, 3),
-(2, 'brosse à dent', 'produits/brosse_a_dent.jpg', NULL, NULL, 1, 3),
-(3, 'lait', 'produits/lait.jpg', NULL, NULL, 1, 3),
-(4, 'oeufs', 'produits/oeufs.jpg', NULL, NULL, 1, 3),
-(5, 'papier wc', 'produits/pq.jpg', NULL, NULL, 1, 3);
+(1, 'beurre', 'produits/beurre.jpg', 4, 1, 1, 3),
+(2, 'brosse à dent', 'produits/brosse_a_dent.jpg', NULL, 1, 1, 3),
+(3, 'lait', 'produits/lait.jpg', NULL, 1, 1, 3),
+(4, 'oeufs', 'produits/oeufs.jpg', NULL, 1, 1, 3),
+(5, 'papier wc', 'produits/pq.jpg', NULL, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -236,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `visibilite` (
   `code` varchar(3) NOT NULL,
   `nom` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `visibilite`
@@ -252,6 +269,15 @@ INSERT INTO `visibilite` (`id`, `code`, `nom`) VALUES
 --
 
 --
+-- Contraintes pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD CONSTRAINT `categorie_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `categorie_ibfk_1` FOREIGN KEY (`id_parent`) REFERENCES `categorie` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `categorie_ibfk_2` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`),
+  ADD CONSTRAINT `categorie_ibfk_3` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`);
+
+--
 -- Contraintes pour la table `liste`
 --
 ALTER TABLE `liste`
@@ -263,7 +289,7 @@ ALTER TABLE `liste`
 ALTER TABLE `liste_produit_link`
   ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lpl_liste` FOREIGN KEY (`id_liste`) REFERENCES `liste` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magazin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magasin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_utilisateur` FOREIGN KEY (`coche_id_utilisteur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -278,17 +304,10 @@ ALTER TABLE `magasin`
 -- Contraintes pour la table `produit`
 --
 ALTER TABLE `produit`
-  ADD CONSTRAINT `fk_produit_categorie1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_produit_etat` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_produit_utilisateur1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_produit_visibilite` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `utilisateur_liste_link`
---
-ALTER TABLE `utilisateur_liste_link`
-  ADD CONSTRAINT `fk_partage_liste1` FOREIGN KEY (`id_liste`) REFERENCES `liste` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_partage_utilisateur1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
