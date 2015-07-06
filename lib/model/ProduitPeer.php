@@ -4,21 +4,22 @@ class ProduitPeer extends BaseProduitPeer
 {
     public static function retrievePourUnUtilisateurEtUneListe($utilisateur, $liste, $recherche = "")
     {
+        //Ne marche pas correctement et je ne sais pas pourquoi
+        
         $crit = new Criteria();
         //$crit->addJoin(self::ID, ListeProduitLinkPeer::ID_PRODUIT);
         $criterion = self::getCriterionPourUnUtilisateur($utilisateur,$crit);   
         
-        $criterion1 = $crit->getNewCriterion(ListeProduitLinkPeer::ID_PRODUIT, parent::ID, Criteria::EQUAL);
-        $criterion2 = $crit->getNewCriterion(ListeProduitLinkPeer::ID_LISTE, $liste->getId(), Criteria::EQUAL);
-        $criterion3 = $crit->getNewCriterion(parent::ID_VISIBILITE, 2, Criteria::EQUAL);
+        //$criterion1 = $crit->getNewCriterion(ListeProduitLinkPeer::ID_PRODUIT, parent::ID, Criteria::EQUAL);
+        //$criterion2 = $crit->getNewCriterion(ListeProduitLinkPeer::ID_LISTE, $liste->getId(), Criteria::EQUAL);
+        //$criterion3 = $crit->getNewCriterion(parent::ID_VISIBILITE, 2, Criteria::EQUAL);
         
-        $criterion2->addAnd($criterion1);
-        $criterion2->addAnd($criterion3);
-        $criterion->addOr($criterion2);
+//        $criterion2->addAnd($criterion1);
+//        $criterion2->addAnd($criterion3);
+//        $criterion->addOr($criterion2);
         $crit->add($criterion);
-        $crit->setDistinct();
+        $crit->setDistinct();        
         
-        var_dump($crit->toString());
         return parent::doSelect($crit);
     }
     

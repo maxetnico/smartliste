@@ -26,8 +26,7 @@ class produitActions extends sfActions
     else
     {
         $this->produits = ProduitPeer::retrievePourUnUtilisateur($this->getUser()->getModelUtilisateur());
-    }    
-    var_dump($this->produits);die;
+    }        
   }
   
   protected function utilisateurPossedeListe($idListe)
