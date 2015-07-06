@@ -186,7 +186,6 @@ button:hover, a.button:hover {
 
 .block {
     border: 5px solid white;
-    overflow: auto;
     //background-color: #47D147;
     background-color: rgba(71,209,71,0.3);
     border-radius: 15px;
@@ -195,6 +194,9 @@ button:hover, a.button:hover {
     text-align: left;
     margin-top: 10px;
     vertical-align: top;
+}
+div.block {
+    overflow: auto;
 }
 
 .block li {padding-left: 5px; padding-top: 5px; }
@@ -227,12 +229,37 @@ button:hover, a.button:hover {
     __margin-top:10px;
 }
 
-.mag_val{
+.etat_val{
     color:#0a0;
 }
-.mag_att{
+.etat_att{
     color:#127ED7;
 }
-.mag_ref{
+.etat_ref{
     color:#F12;
+}
+
+.par_moi{
+    color:black;
+}
+.par_lst{
+    color:#FC9700;
+}
+.par_sit{
+    color:#0075FB;
+}
+
+.mag {
+    width:100%;
+    text-align: left;
+    font-size: 16px;
+}
+.mag td, .mad th {
+    padding: 5px 10px;
+    text-align: left;
+}
+.entete th {
+    background-color: #D0CBCB;
+    padding: 5px 10px;
+    text-align: left;
 }
