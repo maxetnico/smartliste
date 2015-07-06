@@ -17,8 +17,10 @@ class magasinActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
-    $this->magasins = MagasinPeer::retriveTous(); 
+    if($request->hasParameter('aff') == 'aff')
+        $this->magasins = MagasinPeer::retriveTous();
+    else
+        $this->magasins = MagasinPeer::retrivePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId()); 
   }
     
   public function executeQuitter(sfWebRequest $request)
@@ -26,6 +28,14 @@ class magasinActions extends sfActions
       $idMagsin = $request->getParameter('magasin');
       $this->getUser()->getModelUtilisateur()->quitterListe($idMagasin);
       $this->redirect('magasin/index');
+  }
+  
+  public function executeIndex2(sfWebRequest $request)
+  {
+    $this->magasins = MagasinPeer::retriveTous();
+    //$this->redirect('magasin/index');
+    return $this->renderPartial('magasin/index', array('magasins' => $this->magasins));
+    
   }
   
   public function executeNouveauMagasin(sfWebRequest $request)

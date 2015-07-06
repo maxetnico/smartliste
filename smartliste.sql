@@ -248,8 +248,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
 
 INSERT INTO `utilisateur_liste_link` (`id`, `id_liste`, `id_utilisateur`) VALUES
 (1, 4, 1),
-(2, 6, 3),
-(3, 7, 4),
+(2, 1, 3),
+(3, 1, 4),
 (4, 5, 4);
 
 -- --------------------------------------------------------

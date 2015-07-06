@@ -19,9 +19,7 @@ class produitActions extends sfActions
   {
     if($request->hasParameter("liste") && $this->utilisateurPossedeListe($request->getParameter("liste")))
     {
-        $this->liste = ListePeer::retrieveByPK($request->getParameter("liste"));
-        $this->produits = ProduitPeer::retrievePourUnUtilisateurEtUneListe($this->getUser()->getModelUtilisateur(), $this->liste);
-        
+        $this->liste = ListePeer::retrieveByPK($request->getParameter("liste"));        
     }
     else
     {

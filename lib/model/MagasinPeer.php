@@ -7,16 +7,16 @@ class MagasinPeer extends BaseMagasinPeer
         return parent::doSelect($crit);
     }
     
-     public static function retriveTousPourUnUtilisateur($idUtilisateur) {
+     public static function retrivePourUnUtilisateur($idUtilisateur) {
         $crit = new Criteria();
-        $crit->add(self::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL);
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
         return parent::doSelect($crit);
     }
     
     public static function retriveMagasinDejaPresent($idUtilisateur,$nomMagasin) {
         $crit = new Criteria();
-        $crit->add(self::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL);
-        $crit->add(self::NOM,$nomMagasin,  Criteria::EQUAL);
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
+        $crit->add(self::NOM,$nomMagasin);
         return parent::doSelect($crit);
     }
 }

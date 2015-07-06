@@ -250,16 +250,17 @@ div.block {
 }
 
 .mag {
-    width:70%;
     text-align: left;
     font-size: 16px;
 }
-.mag td, .mad th {
-    padding: 5px 10px;
-    text-align: left;
+.mag thead tr th.tleft  {
+    border-top-left-radius: 15px;
 }
-.entete th {
-    background-color: #D0CBCB;
+.mag thead tr th.tright {
+    border-top-right-radius: 15px;
+}
+.mag th {
+    background-color: #0a0;
     padding: 5px 10px;
     text-align: left;
 }
