@@ -227,3 +227,12 @@ button:hover, a.button:hover {
     __margin-top:10px;
 }
 
+.mag_val{
+    color:#0a0;
+}
+.mag_att{
+    color:#127ED7;
+}
+.mag_ref{
+    color:#F12;
+}

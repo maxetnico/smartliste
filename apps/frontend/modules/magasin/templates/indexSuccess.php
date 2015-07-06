@@ -14,26 +14,23 @@
         </div>
     </div>
     <div class="row ma-no-h pa-no-h">
-        <div id="mag_perso" class="mes_mag  col-xs-5 col-xs-offset-2">
+        <div id="mag_perso" class="mes_mag block col-xs-8 col-xs-offset-2">
             <h4>Mes Magasins</h4>
-            <ul class="info_mag block col-xs-12">
+            
+            <table class="table table-hover">
+                    <tr>
+                        <th>Etat</th>
+                        <th>Nom</th>
+                        <th>Partage</th>
+                    </tr>
                 <?php
                 foreach ($magasins as $magasin) {
-                    include_partial("magasin/magasin",array("magasin"=>$magasin));
+                    echo '<tr>';
+                    include_partial("magasin/magasin1",array("magasin"=>$magasin));
+                    echo '</tr>';
                 }
                 ?>
-            </ul>
-        </div>
-        <div id="mag_en_validation" class="mag_en_validation col-xs-3">
-            <h4>Mes Magasins en cours de validation</h4>
-            <ul class="block col-xs-12">
-
-                <?php
-                foreach ($magasins as $magasin) {
-                    include_partial("magasin/magasin",array("magasin"=>$magasin));
-                }
-                ?>
-            </ul>
+            </table>
         </div>
     </div>
 </div>
