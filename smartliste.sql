@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `smartliste`
 --
+DROP DATABASE IF EXISTS`smartliste`;
+CREATE DATABASE IF NOT EXISTS `smartliste` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `smartliste`;
 
 -- --------------------------------------------------------
 
@@ -49,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `etat` (
   `code` varchar(3) NOT NULL,
   `nom` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `etat`
@@ -57,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `etat` (
 
 INSERT INTO `etat` (`id`, `code`, `nom`) VALUES
 (1, 'VAL', 'Validé'),
-(2, 'ATT', 'En attente');
+(2, 'ATT', 'En attente'),
+(3, 'REF', 'Refusé');
 
 -- --------------------------------------------------------
 
@@ -77,17 +81,17 @@ CREATE TABLE IF NOT EXISTS `liste` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_utilisateur_idx` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `liste`
 --
 
 INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_partage`, `date_creation`, `date_modification`) VALUES
-(4, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL),
-(5, 'fa fa-ambulance', 'test', '#dc2127', 3, '4mnl2fa5pywshaq', '0000-00-00 00:00:00', NULL),
-(6, 'fa fa-ambulance', 'test', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL),
-(7, 'fa fa-home', 'test', '#fbd75b', 4, '9o9orfl4km83lux', '0000-00-00 00:00:00', NULL);
+(1, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL),
+(2, 'fa fa-ambulance', 'test', '#dc2127', 3, '4mnl2fa5pywshaq', '0000-00-00 00:00:00', NULL),
+(3, 'fa fa-ambulance', 'test', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL),
+(4, 'fa fa-home', 'test', '#fbd75b', 4, '9o9orfl4km83lux', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,15 +135,16 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_visibilite` (`id_visibilite`),
   KEY `id_etat` (`id_etat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `magasin`
 --
 
 INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `date_creation`, `nb_ajout`, `id_etat`) VALUES
-(1, 'penny', 'penny.jpg', 3, 1, '2015-07-06 09:11:23', 0, 1),
-(2, 'Match', 'match.jpg', 3, 2, '2015-07-06 09:11:23', 0, 1);
+(1, 'penny', 'penny.jpg', 3, 1, '2015-07-04 09:11:23', 0, 1),
+(2, 'Auchan', 'auchan.jpg', 3, 3, '2015-07-05 10:11:23', 0, 2),
+(3, 'Match', 'match.jpg', 3, 2, '2015-07-06 11:11:23', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -221,9 +226,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
 --
 
 INSERT INTO `utilisateur_liste_link` (`id`, `id_liste`, `id_utilisateur`) VALUES
-(1, 4, 1),
-(2, 6, 3),
-(3, 7, 4);
+(1, 2, 1),
+(2, 3, 3),
+(3, 4, 4);
 
 -- --------------------------------------------------------
 

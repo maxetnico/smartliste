@@ -20,7 +20,13 @@ class magasinActions extends sfActions
     //$this->forward('default', 'module');
     $this->magasins = MagasinPeer::retriveTous(); 
   }
-  
+    
+  public function executeQuitter(sfWebRequest $request)
+  {
+      $idMagsin = $request->getParameter('magasin');
+      $this->getUser()->getModelUtilisateur()->quitterListe($idMagasin);
+      $this->redirect('magasin/index');
+  }
   
   public function executeNouveauMagasin(sfWebRequest $request)
   {

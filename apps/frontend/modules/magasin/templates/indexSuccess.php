@@ -18,16 +18,16 @@
         </div>
     </div>
     <div class="row ma-no-h pa-no-h">
-        <div id="mag_perso" class="mes_mag col-xs-8 col-xs-offset-2">
+        <div id="mag_perso" class="mes_mag col-sm-8 col-sm-offset-2 col-xs-12">
             <h3>Mes Magasins</h3>
             
             <table class="mag entete">
                     <tr>
-                        <th width='37px'>Etat</th>
-                        <th width='37px'>Nom</th>
+                        <th>Etat</th>
+                        <th>Nom</th>
                         <th></th>
-                        <th width='37px'>Partage</th>
-                        <th width='37px'>Actions</th>
+                        <th>Partage</th>
+                        <th></th>
                     </tr>
                 <?php
                 foreach ($magasins as $magasin) {
