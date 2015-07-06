@@ -2,6 +2,8 @@
 .ma-no-v {margin-top: 0px !important; margin-bottom: 0px !important;}
 .pa-no-h {padding-left: 0px !important; padding-right:0px !important;}
 .pa-no-v {padding-top: 0px !important; padding-bottom: 0px !important;}
+.text-left-important {text-align: left !important;}
+.text-center-important {text-align: center !important;}
 
 #menu_1 input[type=text] {color: #888;}
 
@@ -29,6 +31,10 @@
 .liste > div {height: 50px; border: 2px #984807 solid; overflow: hidden;}
 .liste .icone {border-top-left-radius: 40px; border-bottom-left-radius: 40px; min-width: 40px;}
 .liste .nom {margin-left: 2%; border-top-right-radius: 40px; border-bottom-right-radius: 40px;}
+@media only screen and (max-width : 500px)
+{
+    .liste .nom {margin-left: 0%;}
+}
 .liste .icone {text-align: right; font-size: 30px;}
 
 .message_flash {width:90%; margin-left: 5%; margin-top: 12px;}
@@ -50,3 +56,6 @@
     display: block;
 }
 .invitation .menu_box form {padding-left: 10px; padding-bottom: 10px;}
+
+.simplecolorpicker {width: auto !important;}
+.simplecolorpicker .color {width: 20px !important;}
