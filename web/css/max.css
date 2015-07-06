@@ -59,3 +59,5 @@
 
 .simplecolorpicker {width: auto !important;}
 .simplecolorpicker .color {width: 20px !important;}
+
+.pagination li>a {color: #0A1;}

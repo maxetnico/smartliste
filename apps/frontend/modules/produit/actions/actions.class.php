@@ -17,6 +17,28 @@ class produitActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    if($request->hasParameter("liste") && $this->utilisateurPossedeListe($request->getParameter("liste")))
+    {
+        $this->liste = ListePeer::retrieveByPK($request->getParameter("liste"));
+        $this->produits = ProduitPeer::retrievePourUnUtilisateurEtUneListe($this->getUser()->getModelUtilisateur(), $this->liste);
+        
+    }
+    else
+    {
+        $this->produits = ProduitPeer::retrievePourUnUtilisateur($this->getUser()->getModelUtilisateur());
+    }    
+    var_dump($this->produits);die;
+  }
+  
+  protected function utilisateurPossedeListe($idListe)
+  {    
+    $modelUtilisateur = $this->getUser()->getModelUtilisateur();
+    foreach (ListePeer::retrievePourUnUtilisateur($modelUtilisateur->getId()) as $liste) {
+        if($liste->getId() == $idListe)
+        {
+            return true;
+        }
+    }
+    return false;
   }
 }

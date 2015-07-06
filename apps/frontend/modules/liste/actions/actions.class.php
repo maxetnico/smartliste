@@ -80,5 +80,5 @@ class listeActions extends sfActions
         }
     }
     return false;
-  }
+  }   
 }

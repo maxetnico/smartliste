@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 26 Juin 2015 à 11:41
+-- Généré le :  Lun 06 Juillet 2015 à 09:58
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `smartliste`
 --
+CREATE DATABASE IF NOT EXISTS `smartliste` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `smartliste`;
 
 -- --------------------------------------------------------
 
@@ -56,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `etat` (
 --
 
 INSERT INTO `etat` (`id`, `code`, `nom`) VALUES
-(4, 'VAL', 'Validé'),
-(5, 'ATT', 'En attente');
+(1, 'VAL', 'Validé'),
+(2, 'ATT', 'En attente');
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `liste_produit_link` (
 --
 
 CREATE TABLE IF NOT EXISTS `magasin` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
   `img` varchar(45) DEFAULT NULL,
   `id_utilisateur` bigint(20) DEFAULT NULL,
@@ -130,7 +132,15 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_visibilite` (`id_visibilite`),
   KEY `id_etat` (`id_etat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `magasin`
+--
+
+INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `date_creation`, `nb_ajout`, `id_etat`) VALUES
+(1, 'penny', 'penny.jpg', 3, 1, '2015-07-06 09:11:23', 0, 1),
+(2, 'Match', 'match.jpg', 3, 2, '2015-07-06 09:11:23', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
 (1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 10:52:21'),
 (2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06'),
-(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-06-26 11:30:43');
+(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-07-06 09:55:37');
 
 -- --------------------------------------------------------
 
@@ -221,9 +231,9 @@ CREATE TABLE IF NOT EXISTS `visibilite` (
 --
 
 INSERT INTO `visibilite` (`id`, `code`, `nom`) VALUES
-(4, 'MOI', 'Perso'),
-(5, 'LST', 'Liste'),
-(6, 'SIT', 'Site');
+(1, 'MOI', 'Perso'),
+(2, 'LST', 'Liste'),
+(3, 'SIT', 'Site');
 
 --
 -- Contraintes pour les tables exportées
@@ -239,8 +249,8 @@ ALTER TABLE `liste`
 -- Contraintes pour la table `liste_produit_link`
 --
 ALTER TABLE `liste_produit_link`
-  ADD CONSTRAINT `fk_lpl_liste` FOREIGN KEY (`id_liste`) REFERENCES `liste` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magazin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_lpl_liste` FOREIGN KEY (`id_liste`) REFERENCES `liste` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_utilisateur` FOREIGN KEY (`coche_id_utilisteur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -248,9 +258,9 @@ ALTER TABLE `liste_produit_link`
 -- Contraintes pour la table `magasin`
 --
 ALTER TABLE `magasin`
-  ADD CONSTRAINT `magasin_ibfk_3` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `magasin_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `magasin_ibfk_2` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`);
+  ADD CONSTRAINT `magasin_ibfk_2` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`),
+  ADD CONSTRAINT `magasin_ibfk_3` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `produit`

@@ -15,5 +15,21 @@
         <div class="col-xs-12">
             <?php include_partial("liste/liste",array("boolEnDetail" => true,"liste"=>$liste)) ?>
         </div>
-    </div>
+    </div>    
+</div>
+<div class="row ma-no-h">
+    <div class="col-md-offset-2 col-md-10 col-xs-12">
+        <a class="button" href="<?php echo url_for("produit/index")."/index/liste/".$liste->getId() ?>"><i class="fa fa-plus-square"></i> Ajouter un produit</a>
+        <!-- <button id="bouton_ajout_produit" class=""><i class="fa fa-plus-square"></i> Ajouter un produit</button> -->
+        <div id="menu_ajout_box" class="menu_box">     
+            <div class="row ma-no-h">
+                <label>Recherche : </label>
+                <input type="text" id="produit_recherche" placeholder="produit">
+                <button class="" onclick="rechercherProduit()">Go</button>      
+            </div>
+            <div class="row ma-no-h" id="produits">
+                <?php echo include_component("produit", "produitPagination", array("liste" => $liste)) ?>
+            </div>
+        </div>
+    </div>           
 </div>

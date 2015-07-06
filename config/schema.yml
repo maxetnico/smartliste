@@ -31,7 +31,7 @@ propel:
     _attributes: { phpName: ListeProduitLink }
     id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
     id_liste: { type: BIGINT, size: '20', required: true, foreignTable: liste, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    id_produit: { type: BIGINT, size: '20', required: true, foreignTable: produit, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_produit: { type: BIGINT, size: '20', required: true, foreignTable: produit, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     quantite: { type: INTEGER, size: '11', required: false }
     id_magazin: { type: BIGINT, size: '20', required: false, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     coche: { type: TINYINT, size: '1', required: true, defaultValue: '0' }
@@ -40,7 +40,7 @@ propel:
     _indexes: { fk_lpl_magasin_idx: [id_magazin], fk_lpl_utilisateur_idx: [coche_id_utilisteur], fk_lpl_produit_idx: [id_produit], fk_lpl_liste_idx: [id_liste] }
   magasin:
     _attributes: { phpName: Magasin }
-    id: { type: BIGINT, size: '20', primaryKey: true, required: true }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     nom: { type: VARCHAR, size: '128', required: true }
     img: { type: VARCHAR, size: '45', required: false }
     id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
@@ -51,7 +51,7 @@ propel:
     _indexes: { id_utilisateur: [id_utilisateur], id_visibilite: [id_visibilite], id_etat: [id_etat] }
   produit:
     _attributes: { phpName: Produit }
-    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
     nom: { type: VARCHAR, size: '128', required: true }
     img: { type: LONGVARCHAR, required: false }
     id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
