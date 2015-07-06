@@ -33,3 +33,6 @@
         </div>
     </div>           
 </div>
+<div class="row ma-no-h">
+    <?php var_dump($produits) ?>
+</div>

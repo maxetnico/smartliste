@@ -32,6 +32,14 @@ class ProduitPeer extends BaseProduitPeer
         return parent::doSelect($crit);
     }
     
+    public static function retrievePourUneListe($liste)
+    {
+        $crit = new Criteria();
+        $crit->addJoin(self::ID, ListeProduitLinkPeer::ID_PRODUIT);
+        $crit->add(ListeProduitLinkPeer::ID_LISTE,$liste->getId());        
+        return parent::doSelect($crit);
+    }
+    
     protected static function getCriterionPourUnUtilisateur($utilisateur,$c)
     {       
         $cton1 = $c->getNewCriterion(self::ID_UTILISATEUR, $utilisateur->getId());
@@ -39,5 +47,5 @@ class ProduitPeer extends BaseProduitPeer
         
         $cton1->addOr($cton2);        
         return $cton1;
-    }
+    }   
 }

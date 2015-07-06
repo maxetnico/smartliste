@@ -25,8 +25,8 @@
         <div id="mag_perso" class="mes_mag block col-xs-8 col-xs-offset-2">
             <h4>Produits</h4>
             <?php if(isset($liste)) { ?>
-            <form method="POST" action="produit/ajout">
-                <input type="hidden" name="liste" value="<?php echo $liste->getId() ?>"
+            <form method="POST" action="<?php echo url_for("produit/ajout") ?>">
+                <input type="hidden" name="liste" value="<?php echo $liste->getId() ?>">
             <?php } ?>
                 <table class="table table-hover">
                         <tr>
@@ -54,7 +54,7 @@
                             </td>
                             <?php if(isset($liste)) { ?>
                             <td>
-                                <input type="number" value="0">
+                                <input type="number" name="<?php echo $produit->getId() ?>" value="0">
                             </td>
                             <?php } ?>
                         </tr>

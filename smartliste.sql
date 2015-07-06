@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Juillet 2015 à 16:27
+-- Généré le :  Lun 06 Juillet 2015 à 17:01
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -119,14 +119,22 @@ CREATE TABLE IF NOT EXISTS `liste_produit_link` (
   `id_magasin` bigint(20) DEFAULT NULL,
   `coche` tinyint(1) NOT NULL DEFAULT '0',
   `coche_date` datetime DEFAULT NULL,
-  `coche_id_utilisteur` bigint(20) NOT NULL,
+  `coche_id_utilisteur` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_lpl_magasin_idx` (`id_magasin`),
   KEY `fk_lpl_utilisateur_idx` (`coche_id_utilisteur`),
   KEY `fk_lpl_produit_idx` (`id_produit`),
   KEY `fk_lpl_liste_idx` (`id_liste`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `liste_produit_link`
+--
+
+INSERT INTO `liste_produit_link` (`id`, `id_liste`, `id_produit`, `quantite`, `id_magasin`, `coche`, `coche_date`, `coche_id_utilisteur`) VALUES
+(2, 5, 2, 3, NULL, 0, NULL, NULL),
+(3, 5, 4, 2, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -289,9 +297,9 @@ ALTER TABLE `liste`
 -- Contraintes pour la table `liste_produit_link`
 --
 ALTER TABLE `liste_produit_link`
-  ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lpl_liste` FOREIGN KEY (`id_liste`) REFERENCES `liste` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magasin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lpl_utilisateur` FOREIGN KEY (`coche_id_utilisteur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
