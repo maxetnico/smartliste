@@ -31,6 +31,7 @@
                         <th>Catégorie</th>
                         <th>Nom</th>
                         <th>Partage</th>
+                        <?php if(isset($liste)) { ?><th>Quantité</th><?php } ?>
                     </tr>
                 <?php                
                 foreach ($produits as $produit) { ?>
@@ -39,12 +40,20 @@
                             <?php echo $produit->getEtatNom()=="VAL"?"<i class='mag_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='mag_att fa fa-clock-o'></i>":"<i class='mag_ref fa fa-times-circle'></i>"); ?>
                         </td>
                         <td>
+                            <?php echo $produit->getCategorieNom(); ?>
+                        </td>
+                        <td>
                         <?php echo image_tag($produit->getImg(),array("width"=>"35px")); 
                               echo $produit->getNom(); ?>
                         </td>
                         <td>
                         <?php echo $produit->getVisibleNom(); ?>
                         </td>
+                        <?php if(isset($liste)) { ?>
+                        <td>
+                            <input type="number" value="0">
+                        </td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
             </table>
