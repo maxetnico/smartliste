@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Juillet 2015 à 09:58
+-- Généré le :  Lun 06 Juillet 2015 à 15:19
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `smartliste`
 --
-CREATE DATABASE IF NOT EXISTS `smartliste` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `smartliste`;
 
 -- --------------------------------------------------------
 
@@ -79,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `liste` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_utilisateur_idx` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `liste`
@@ -88,7 +86,8 @@ CREATE TABLE IF NOT EXISTS `liste` (
 INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_partage`, `date_creation`, `date_modification`) VALUES
 (4, 'fa fa-beer', 'Ma liste de course rien qu''à moi !', '#dc2127', 1, 'n9lqdeg6zemg7lk', '0000-00-00 00:00:00', NULL),
 (5, 'fa fa-ambulance', 'test', '#dc2127', 3, '4mnl2fa5pywshaq', '0000-00-00 00:00:00', NULL),
-(6, 'fa fa-ambulance', 'test', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL);
+(6, 'fa fa-ambulance', 'test', '#dc2127', 3, 'de2g7wbc6yo3l18', '0000-00-00 00:00:00', NULL),
+(7, 'fa fa-home', 'test', '#fbd75b', 4, '9o9orfl4km83lux', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -149,7 +148,7 @@ INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `d
 --
 
 CREATE TABLE IF NOT EXISTS `produit` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
   `img` text COMMENT 'lien vers l''image',
   `id_utilisateur` bigint(20) DEFAULT NULL,
@@ -162,7 +161,18 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_utilisateur1_idx` (`id_utilisateur`),
   KEY `fk_produit_categorie1_idx` (`id_categorie`),
   KEY `fk_produit_visibilite_idx` (`id_visibilite`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `produit`
+--
+
+INSERT INTO `produit` (`id`, `nom`, `img`, `id_utilisateur`, `id_categorie`, `id_etat`, `id_visibilite`) VALUES
+(1, 'beurre', 'produits/beurre.jpg', 4, NULL, 1, 3),
+(2, 'brosse à dent', 'produits/brosse_a_dent.jpg', NULL, NULL, 1, 3),
+(3, 'lait', 'produits/lait.jpg', NULL, NULL, 1, 3),
+(4, 'oeufs', 'produits/oeufs.jpg', NULL, NULL, 1, 3),
+(5, 'papier wc', 'produits/pq.jpg', NULL, NULL, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -178,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `mail` varchar(100) DEFAULT NULL,
   `datelastconn` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `utilisateur`
@@ -187,7 +197,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
 (1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 10:52:21'),
 (2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06'),
-(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-07-06 09:55:37');
+(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-07-06 09:55:37'),
+(4, 'max', 'max', '2015-07-06 10:02:38', '', '2015-07-06 13:56:08');
 
 -- --------------------------------------------------------
 
@@ -203,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_partage_utilisateur1_idx` (`id_utilisateur`),
   KEY `fk_partage_liste1_idx` (`id_liste`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `utilisateur_liste_link`
@@ -211,7 +222,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
 
 INSERT INTO `utilisateur_liste_link` (`id`, `id_liste`, `id_utilisateur`) VALUES
 (1, 4, 1),
-(2, 6, 3);
+(2, 6, 3),
+(3, 7, 4);
 
 -- --------------------------------------------------------
 
@@ -249,9 +261,9 @@ ALTER TABLE `liste`
 -- Contraintes pour la table `liste_produit_link`
 --
 ALTER TABLE `liste_produit_link`
-  ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magazin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lpl_liste` FOREIGN KEY (`id_liste`) REFERENCES `liste` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_lpl_produit` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_lpl_magasin` FOREIGN KEY (`id_magazin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_lpl_utilisateur` FOREIGN KEY (`coche_id_utilisteur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
