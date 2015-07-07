@@ -2,6 +2,43 @@
 
 class ProduitPeer extends BaseProduitPeer
 {
+    public static function retrievePourUnUtilisateurSaufListeAvecCollaborateurs($utilisateur,$liste)
+    {
+        $arrRetour = array();
+        $crit = new Criteria();
+        $crit->addJoin(ListeProduitLinkPeer::ID_PRODUIT,self::ID);
+        $crit->add(ListeProduitLinkPeer::ID_LISTE,$liste->getId(),  Criteria::EQUAL);
+        $crit->setDistinct();
+        $arrExclus = parent::doSelect($crit);
+        
+        $crit = new Criteria();
+        $criterion = self::getCriterionPourUnUtilisateur($utilisateur,$crit);
+        $crit->add($criterion);
+        $arrInclus = parent::doSelect($crit);        
+        
+        $utilisateurs = UtilisateurPeer::retrieveParListe($liste);
+        foreach ($utilisateurs as $user) {
+            $arrInclus = array_merge($arrInclus, self::retrievePourUnUtilisateur($user));
+        }
+        
+        foreach ($arrInclus as $inclu) {
+            $boolOk = true;
+            foreach ($arrExclus as $exclu) {
+                if($inclu->getId() == $exclu->getId())
+                {
+                    $boolOk = false;
+                    break;
+                }
+            }
+            if($boolOk)
+            {
+                $arrRetour[$inclu->getId()] = $inclu;
+            }
+        }
+        
+        return $arrRetour;
+    }
+    
     public static function retrievePourUnUtilisateurEtUneListe($utilisateur, $liste, $recherche = "")
     {
         //Ne marche pas correctement et je ne sais pas pourquoi
