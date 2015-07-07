@@ -14,4 +14,9 @@ class Utilisateur extends BaseUtilisateur
         $modelUtilisateurListeLink->setIdListe($idListe);
         $modelUtilisateurListeLink->save();
     }
+    
+    public function quitterMagasin($idMagasin)
+    {
+        MagasinPeer::UpdateIdUtilisateurEtIdMagasin(parent::getId(),$idMagasin);
+    }
 }

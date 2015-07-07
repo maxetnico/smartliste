@@ -25,8 +25,8 @@ class magasinActions extends sfActions
     
   public function executeQuitter(sfWebRequest $request)
   {
-      $idMagsin = $request->getParameter('magasin');
-      $this->getUser()->getModelUtilisateur()->quitterListe($idMagasin);
+      $idMagasin = $request->getParameter('magasin');
+      $this->getUser()->getModelUtilisateur()->quitterMagasin($idMagasin);
       $this->redirect('magasin/index');
   }
   
@@ -51,9 +51,11 @@ class magasinActions extends sfActions
             $modelMagasin->setIdUtilisateur($iduser);
             $modelMagasin->setImg($request->getParameter("lienimg"));
             $modelMagasin->setDateCreation(getdate());
+            $modelMagasin->save();
             
-            $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelMagasin);
+            //$this->getUser()->getModelUtilisateur()->ajouterALaListe($modelMagasin);
             $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste");  
+            $this->redirect('magasin/index');
         }
         else
         {
