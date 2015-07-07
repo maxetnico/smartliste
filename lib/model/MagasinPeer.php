@@ -19,15 +19,4 @@ class MagasinPeer extends BaseMagasinPeer
         $crit->add(self::NOM,$nomMagasin);
         return parent::doSelect($crit);
     }
-    public static function UpdateIdUtilisateurEtIdMagasin($idUtilisateur, $idMagasin)
-    {
-        $crit = new Criteria();
-        $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
-        $crit->add(self::ID,$idMagasin);
-        
-        $crit2 = new Criteria();
-        $crit2->add(self::ID_UTILISATEUR,0);
-        
-        parent::doUpdate($crit,$crit2);
-    }
 }
