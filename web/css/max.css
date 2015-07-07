@@ -26,8 +26,8 @@
 /* Partie des listes */
 .liste {margin: 20px 0px; line-height: 45px; font-size:22px; cursor:pointer;}
 .liste_details .liste {cursor:default;}
-.liste .quitter {display:none; color:#f00; font-size: 28px; float: right; line-height: 45px;}
-.liste:hover .quitter {display:inline-block !important;}
+.liste .quitter, .mag tr td i.quitter {display:none; color:#f00; font-size: 28px; float: right; line-height: 45px;}
+.liste:hover .quitter, tr:hover td i.quitter:hover {display:inline-block !important;}
 
 .liste > div {height: 50px; border: 2px #984807 solid; overflow: hidden;}
 .liste .icone {border-top-left-radius: 40px; border-bottom-left-radius: 40px; min-width: 40px;}

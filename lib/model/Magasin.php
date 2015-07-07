@@ -8,9 +8,9 @@ class Magasin extends BaseMagasin
     public function getVisibleNom(){
         return VisibilitePeer::retrieveByPK(parent::getIdVisibilite())->getCode();
     }
-    public function quitterMagasin($idMagasin)
+    public function quitterMagasin($idUtiliateur,$idMagasin)
     {
-        MagasinPeer::UpdateIdUtilisateurEtIdListe(parent::getId(),$idMagasin);
+        MagasinPeer::UpdateIdUtilisateurEtIdListe($idUtiliateur,$idMagasin);
     }
     
 }

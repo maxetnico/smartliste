@@ -17,7 +17,7 @@ class magasinActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    if($request->hasParameter('aff') == 'aff')
+    if($request->getParameter('aff') == 'tous')
         $this->magasins = MagasinPeer::retriveTous();
     else
         $this->magasins = MagasinPeer::retrivePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId()); 
@@ -25,8 +25,8 @@ class magasinActions extends sfActions
     
   public function executeQuitter(sfWebRequest $request)
   {
-      $idMagsin = $request->getParameter('magasin');
-      $this->getUser()->getModelUtilisateur()->quitterListe($idMagasin);
+      $idMagasin = $request->getParameter('magasin');
+      $this->quitterMagasin($this->getUser()->getModelUtilisateur()->getId(),$idMagasin);
       $this->redirect('magasin/index');
   }
   

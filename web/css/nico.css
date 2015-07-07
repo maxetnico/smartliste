@@ -252,6 +252,7 @@ div.block {
 .mag {
     text-align: left;
     font-size: 16px;
+    border-bottom: 1px solid #0a0;
 }
 .mag thead tr th.tleft  {
     border-top-left-radius: 15px;
@@ -263,4 +264,11 @@ div.block {
     background-color: #0a0;
     padding: 5px 10px;
     text-align: left;
+}
+.mag td, .mag th {
+    border-bottom: 1px solid #0a0;
+}
+
+.mag tr:hover .quitter {
+    __display:block;
 }
