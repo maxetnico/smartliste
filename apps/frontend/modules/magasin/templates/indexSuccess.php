@@ -30,7 +30,11 @@
     </div>
     <div class="row ma-no-h pa-no-h">
         <div id="mag_perso" class="mes_mag block col-sm-8 col-sm-offset-2 col-xs-12">
-            <h3>Mes Magasins</h3>
+              <?php if($tous_aff) { ?>
+            <h3>Tous les magasins</h3>
+              <?php } else { ?>
+            <h3>Mes magasins</h3>
+              <?php } ?>
             <table align="left" class="mag style_police table">
                 <thead>
                     <tr>

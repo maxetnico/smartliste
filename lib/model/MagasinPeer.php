@@ -5,11 +5,13 @@ class MagasinPeer extends BaseMagasinPeer
     public static function retriveTous() {
         $crit = new Criteria();
         $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);
-        $crit->add(EtatPeer::CODE,'SIT',  Criteria::EQUAL);
+        $crit->add(EtatPeer::CODE,'VAL',  Criteria::EQUAL);
+        $crit->addJoin(self::ID_VISIBILITE, VisibilitePeer::ID);
+        $crit->add(VisibilitePeer::CODE,'SIT',  Criteria::EQUAL);
         return parent::doSelect($crit);
     }
     
-     public static function retrivePourUnUtilisateur($idUtilisateur) {
+    public static function retrivePourUnUtilisateur($idUtilisateur) {
         $crit = new Criteria();
         $crit->add(self::ID_UTILISATEUR,$idUtilisateur, Criteria::EQUAL);
         return parent::doSelect($crit);
