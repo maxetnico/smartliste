@@ -1,3 +1,6 @@
+<?php
+// /!\ $produits contient le nom des catégories en clé et le tableau des produits de cette catégorie en valeur
+?>
 <div class="row ma-no-h">
     <div class="col-md-offset-2 col-md-4 col-xs-12">
         <a class="button" href="<?php echo url_for("liste/index") ?>"><i class="fa fa-reply"></i> Retour aux listes</a>

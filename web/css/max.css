@@ -5,6 +5,7 @@
 .text-left-important {text-align: left !important;}
 .text-center-important {text-align: center !important;}
 .right {float:right;}
+.width-60 {width:60px;}
 
 #menu_1 input[type=text] {color: #888;}
 
@@ -62,3 +63,6 @@
 .simplecolorpicker .color {width: 20px !important;}
 
 .pagination li>a {color: #0A1;}
+
+td.image {min-height: 40px;}
+td.image img {max-height: 40px; max-width: 40px;}
