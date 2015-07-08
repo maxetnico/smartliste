@@ -17,6 +17,7 @@ class magasinActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    
     if($request->getParameter('aff') == 'tous')
         $this->magasins = MagasinPeer::retriveTous();
     else
@@ -46,11 +47,14 @@ class magasinActions extends sfActions
         $modelMagasin = MagasinPeer::retriveMagasinDejaPresent($iduser,$request->hasParameter('nommag'));
         if($modelMagasin == null)
         {
+               $etatatt = new Criteria;
+               $etatatt->add(EtatPeer::CODE,'ATT')
             $modelMagasin = new Magasin();
             $modelMagasin->setNom($request->getParameter("nommag"));
             $modelMagasin->setIdUtilisateur($iduser);
             $modelMagasin->setImg($request->getParameter("lienimg"));
             $modelMagasin->setDateCreation(getdate());
+            $modelMagasin->setIdEtat();
             
             $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelMagasin);
             $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste");  
