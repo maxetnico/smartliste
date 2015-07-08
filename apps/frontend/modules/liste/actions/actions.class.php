@@ -32,6 +32,7 @@ class listeActions extends sfActions
             $modelListe->setNom($request->getParameter("nom"));
             $modelListe->setIcone($request->getParameter("icone"));
             $modelListe->setCouleur($request->getParameter("couleur"));
+            $modelListe->setDateCreation(new \DateTime());
             $modelListe->save();
             
             $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelListe->getId());
