@@ -56,7 +56,15 @@ class listeActions extends sfActions
       if($request->hasParameter("liste") && $this->utilisateurPossedeListe($request->getParameter("liste")))
       {
           $this->liste = ListePeer::retrieveByPK($request->getParameter("liste"));
-          $this->produits = ProduitPeer::retrievePourUneListe($this->liste);
+          $produits = ProduitPeer::retrievePourUneListe($this->liste);
+          $this->produits = array();
+          foreach ($produits as $produit) {
+              if(!isset($this->produits[$produit->getCategorieNom()]))
+              {
+                  $this->produits[$produit->getCategorieNom()] = array();
+              }
+              $this->produits[$produit->getCategorieNom()][] = $produit;
+          }
       }
       else
       {

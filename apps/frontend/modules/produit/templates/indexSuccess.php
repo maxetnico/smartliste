@@ -34,8 +34,9 @@
                             <th class="tleft">Etat</th>
                             <th>Catégorie</th>
                             <th>Nom</th>
-                            <th class="tright text-center-important">Partage</th>
-                            <?php if(isset($liste)) { ?><th>Quantité</th><?php } ?>
+                            <th></th>
+                            <th class="<?php echo isset($liste)?"":"tright"; ?> text-center-important">Partage</th>
+                            <?php if(isset($liste)) { ?><th class="tright">Quantité</th><?php } ?>
                         </tr>
                     </thead>
                     <?php                
@@ -47,23 +48,25 @@
                             <td>
                                 <?php echo $produit->getCategorieNom(); ?>
                             </td>
-                            <td>
-                            <?php echo image_tag($produit->getImg(),array("width"=>"35px")); 
-                                  echo $produit->getNom(); ?>
+                            <td class="image">
+                            <?php echo image_tag($produit->getImg(),array()); ?>
+                            </td>
+                            <td>  
+                            <?php echo $produit->getNom(); ?>
                             </td>
                             <td class="text-center">
                             <?php echo $produit->getVisibleCode()=="MOI"?'<i class="par_moi fa fa-user"></i>':($produit->getVisibleCode()=="LST"?'<i class="par_lst fa fa-list-alt"></i>':'<i class="par_sit fa fa-globe"></i>'); ?>
                             </td>
                             <?php if(isset($liste)) { ?>
                             <td>
-                                <input type="number" name="<?php echo $produit->getId() ?>" value="0">
+                                <input type="number" name="<?php echo $produit->getId() ?>" value="0" class="width-60">
                             </td>
                             <?php } ?>
                         </tr>
                     <?php } ?>
                 </table>
                  <?php if(isset($liste)) { ?>
-                <button class="right" type="submit">Sauvegarder</button>
+                <button class="right" type="submit">Ajouter à la liste</button>
             </form>
             <?php } ?>
         </div>
