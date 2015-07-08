@@ -22,25 +22,27 @@
         </div>
     </div>
     <div class="row ma-no-h pa-no-h">
-        <div id="mag_perso" class="mes_mag block col-xs-8 col-xs-offset-2">
-            <h4>Produits</h4>
+        <div id="mag_perso" class="mes_mag block col-sm-8 col-sm-offset-2 col-xs-12">
+            <h3>Produits</h3>
             <?php if(isset($liste)) { ?>
             <form method="POST" action="<?php echo url_for("produit/ajout") ?>">
                 <input type="hidden" name="liste" value="<?php echo $liste->getId() ?>">
             <?php } ?>
-                <table class="table table-hover">
+                <table class="mag table-hover mag style_police table">
+                    <thead>
                         <tr>
-                            <th>Etat</th>
+                            <th class="tleft">Etat</th>
                             <th>Catégorie</th>
                             <th>Nom</th>
-                            <th>Partage</th>
+                            <th class="tright text-center-important">Partage</th>
                             <?php if(isset($liste)) { ?><th>Quantité</th><?php } ?>
                         </tr>
+                    </thead>
                     <?php                
                     foreach ($produits as $produit) { ?>
                         <tr>
                             <td width='37px'>
-                                <?php echo $produit->getEtatNom()=="VAL"?"<i class='mag_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='mag_att fa fa-clock-o'></i>":"<i class='mag_ref fa fa-times-circle'></i>"); ?>
+                                <?php echo $produit->getEtatNom()=="VAL"?"<i class='etat_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='etat_att fa fa-clock-o'></i>":"<i class='etat_ref fa fa-times-circle'></i>"); ?>
                             </td>
                             <td>
                                 <?php echo $produit->getCategorieNom(); ?>
@@ -49,8 +51,8 @@
                             <?php echo image_tag($produit->getImg(),array("width"=>"35px")); 
                                   echo $produit->getNom(); ?>
                             </td>
-                            <td>
-                            <?php echo $produit->getVisibleNom(); ?>
+                            <td class="text-center">
+                            <?php echo $produit->getVisibleCode()=="MOI"?'<i class="par_moi fa fa-user"></i>':($produit->getVisibleCode()=="LST"?'<i class="par_lst fa fa-list-alt"></i>':'<i class="par_sit fa fa-globe"></i>'); ?>
                             </td>
                             <?php if(isset($liste)) { ?>
                             <td>
