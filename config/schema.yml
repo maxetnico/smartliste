@@ -37,13 +37,13 @@ propel:
     id_magasin: { type: BIGINT, size: '20', required: false, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     coche: { type: TINYINT, size: '1', required: true, defaultValue: '0' }
     coche_date: { type: TIMESTAMP, required: false }
-    coche_id_utilisteur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    coche_id_utilisteur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     _indexes: { fk_lpl_magasin_idx: [id_magasin], fk_lpl_utilisateur_idx: [coche_id_utilisteur], fk_lpl_produit_idx: [id_produit], fk_lpl_liste_idx: [id_liste] }
   magasin:
     _attributes: { phpName: Magasin }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     nom: { type: VARCHAR, size: '128', required: true }
-    img: { type: VARCHAR, size: '45', required: false }
+    img: { type: LONGVARCHAR, required: false }
     id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '6', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     date_creation: { type: TIMESTAMP, required: false }
@@ -51,6 +51,12 @@ propel:
     id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '5', foreignTable: etat, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     _indexes: { id_utilisateur: [id_utilisateur], id_visibilite: [id_visibilite], id_etat: [id_etat] }
     _uniques: { id_magasin: [id] }
+  magasins_favoris:
+    _attributes: { phpName: MagasinsFavoris }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    id_magasin: { type: BIGINT, size: '20', required: true }
+    id_utilisateur: { type: BIGINT, size: '20', required: true }
+    _indexes: { id_utilisateur: [id_utilisateur] }
   produit:
     _attributes: { phpName: Produit }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }

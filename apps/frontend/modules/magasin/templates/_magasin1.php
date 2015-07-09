@@ -1,5 +1,6 @@
         <div id="mag_perso" class="mes_mag block col-sm-8 col-sm-offset-2 col-xs-12">
             <h3>Tous les magasins</h3>
+            <form method="post" action="<?php echo url_for('magasin/NouveauMagasin') ?>">
             <table align="left" class="mag style_police table">
                 <thead>
                     <tr class="">
@@ -32,4 +33,5 @@
                 }
                 ?>
             </table>
+        </form>
         </div>

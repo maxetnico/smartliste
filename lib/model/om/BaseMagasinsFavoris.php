@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'utilisateur_liste_link' table.
+ * Base class that represents a row from the 'magasins_favoris' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseUtilisateurListeLink extends BaseObject  implements Persistent {
+abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 
 
-  const PEER = 'UtilisateurListeLinkPeer';
+  const PEER = 'MagasinsFavorisPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        UtilisateurListeLinkPeer
+	 * @var        MagasinsFavorisPeer
 	 */
 	protected static $peer;
 
@@ -31,10 +31,10 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	protected $id;
 
 	/**
-	 * The value for the id_liste field.
+	 * The value for the id_magasin field.
 	 * @var        string
 	 */
-	protected $id_liste;
+	protected $id_magasin;
 
 	/**
 	 * The value for the id_utilisateur field.
@@ -57,7 +57,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BaseUtilisateurListeLink object.
+	 * Initializes internal state of BaseMagasinsFavoris object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -87,13 +87,13 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	}
 
 	/**
-	 * Get the [id_liste] column value.
+	 * Get the [id_magasin] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getIdListe()
+	public function getIdMagasin()
 	{
-		return $this->id_liste;
+		return $this->id_magasin;
 	}
 
 	/**
@@ -110,7 +110,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 * Set the value of [id] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     UtilisateurListeLink The current object (for fluent API support)
+	 * @return     MagasinsFavoris The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -120,37 +120,37 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = UtilisateurListeLinkPeer::ID;
+			$this->modifiedColumns[] = MagasinsFavorisPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [id_liste] column.
+	 * Set the value of [id_magasin] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     UtilisateurListeLink The current object (for fluent API support)
+	 * @return     MagasinsFavoris The current object (for fluent API support)
 	 */
-	public function setIdListe($v)
+	public function setIdMagasin($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->id_liste !== $v) {
-			$this->id_liste = $v;
-			$this->modifiedColumns[] = UtilisateurListeLinkPeer::ID_LISTE;
+		if ($this->id_magasin !== $v) {
+			$this->id_magasin = $v;
+			$this->modifiedColumns[] = MagasinsFavorisPeer::ID_MAGASIN;
 		}
 
 		return $this;
-	} // setIdListe()
+	} // setIdMagasin()
 
 	/**
 	 * Set the value of [id_utilisateur] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     UtilisateurListeLink The current object (for fluent API support)
+	 * @return     MagasinsFavoris The current object (for fluent API support)
 	 */
 	public function setIdUtilisateur($v)
 	{
@@ -160,7 +160,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 
 		if ($this->id_utilisateur !== $v) {
 			$this->id_utilisateur = $v;
-			$this->modifiedColumns[] = UtilisateurListeLinkPeer::ID_UTILISATEUR;
+			$this->modifiedColumns[] = MagasinsFavorisPeer::ID_UTILISATEUR;
 		}
 
 		return $this;
@@ -204,7 +204,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (string) $row[$startcol + 0] : null;
-			$this->id_liste = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->id_magasin = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
 			$this->id_utilisateur = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
 			$this->resetModified();
 
@@ -215,10 +215,10 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 3; // 3 = UtilisateurListeLinkPeer::NUM_COLUMNS - UtilisateurListeLinkPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 3; // 3 = MagasinsFavorisPeer::NUM_COLUMNS - MagasinsFavorisPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating UtilisateurListeLink object", $e);
+			throw new PropelException("Error populating MagasinsFavoris object", $e);
 		}
 	}
 
@@ -261,13 +261,13 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UtilisateurListeLinkPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(MagasinsFavorisPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = UtilisateurListeLinkPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = MagasinsFavorisPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -292,7 +292,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseUtilisateurListeLink:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseMagasinsFavoris:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -307,12 +307,12 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UtilisateurListeLinkPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(MagasinsFavorisPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			UtilisateurListeLinkPeer::doDelete($this, $con);
+			MagasinsFavorisPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -321,7 +321,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 		}
 	
 
-    foreach (sfMixer::getCallables('BaseUtilisateurListeLink:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BaseMagasinsFavoris:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -343,7 +343,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseUtilisateurListeLink:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseMagasinsFavoris:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -358,19 +358,19 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UtilisateurListeLinkPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(MagasinsFavorisPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BaseUtilisateurListeLink:save:post') as $callable)
+    foreach (sfMixer::getCallables('BaseMagasinsFavoris:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			UtilisateurListeLinkPeer::addInstanceToPool($this);
+			MagasinsFavorisPeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -396,13 +396,13 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 			$this->alreadyInSave = true;
 
 			if ($this->isNew() ) {
-				$this->modifiedColumns[] = UtilisateurListeLinkPeer::ID;
+				$this->modifiedColumns[] = MagasinsFavorisPeer::ID;
 			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = UtilisateurListeLinkPeer::doInsert($this, $con);
+					$pk = MagasinsFavorisPeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
@@ -411,7 +411,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 
 					$this->setNew(false);
 				} else {
-					$affectedRows += UtilisateurListeLinkPeer::doUpdate($this, $con);
+					$affectedRows += MagasinsFavorisPeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
@@ -483,7 +483,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 			$failureMap = array();
 
 
-			if (($retval = UtilisateurListeLinkPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = MagasinsFavorisPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -506,7 +506,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = UtilisateurListeLinkPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = MagasinsFavorisPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -525,7 +525,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getIdListe();
+				return $this->getIdMagasin();
 				break;
 			case 2:
 				return $this->getIdUtilisateur();
@@ -549,10 +549,10 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = UtilisateurListeLinkPeer::getFieldNames($keyType);
+		$keys = MagasinsFavorisPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getIdListe(),
+			$keys[1] => $this->getIdMagasin(),
 			$keys[2] => $this->getIdUtilisateur(),
 		);
 		return $result;
@@ -570,7 +570,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = UtilisateurListeLinkPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = MagasinsFavorisPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -589,7 +589,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setIdListe($value);
+				$this->setIdMagasin($value);
 				break;
 			case 2:
 				$this->setIdUtilisateur($value);
@@ -616,10 +616,10 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = UtilisateurListeLinkPeer::getFieldNames($keyType);
+		$keys = MagasinsFavorisPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setIdListe($arr[$keys[1]]);
+		if (array_key_exists($keys[1], $arr)) $this->setIdMagasin($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setIdUtilisateur($arr[$keys[2]]);
 	}
 
@@ -630,11 +630,11 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(UtilisateurListeLinkPeer::DATABASE_NAME);
+		$criteria = new Criteria(MagasinsFavorisPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(UtilisateurListeLinkPeer::ID)) $criteria->add(UtilisateurListeLinkPeer::ID, $this->id);
-		if ($this->isColumnModified(UtilisateurListeLinkPeer::ID_LISTE)) $criteria->add(UtilisateurListeLinkPeer::ID_LISTE, $this->id_liste);
-		if ($this->isColumnModified(UtilisateurListeLinkPeer::ID_UTILISATEUR)) $criteria->add(UtilisateurListeLinkPeer::ID_UTILISATEUR, $this->id_utilisateur);
+		if ($this->isColumnModified(MagasinsFavorisPeer::ID)) $criteria->add(MagasinsFavorisPeer::ID, $this->id);
+		if ($this->isColumnModified(MagasinsFavorisPeer::ID_MAGASIN)) $criteria->add(MagasinsFavorisPeer::ID_MAGASIN, $this->id_magasin);
+		if ($this->isColumnModified(MagasinsFavorisPeer::ID_UTILISATEUR)) $criteria->add(MagasinsFavorisPeer::ID_UTILISATEUR, $this->id_utilisateur);
 
 		return $criteria;
 	}
@@ -649,9 +649,9 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(UtilisateurListeLinkPeer::DATABASE_NAME);
+		$criteria = new Criteria(MagasinsFavorisPeer::DATABASE_NAME);
 
-		$criteria->add(UtilisateurListeLinkPeer::ID, $this->id);
+		$criteria->add(MagasinsFavorisPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -682,14 +682,14 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of UtilisateurListeLink (or compatible) type.
+	 * @param      object $copyObj An object of MagasinsFavoris (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setIdListe($this->id_liste);
+		$copyObj->setIdMagasin($this->id_magasin);
 
 		$copyObj->setIdUtilisateur($this->id_utilisateur);
 
@@ -709,7 +709,7 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     UtilisateurListeLink Clone of current object.
+	 * @return     MagasinsFavoris Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -728,12 +728,12 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     UtilisateurListeLinkPeer
+	 * @return     MagasinsFavorisPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new UtilisateurListeLinkPeer();
+			self::$peer = new MagasinsFavorisPeer();
 		}
 		return self::$peer;
 	}
@@ -757,9 +757,9 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BaseUtilisateurListeLink:'.$method))
+    if (!$callable = sfMixer::getCallable('BaseMagasinsFavoris:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BaseUtilisateurListeLink::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BaseMagasinsFavoris::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -768,4 +768,4 @@ abstract class BaseUtilisateurListeLink extends BaseObject  implements Persisten
   }
 
 
-} // BaseUtilisateurListeLink
+} // BaseMagasinsFavoris

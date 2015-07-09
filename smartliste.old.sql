@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 09 Juillet 2015 à 23:09
+-- Généré le :  Lun 06 Juillet 2015 à 17:01
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `smartliste`
 --
-CREATE DATABASE IF NOT EXISTS `smartliste` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `smartliste`;
 
 -- --------------------------------------------------------
 
@@ -147,7 +145,7 @@ INSERT INTO `liste_produit_link` (`id`, `id_liste`, `id_produit`, `quantite`, `i
 CREATE TABLE IF NOT EXISTS `magasin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
-  `img` text,
+  `img` varchar(45) DEFAULT NULL,
   `id_utilisateur` bigint(20) DEFAULT NULL,
   `id_visibilite` tinyint(4) NOT NULL DEFAULT '6',
   `date_creation` datetime DEFAULT NULL,
@@ -158,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_visibilite` (`id_visibilite`),
   KEY `id_etat` (`id_etat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `magasin`
@@ -166,24 +164,8 @@ CREATE TABLE IF NOT EXISTS `magasin` (
 
 INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `date_creation`, `nb_ajout`, `id_etat`) VALUES
 (1, 'penny', 'penny.jpg', 3, 1, '2015-07-04 09:11:23', 0, 1),
-(2, 'Auchan', 'auchan.jpg', 2, 3, '2015-07-05 10:11:23', 0, 1),
-(3, 'Match', 'match.jpg', 3, 3, '2015-07-06 11:11:23', 0, 1),
-(9, 'Grand Frais', 'Grand Frais.png', 3, 1, '2015-07-09 00:06:28', 0, 1);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `magasins_favoris`
---
-
-CREATE TABLE IF NOT EXISTS `magasins_favoris` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_magasin` bigint(20) NOT NULL,
-  `id_utilisateur` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_utilisateur` (`id_utilisateur`),
-  KEY `id_magasin` (`id_magasin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+(2, 'Auchan', 'auchan.jpg', 3, 3, '2015-07-05 10:11:23', 0, 2),
+(3, 'Match', 'match.jpg', 3, 2, '2015-07-06 11:11:23', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -241,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
 (1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 10:52:21'),
 (2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06'),
-(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-07-08 21:56:37'),
+(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-07-06 09:55:37'),
 (4, 'max', 'max', '2015-07-06 10:02:38', '', '2015-07-06 16:11:46');
 
 -- --------------------------------------------------------
@@ -300,10 +282,10 @@ INSERT INTO `visibilite` (`id`, `code`, `nom`) VALUES
 -- Contraintes pour la table `categorie`
 --
 ALTER TABLE `categorie`
+  ADD CONSTRAINT `categorie_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `categorie_ibfk_1` FOREIGN KEY (`id_parent`) REFERENCES `categorie` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `categorie_ibfk_2` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`),
-  ADD CONSTRAINT `categorie_ibfk_3` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`),
-  ADD CONSTRAINT `categorie_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `categorie_ibfk_3` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`);
 
 --
 -- Contraintes pour la table `liste`
@@ -329,20 +311,13 @@ ALTER TABLE `magasin`
   ADD CONSTRAINT `magasin_ibfk_3` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `magasins_favoris`
---
-ALTER TABLE `magasins_favoris`
-  ADD CONSTRAINT `fk_util_favoris` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_mag_favoris` FOREIGN KEY (`id_magasin`) REFERENCES `magasin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Contraintes pour la table `produit`
 --
 ALTER TABLE `produit`
+  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_produit_etat` FOREIGN KEY (`id_etat`) REFERENCES `etat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_produit_utilisateur1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_produit_visibilite` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_produit_visibilite` FOREIGN KEY (`id_visibilite`) REFERENCES `visibilite` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

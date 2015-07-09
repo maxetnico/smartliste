@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-sm-offset-2 col-sm-4 col-xs-12">
-            <form method="get" action="<?php echo url_for('magasin/index'); ?>">
+            <form method="post" action="<?php echo url_for('magasin/index'); ?>">
                 <?php $tous_aff = 0 ; if(isset($_GET['aff']) && $_GET['aff'] == 'tous' ) { $tous_aff = 1;  ?>
                 <input name="aff" type="hidden" value="mes">
                 <button id="bouton_invitation" type="submit" value="mes">Mes magasins</button>

@@ -31,6 +31,16 @@ class magasinActions extends sfActions
       $this->redirect('magasin/index');
   }
   
+  public function executeAjoutFavoris(sfWebRequest $request)
+  {
+      
+    $this->redirect('magasin/index');  
+  }
+  public function executeQuitterFavoris(sfWebRequest $request)
+  {
+      
+    $this->redirect('magasin/index');  
+  }
   public function executeNouveauMagasin(sfWebRequest $request)
   {
     if($request->getParameter('nommag') != null && $request->getParameter('partage') != null && $request->getParameter('lienimg') != null)
