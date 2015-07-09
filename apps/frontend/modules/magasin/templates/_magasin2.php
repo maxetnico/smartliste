@@ -34,7 +34,7 @@
         </table>
 </div> 
 <div id="mag_perso" class="mes_mag block col-sm-8 col-sm-offset-2 col-xs-12">
-        <h3>Mes magasins</h3>
+        <h3>Mes Favoris</h3>
         <table align="left" class="mag style_police table">
             <thead>
                 <tr class="">
@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <?php
-            foreach ($magasins as $magasin) {
+            foreach ($magasinsfav as $magasin) {
                 echo '<tr class="quitter">';
 
                 echo "<td>";

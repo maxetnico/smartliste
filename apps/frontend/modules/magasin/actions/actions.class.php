@@ -19,9 +19,12 @@ class magasinActions extends sfActions
   {
     
     if($request->getParameter('aff') == 'tous')
-        $this->magasins = MagasinPeer::retriveTous();
+    {    $this->magasins = MagasinPeer::retriveTous();}
     else
-        $this->magasins = MagasinPeer::retrivePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId()); 
+    {
+        $this->magasins = MagasinPeer::retrivePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
+        $this->magasinsfav = MagasinPeer::retriveTous();
+    }
   }
     
   public function executeQuitter(sfWebRequest $request)
