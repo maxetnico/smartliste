@@ -40,11 +40,12 @@ class magasinActions extends sfActions
         if($modelMagasin == null)
         {
             $ext = substr($request->getParameter("lienimg"),-4);
+            $arrInfoImage = getimagesize($request->getParameter("lienimg"));            
             
-            
-            switch ($ext){
-                case ".png":break;
-                case ".jpg":break;
+            switch ($arrInfoImage[2]){
+                case IMAGETYPE_JPEG:$ext=".jpg";break;
+                case IMAGETYPE_PNG:$ext=".png";break;
+                case IMAGETYPE_GIF:$ext=".gif";break;
                 default:$ext="";
             }
             if($ext != "" )
