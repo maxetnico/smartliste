@@ -52,7 +52,6 @@ class magasinActions extends sfActions
         $modelMagasin = MagasinPeer::retriveMagasinDejaPresent($iduser,$request->getParameter('nommag'));
         if($modelMagasin == null)
         {
-            $ext = substr($request->getParameter("lienimg"),-4);
             $arrInfoImage = getimagesize($request->getParameter("lienimg"));            
             
             switch ($arrInfoImage[2]){
@@ -61,10 +60,10 @@ class magasinActions extends sfActions
                 case IMAGETYPE_GIF:$ext=".gif";break;
                 default:$ext="";
             }
+			
             if($ext != "" )
             {
                 $in=fopen($request->getParameter("lienimg"), "rb");
-                //$out=fopen('images/test/'.$request->getParameter("nommag").'.'.substr($request->getParameter("lienimg"),-3), "wb");
 
                 $cpt=3;$brut="";
                 while (($brut .= fread($in,8192)) && $cpt>=0 ){
@@ -76,25 +75,20 @@ class magasinActions extends sfActions
                     $this->redirect('magasin/index'); 
                 }
                 else {
-                   // if(!file_exists('images/magasins/'.$request->getParameter("nommag").$ext))
-                   // {
-                        file_put_contents('images/magasins/'.$request->getParameter("nommag").$ext, $brut );
+                    file_put_contents('images/magasins/'.$request->getParameter("nommag").$ext, $brut );
                         
-                        $modelMagasin = new Magasin();
-                        $modelMagasin->setNom($request->getParameter("nommag"));
-                        $modelMagasin->setIdUtilisateur($iduser);
-                        $modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));//http://www.grandfrais.com/charte/base/img/visual/logo.png
-                        $modelMagasin->setDateCreation(new \DateTime());
-                        $modelMagasin->setIdEtat(EtatPeer::retriveIdDuCode('ATT'));
-                        $modelMagasin->setIdVisibilite(VisibilitePeer::retriveIdDuCode($request->getParameter('partage')));
-                        $modelMagasin->save();
+					$modelMagasin = new Magasin();
+					$modelMagasin->setNom($request->getParameter("nommag"));
+					$modelMagasin->setIdUtilisateur($iduser);
+					$modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));//http://www.grandfrais.com/charte/base/img/visual/logo.png
+					$modelMagasin->setDateCreation(new \DateTime());
+					$modelMagasin->setIdEtat(EtatPeer::retriveIdDuCode('ATT'));
+					$modelMagasin->setIdVisibilite(VisibilitePeer::retriveIdDuCode($request->getParameter('partage')));
+					$modelMagasin->save();
 
-                        $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste"); 
+					$this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste"); 
 
-
-                        $this->redirect('magasin/index');        
-                        
-                   // }
+					$this->redirect('magasin/index');    
                 }
             }
          //   list($width,$height,$type,$attr) = file_get_contents($request->getParameter("lienimg"));
