@@ -4,7 +4,8 @@
             <button id="bouton_invitation" type="button"><i class="fa fa-plus-circle"></i> Ajouter un magasin</button>
             <div id="menu_inv_box" class="menu_box">
                 <form method="post" action="<?php echo url_for('magasin/NouveauMagasin') ?>">
-                    <span>nom : </span><input type="text" name="nommag" placeholder="Nom du magasin" value="" /></br>
+                    <span>nom : </span><input type="text" id="nommag" name="nommag" placeholder="Nom du magasin" value="" /></br>
+                    <a id="imgRecherche">Recherche image</a></br>
                     <span>image : </span><input type="text" name="lienimg" placeholder="Lien vers l'image" value="" /></br>
                     <span>Partage : </span>
                         <input type="radio" id="parmoi" name="partage" value="MOI" checked /><label for="parmoi"><i class="par_moi fa fa-user"></i> Moi</label>
@@ -39,3 +40,17 @@
       ?>
     </div>
 </div>
+
+<script>
+    $('#imgRecherche').css('cursor','pointer');
+    $('#nommag').on('change',function(){
+        if($('#nommag').val().length > 0 && $('#nommag').val() != " ")
+        {
+           // $('#imgRecherche').prop('href','https://duckduckgo.com/?q=i!+'+$('#nommag').val());
+            $('#imgRecherche').prop('href','https://duckduckgo.com/?q=+'+$('#nommag').val()+'&ia=images');
+            $('#imgRecherche').prop('target','_blank');
+            //$('#imgRecherche').click();
+        }  
+    });
+
+</script>
