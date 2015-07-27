@@ -59,12 +59,13 @@ class listeActions extends sfActions
           $this->liste = ListePeer::retrieveByPK($request->getParameter("liste"));
           $produits = ProduitPeer::retrievePourUneListe($this->liste);
           $this->produits = array();
-          foreach ($produits as $produit) {
+          foreach ($produits as $arr) {
+              $produit = $arr[0];
               if(!isset($this->produits[$produit->getCategorieNom()]))
               {
                   $this->produits[$produit->getCategorieNom()] = array();
               }
-              $this->produits[$produit->getCategorieNom()][] = $produit;
+              $this->produits[$produit->getCategorieNom()][] = $arr;
           }
       }
       else

@@ -39,6 +39,22 @@
 }
 .liste .icone {text-align: right; font-size: 30px;}
 
+/* Partie des listes avec produits */
+.listes-produits {margin-top: 15px;}
+.listes-produits .conteneur {background: #fff; width:100%;}
+.listes-produits tr {width:100%; text-align: center;}
+.listes-produits td {height:31px;}
+.listes-produits .categorie {color: #fff; background:#000; text-align: center; font-size: 15px;}
+.liste-produits {border-bottom: 1px #984807 solid;}
+.listes-produits h2 {width:100%; text-align: center; color: #aaa;}
+.listes-produits .nom-produit {color:#222;}
+.listes-produits td img {max-height: 30px; max-width: 30px;}
+.listes-produits td.vignette {width:10%;}
+.listes-produits td.texte {width:65%;}
+.listes-produits td.quantite {width:10%;}
+.listes-produits td.magasin {width:10%;}
+.listes-produits td.checkbox {width:5%;padding-left:50%;}
+
 .message_flash {width:90%; margin-left: 5%; margin-top: 12px;}
 .message_flash div {width: 100%; padding: 10px; border-radius: 10px; text-align: center;}
 .message_flash span {font-size: 18px;} 

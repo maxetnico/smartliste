@@ -73,8 +73,15 @@ class ProduitPeer extends BaseProduitPeer
     {
         $crit = new Criteria();
         $crit->addJoin(self::ID, ListeProduitLinkPeer::ID_PRODUIT);
-        $crit->add(ListeProduitLinkPeer::ID_LISTE,$liste->getId());        
-        return parent::doSelect($crit);
+        $crit->add(ListeProduitLinkPeer::ID_LISTE,$liste->getId());
+        $produits = parent::doSelect($crit);
+        $retour = array();
+        foreach ($produits as $produit) {
+            $modelMagasin = MagasinPeer::retrieveOneByListeAndProduct($liste->getId(),$produit->getId());
+            $modelLink = ListeProduitLinkPeer::retrieveOneByListeAndProduct($liste->getId(),$produit->getId());
+            $retour[] = array($produit,$modelMagasin,$modelLink);
+        }
+        return $retour;
     }
     
     protected static function getCriterionPourUnUtilisateur($utilisateur,$c)

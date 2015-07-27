@@ -30,4 +30,13 @@ class MagasinPeer extends BaseMagasinPeer
         $crit->put(self::ID_UTILISATEUR,0);
         return parent::doUpdate($crit);
     }
+    
+    public static function retrieveOneByListeAndProduct($idListe,$idProduct)
+    {
+        $crit = new Criteria();
+        $crit->addJoin(self::ID, ListeProduitLinkPeer::ID_MAGASIN);
+        $crit->add(ListeProduitLinkPeer::ID_LISTE,$idListe,  Criteria::EQUAL);       
+        $crit->add(ListeProduitLinkPeer::ID_PRODUIT,$idProduct,  Criteria::EQUAL);
+        return parent::doSelectOne($crit);
+    }
 }

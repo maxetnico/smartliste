@@ -1,5 +1,5 @@
 <?php
-// /!\ $produits contient le nom des catégories en clé et le tableau des produits de cette catégorie en valeur
+// /!\ $produits contient le nom des catégories en clé et un tableau avec [0] le produit et [1] le magasin
 ?>
 <div class="row ma-no-h">
     <div class="col-md-offset-2 col-md-4 col-xs-12">
@@ -36,6 +36,47 @@
         </div>
     </div>           
 </div>
-<div class="row ma-no-h">
-    <?php var_dump($produits) ?>
+<div class="row ma-no-h listes-produits">
+    <?php
+    //var_dump($produits);
+    if(count($produits) != 0)
+    {
+        foreach ($produits as $strCategorie => $arrProduits)
+        { ?>
+    <div class="col-md-6 col-sm-12">
+        <table class="conteneur">
+            <tr><th class="categorie" colspan="5"><?php echo $strCategorie ?></th</tr>            
+                <?php foreach ($arrProduits as $key => $arr)
+                { 
+                    $modelProduit = $arr[0];
+                    $modelMagasin = $arr[1];
+                    $modelListeProduitLink = $arr[2];
+                    ?>            
+                <tr class="liste-produits">
+                    <td class="vignette">
+                        <?php echo image_tag($modelProduit->getImg()) ?>
+                    </td>
+                    <td class="texte">
+                        <span class="nom-produit"><?php echo $modelProduit->getNom() ?></span>
+                    </td>
+                    <td class="quantite">
+                        <span class="nom-produit">Nb: <?php echo $modelListeProduitLink->getQuantite() ?></span>
+                    </td>
+                    <td class="magasin">
+                        <?php echo $modelMagasin->getImg()!=null?image_tag($modelMagasin->getImg()):''; ?>
+                    </td>
+                    <td class="checkbox">
+                        <input type="checkbox">
+                    </td>
+                </tr>
+                <?php } ?>           
+        </table>  
+    </div>
+    <?php } 
+    }
+    else
+    {
+    ?>
+    <h2>Cette liste ne contient aucun produit</h2>
+    <?php } ?>
 </div>
