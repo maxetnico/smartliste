@@ -26,7 +26,7 @@
                     echo "</td><td class='text-center'>";
                     echo $magasin->getVisibleNom()=="MOI"?'<i class="par_moi fa fa-user"></i>':($magasin->getVisibleNom()=="LST"?'<i class="par_lst fa fa-list-alt"></i>':'<i class="par_sit fa fa-globe"></i>');
                     echo "</td><td>";
-                    echo "<a href='".(url_for("magasin/ajoutFavoris").'/magasin/'.$magasin->getId())."' title='Quitter'><i class='fa fa-star-o'></i></a>";
+                    echo "<a href='".(url_for("magasin/ajoutFavoris").'/magasin/'.$magasin->getId())."' title='ajouter aux favoris'><i class='fa fa-star-o'></i></a>";
                     echo "</td>";
                     
                     echo '</tr>';

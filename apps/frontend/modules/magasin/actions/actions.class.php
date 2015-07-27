@@ -17,18 +17,18 @@ class magasinActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    
     if($request->getParameter('aff') == 'tous')
-    {    $this->magasins = MagasinPeer::retriveTous();}
+    {    $this->magasins = MagasinPeer::retriveTousSaufMoi($this->getUser()->getModelUtilisateur()->getId());}
     else
     {
         $this->magasins = MagasinPeer::retrivePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
-        $this->magasinsfav = MagasinPeer::retriveTous();
+        $this->magasinsfav = MagasinsFavorisPeer::retriveFavPourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
     }
   }
     
   public function executeQuitter(sfWebRequest $request)
   {
+      // faire la mise a 0 du champ magasin.id_utilisteur
       $idMagasin = $request->getParameter('magasin');
       $this->quitterMagasin($this->getUser()->getModelUtilisateur()->getId(),$idMagasin);
       $this->redirect('magasin/index');
@@ -36,14 +36,31 @@ class magasinActions extends sfActions
   
   public function executeAjoutFavoris(sfWebRequest $request)
   {
-      
-    $this->redirect('magasin/index');  
+    $iduser = $this->getUser()->getModelUtilisateur()->getId();
+    $idMagasin = $request->getParameter('magasin');
+    $FavMagasin = MagasinsFavorisPeer::retriveFavMagasinDejaPresent($iduser,$idMagasin);
+    if($FavMagasin == null)
+    {
+        $FavMagasin = new MagasinsFavoris();
+        $FavMagasin->setIdUtilisateur($iduser);
+        $FavMagasin->setIdMagasin($idMagasin);
+        $FavMagasin->save();
+        $this->getUser()->setFlash("info", "Le magasin a été ajouter à vos favoris"); 
+    }
+    else
+    {
+        $this->getUser()->setFlash("warning", "Ce magasin existe déjà dans vos favoris");   
+    }
+    $this->redirect('magasin/index/aff/tous');  
   }
+  
   public function executeQuitterFavoris(sfWebRequest $request)
   {
-      
-    $this->redirect('magasin/index');  
+    $idFav = $request->getParameter('magasin2');
+    MagasinsFavorisPeer::deleteFavQuitterListe($idFav);
+    $this->redirect('magasin/index');
   }
+  
   public function executeNouveauMagasin(sfWebRequest $request)
   {
     if($request->getParameter('nommag') != null && $request->getParameter('partage') != null && $request->getParameter('lienimg') != null)
@@ -52,7 +69,6 @@ class magasinActions extends sfActions
         $modelMagasin = MagasinPeer::retriveMagasinDejaPresent($iduser,$request->getParameter('nommag'));
         if($modelMagasin == null)
         {
-            $ext = substr($request->getParameter("lienimg"),-4);
             $arrInfoImage = getimagesize($request->getParameter("lienimg"));            
             
             switch ($arrInfoImage[2]){
@@ -73,41 +89,28 @@ class magasinActions extends sfActions
                 fclose($in);
                 if($cpt==0) {
                     $this->getUser()->setFlash("warning", "taille du fichier image trop grande");
-                    $this->redirect('magasin/index'); 
                 }
                 else {
-                   // if(!file_exists('images/magasins/'.$request->getParameter("nommag").$ext))
-                   // {
-                        file_put_contents('images/magasins/'.$request->getParameter("nommag").$ext, $brut );
-                        
-                        $modelMagasin = new Magasin();
-                        $modelMagasin->setNom($request->getParameter("nommag"));
-                        $modelMagasin->setIdUtilisateur($iduser);
-                        $modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));//http://www.grandfrais.com/charte/base/img/visual/logo.png
-                        $modelMagasin->setDateCreation(new \DateTime());
-                        $modelMagasin->setIdEtat(EtatPeer::retriveIdDuCode('ATT'));
-                        $modelMagasin->setIdVisibilite(VisibilitePeer::retriveIdDuCode($request->getParameter('partage')));
-                        $modelMagasin->save();
+                    file_put_contents('images/magasins/'.$request->getParameter("nommag").$ext, $brut );
 
-                        $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste"); 
+                    $modelMagasin = new Magasin();
+                    $modelMagasin->setNom($request->getParameter("nommag"));
+                    $modelMagasin->setIdUtilisateur($iduser);
+                    $modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));//http://www.grandfrais.com/charte/base/img/visual/logo.png
+                    $modelMagasin->setDateCreation(new \DateTime());
+                    $modelMagasin->setIdEtat(EtatPeer::retriveIdDuCode('ATT'));
+                    $modelMagasin->setIdVisibilite(VisibilitePeer::retriveIdDuCode($request->getParameter('partage')));
+                    $modelMagasin->save();
 
-
-                        $this->redirect('magasin/index');        
-                        
-                   // }
-                }
+                    $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste"); 
+                }   
             }
-         //   list($width,$height,$type,$attr) = file_get_contents($request->getParameter("lienimg"));
-         //   file_put_contents('images/test/test.txt', $width." - ".$height." - ".$type." - ".$attr);
-         //   file_put_contents('images/test/test.jpg', $current);
-            
-
         }
         else
         {
             $this->getUser()->setFlash("warning", "Ce nom de magasin existe déjà dans votre liste");   
-            $this->redirect('magasin/index'); 
         }
+        $this->redirect('magasin/index'); 
     }
   }
 }

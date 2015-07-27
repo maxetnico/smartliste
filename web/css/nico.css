@@ -272,3 +272,12 @@ div.block {
 .mag tr:hover .quitter {
     __display:block;
 }
+
+.choixpart {
+    display: none;
+    z-index: 99;
+}
+
+i {
+    z-index: 10;
+}

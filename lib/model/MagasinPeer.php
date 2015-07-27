@@ -1,13 +1,39 @@
 <?php
 
 class MagasinPeer extends BaseMagasinPeer
-{
+{    
+    public static function retriveFav2PourUnUtilisateur($isu) {
+        
+        $crit = new Criteria();
+        $crit->addJoin(self::ID, MagasinsFavorisPeer::ID_MAGASIN);
+        $crit->add(MagasinsFavorisPeer::ID_UTILISATEUR,$isu,  Criteria::EQUAL);
+      //  $crit->addAsColumn('idfav',MagasinsFavorisPeer::ID);
+        return parent::doSelect($crit);
+    }
+    
+    public static function retriveFavPourUnUtilisateur($isu) {
+        
+        $crit = new Criteria();
+        $crit->add(MagasinsFavorisPeer::ID_UTILISATEUR,$isu);
+        $crit->add(self::ID,  MagasinsFavorisPeer::ID); 
+        return parent::doSelect($crit);
+    }
+    
     public static function retriveTous() {
         $crit = new Criteria();
         $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);
         $crit->add(EtatPeer::CODE,'VAL',  Criteria::EQUAL);
         $crit->addJoin(self::ID_VISIBILITE, VisibilitePeer::ID);
         $crit->add(VisibilitePeer::CODE,'SIT',  Criteria::EQUAL);
+        return parent::doSelect($crit);
+    }
+    public static function retriveTousSaufMoi($idu) {
+        $crit = new Criteria();
+        $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);
+        $crit->add(EtatPeer::CODE,'VAL',  Criteria::EQUAL);
+        $crit->addJoin(self::ID_VISIBILITE, VisibilitePeer::ID);
+        $crit->add(VisibilitePeer::CODE,'SIT',  Criteria::EQUAL);
+        $crit->add(self::ID_UTILISATEUR,$idu,  Criteria::NOT_EQUAL);
         return parent::doSelect($crit);
     }
     
