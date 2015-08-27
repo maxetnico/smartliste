@@ -46,8 +46,8 @@
     $('#nommag').on('change',function(){
         if($('#nommag').val().length > 0 && $('#nommag').val() != " ")
         {
-           // $('#imgRecherche').prop('href','https://duckduckgo.com/?q=i!+'+$('#nommag').val());
-            $('#imgRecherche').prop('href','https://duckduckgo.com/?q=+'+$('#nommag').val()+'&ia=images');
+           // $('#imgRecherche').prop('href','https://duckduckgo.com/?q=i!magasin+'+$('#nommag').val());
+            $('#imgRecherche').prop('href','https://duckduckgo.com/?q=i!+magasin+'+$('#nommag').val()+'&iax=1&ia=images');
             $('#imgRecherche').prop('target','_blank');
             //$('#imgRecherche').click();
         }  
