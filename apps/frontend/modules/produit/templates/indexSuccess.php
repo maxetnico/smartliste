@@ -10,11 +10,33 @@
         <div class="col-xs-8 col-xs-offset-2 pa-no-h">
             <button id="bouton_ajout_produit" type="button"><i class="fa fa-plus-circle"></i> Ajouter un produit</button>
             <div id="menu_ajout_box" class="menu_box">
-                <form method="post" action="<?php echo url_for('produit/ajouter') ?>">
+                <!--<form method="post" action="<?php echo url_for('produit/ajouter') ?>">
                     <span>nom : </span><input type="text" name="nommag" placeholder="Nom du magasin" value=""></br>
                     <span>image : </span><input type="text" name="lienimg" placeholder="Lien vers l'image" value=""></br>
                     <span>Partage : </span><input type="text" name="visiblepar" placeholder="Visible par qui ?" value=""></br>
                     <span>Catégorie : </span><input type="text" name="visiblepar" placeholder="Visible par qui ?" value=""></br>
+                    <button type="submit" id="bouton_valider">Ajouter</button>
+                    <button type="reset" class="bouton_annuler">Annuler</button>
+                </form>-->
+                <form method="post" action="<?php echo url_for('produit/ajouter') ?>">
+                    <span>nom : </span><input type="text" id="nommag" name="nom" placeholder="Nom du produit" value="" /><br>
+                    <a id="imgRecherche">Recherche image</a></br>
+                    <span>image : </span><input type="text" name="lienimg" placeholder="Lien vers l'image" value="" /><br>
+                    <span>Partage : </span>
+                        <input type="radio" id="parmoi" name="partage" value="MOI" checked /><label for="parmoi"><i class="par_moi fa fa-user"></i> Moi</label>
+                        <input type="radio" id="parlst" name="partage" value="LST" /><label for="parlst"><i class="par_lst fa fa-list-alt"></i> Liste</label>
+                        <input type="radio" id="parsit" name="partage" value="SIT" /><label for="parsit"><i class="par_sit fa fa-globe"></i> Site</label>
+                        <br>
+                    <span>Type : </span>
+                        <select name="categorie">
+                            <?php
+                            foreach ($categories as $modelCategorie)
+                            {
+                                echo "<option value='".$modelCategorie->getId()."'>".$modelCategorie->getNom()."</option>";
+                            }
+                            ?>
+                        </select>
+                    <br>
                     <button type="submit" id="bouton_valider">Ajouter</button>
                     <button type="reset" class="bouton_annuler">Annuler</button>
                 </form>
@@ -35,12 +57,12 @@
                             <th>Catégorie</th>
                             <th>Nom</th>
                             <th></th>
-                            <th class="<?php echo isset($liste)?"":"tright"; ?> text-center-important">Partage</th>
-                            <?php if(isset($liste)) { ?><th class="tright">Quantité</th><?php } ?>
+                            <th class="text-center-important">Partage</th>
+                            <?php if(isset($liste)) { ?><th class="tright">Quantité</th><?php } else { ?><th class="tright text-center-important"></th> <?php } ?>
                         </tr>
                     </thead>
                     <?php                
-                    foreach ($produits as $produit) { ?>
+                    foreach ($produits as $cle => $produit) { ?>
                         <tr>
                             <td width='37px'>
                                 <?php echo $produit->getEtatNom()=="VAL"?"<i class='etat_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='etat_att fa fa-clock-o'></i>":"<i class='etat_ref fa fa-times-circle'></i>"); ?>
@@ -58,9 +80,16 @@
                             <?php echo $produit->getVisibleCode()=="MOI"?'<i class="par_moi fa fa-user"></i>':($produit->getVisibleCode()=="LST"?'<i class="par_lst fa fa-list-alt"></i>':'<i class="par_sit fa fa-globe"></i>'); ?>
                             </td>
                             <?php if(isset($liste)) { ?>
-                            <td>
-                                <input type="number" name="<?php echo $produit->getId() ?>" value="0" class="width-60">
+                            <td>                                
+                                <input type="number" name="<?php echo $produit->getId() ?>" value="0" class="width-60">                               
                             </td>
+                            <?php }
+                            else{ ?> 
+                            <td>
+                                <?php if($arrProduitsSupprimable[$cle]) { ?>
+                                    <a href="<?php echo url_for("produit/supprimer").'/produit/'.$produit->getId(); ?>" title='Supprimer'><i class='fa fa-trash'></i></a>
+                                 <?php } ?>
+                            </td>    
                             <?php } ?>
                         </tr>
                     <?php } ?>

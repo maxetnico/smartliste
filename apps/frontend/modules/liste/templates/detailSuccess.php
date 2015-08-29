@@ -47,7 +47,7 @@
         <table class="conteneur">
             <tr><th class="categorie" colspan="5"><?php echo $strCategorie ?></th</tr>            
                 <?php foreach ($arrProduits as $key => $arr)
-                { 
+                {                     
                     $modelProduit = $arr[0];
                     $modelMagasin = $arr[1];
                     $modelListeProduitLink = $arr[2];
@@ -63,7 +63,11 @@
                         <span class="nom-produit">Nb: <?php echo $modelListeProduitLink->getQuantite() ?></span>
                     </td>
                     <td class="magasin">
-                        <?php echo $modelMagasin->getImg()!=null?image_tag($modelMagasin->getImg()):''; ?>
+                        <?php 
+                        if($modelMagasin != null)
+                        {
+                            echo $modelMagasin->getImg()!=null?image_tag($modelMagasin->getImg()):'';
+                        }?>
                     </td>
                     <td class="checkbox">
                         <input type="checkbox">
