@@ -67,6 +67,8 @@ class listeActions extends sfActions
               }
               $this->produits[$produit->getCategorieNom()][] = $arr;
           }
+          
+          $this->magasins = MagasinPeer::retrieveTousValidePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());          
       }
       else
       {
@@ -100,9 +102,9 @@ class listeActions extends sfActions
                   if($request->getParameter("coche") == 0)
                   {
                       $modelListeProduitLink->setCoche(0);
-                      $modelListeProduitLink->save();
-                      echo "ok";
+                      $modelListeProduitLink->save();                      
                   }
+                  echo "ok";
               }
           }
           else
@@ -117,6 +119,18 @@ class listeActions extends sfActions
             }
           }         
       }      
+      return sfView::NONE;
+  }
+  
+  //Fonction appelée en ajax qui permet de changer de magasin
+  public function executeMagasin(sfWebRequest $request)
+  {
+      $modelListeProduitLink = ListeProduitLinkPeer::retrieveByPK($request->getParameter("link"));
+      if($this->utilisateurPossedeListe($modelListeProduitLink->getIdListe()))
+      {
+          $modelListeProduitLink->setIdMagasin($request->getParameter("magasin"));
+          $modelListeProduitLink->save();
+      }
       return sfView::NONE;
   }
   

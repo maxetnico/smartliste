@@ -45,7 +45,7 @@
         { ?>
     <div class="col-md-6 col-sm-12">
         <table class="conteneur">
-            <tr><th class="categorie" colspan="5"><?php echo $strCategorie ?></th</tr>            
+            <tr><th class="categorie" colspan="5"><?php echo $strCategorie ?></th></tr>            
                 <?php foreach ($arrProduits as $key => $arr)
                 {                     
                     $modelProduit = $arr[0];
@@ -63,11 +63,16 @@
                         <span class="nom-produit">Nb: <?php echo $modelListeProduitLink->getQuantite() ?></span>
                     </td>
                     <td class="magasin">
+                        <select class="select-image" id-link="<?php echo $modelListeProduitLink->getId() ?>" onchange="changeSelectImage(this)">
+                        <?php foreach ($magasins as $key => $magasin) { ?>
+                           <option style="background:url('images/magasins/<?php echo $magasin->getImg() ?>') no-repeat; background-size: 100% auto;" title="<?php echo $magasin->getNom() ?>" value="<?php echo $magasin->getId(); ?>" <?php echo (($modelListeProduitLink->getIdMagasin() == null && $key == 0 )|| ($magasin->getId()==$modelListeProduitLink->getIdMagasin()))?"selected":""; ?>></option>
+                        <?php } ?>                 
+                        </select>
                         <?php 
-                        if($modelMagasin != null)
+                        /*if($modelMagasin != null)
                         {
                             echo $modelMagasin->getImg()!=null?image_tag($modelMagasin->getImg()):'';
-                        }?>
+                        }*/ ?>
                     </td>
                     <td class="checkbox">
                         <input type="checkbox" id-link="<?php echo $modelListeProduitLink->getId() ?>" name="cb-link-<?php echo $modelListeProduitLink->getId() ?>" onclick="checkAndLineThrough(this)">

@@ -13,6 +13,10 @@ function onloadMax()
     $('#bouton_addliste').click(function () {$('#menu_addliste_box').toggle();});
     $('#bouton_invitation').click(function () {$('#menu_inv_box').toggle();});
     $('#bouton_ajout_produit').click(function () {$('#menu_ajout_box').toggle();});
+    
+    $(".select-image").each(function(index,element){
+        $(element).attr("style",$(element).find("option:selected").attr("style"));
+    });    
 }
 
 function allerALUrl(strUrl)
@@ -27,7 +31,7 @@ function checkAndLineThrough(element)
         $(element).parents(".liste-produits").addClass("checked");
     else
         $(element).parents(".liste-produits").removeClass("checked");
-    $.ajax({url:"http://localhost/smartliste/web/index.php/liste/coche/link/"+$(element).attr("id-link")+"/coche/"+($(element).is(":checked")?"1":"0"),success:function(response){
+    $.ajax({url:"liste/coche/link/"+$(element).attr("id-link")+"/coche/"+($(element).is(":checked")?"1":"0"),success:function(response){
             if(response != "ok")
             {
                 $(element).parents(".liste-produits").removeClass("checked");
@@ -35,4 +39,10 @@ function checkAndLineThrough(element)
                 alert(response);
             }
     }});
+}
+
+function changeSelectImage(element)
+{
+    $(element).attr("style",$(element).find("option:selected").attr("style"));
+     $.ajax({url:"liste/magasin/link/"+$(element).attr("id-link")+"/magasin/"+$(element).val()});
 }

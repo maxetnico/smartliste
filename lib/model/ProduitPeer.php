@@ -82,7 +82,7 @@ class ProduitPeer extends BaseProduitPeer
         $retour = array();
         foreach ($produits as $produit) {
             $modelMagasin = MagasinPeer::retrieveOneByListeAndProduct($liste->getId(),$produit->getId());
-            $modelLink = ListeProduitLinkPeer::retrieveOneByListeAndProduct($liste->getId(),$produit->getId());
+            $modelLink = ListeProduitLinkPeer::retrieveOneNotCheckedByListeAndProduct($liste->getId(),$produit->getId());
             $retour[] = array($produit,$modelMagasin,$modelLink);
         }
         return $retour;
@@ -91,7 +91,8 @@ class ProduitPeer extends BaseProduitPeer
     public static function retrievePourUneListeNonCoche($liste)
     {        
         $crit = new Criteria();
-        $crit->add(ListeProduitLinkPeer::COCHE,0);
+        $crit->add(ListeProduitLinkPeer::COCHE,0,  Criteria::EQUAL);
+        
         return self::retrievePourUneListe($liste,$crit);
     }
     
