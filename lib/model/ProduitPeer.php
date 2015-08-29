@@ -8,6 +8,7 @@ class ProduitPeer extends BaseProduitPeer
         $crit = new Criteria();
         $crit->addJoin(ListeProduitLinkPeer::ID_PRODUIT,self::ID);
         $crit->add(ListeProduitLinkPeer::ID_LISTE,$liste->getId(),  Criteria::EQUAL);
+        $crit->add(ListeProduitLinkPeer::COCHE,0,  Criteria::EQUAL);
         $crit->setDistinct();
         $arrExclus = parent::doSelect($crit);
         
@@ -69,9 +70,12 @@ class ProduitPeer extends BaseProduitPeer
         return parent::doSelect($crit);
     }
     
-    public static function retrievePourUneListe($liste)
-    {
-        $crit = new Criteria();
+    public static function retrievePourUneListe($liste,$crit = null)
+    {        
+        if($crit == null)
+        {
+            $crit = new Criteria();
+        }
         $crit->addJoin(self::ID, ListeProduitLinkPeer::ID_PRODUIT);
         $crit->add(ListeProduitLinkPeer::ID_LISTE,$liste->getId());
         $produits = parent::doSelect($crit);
@@ -82,6 +86,13 @@ class ProduitPeer extends BaseProduitPeer
             $retour[] = array($produit,$modelMagasin,$modelLink);
         }
         return $retour;
+    }
+    
+    public static function retrievePourUneListeNonCoche($liste)
+    {        
+        $crit = new Criteria();
+        $crit->add(ListeProduitLinkPeer::COCHE,0);
+        return self::retrievePourUneListe($liste,$crit);
     }
     
     protected static function getCriterionPourUnUtilisateur($utilisateur,$c)

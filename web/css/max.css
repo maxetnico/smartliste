@@ -54,6 +54,7 @@
 .listes-produits td.quantite {width:10%;}
 .listes-produits td.magasin {width:10%;}
 .listes-produits td.checkbox {width:5%;padding-left:50%;}
+.liste-produits.checked * {text-decoration: line-through;}
 
 .message_flash {width:90%; margin-left: 5%; margin-top: 12px;}
 .message_flash div {width: 100%; padding: 10px; border-radius: 10px; text-align: center;}

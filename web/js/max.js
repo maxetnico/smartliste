@@ -19,3 +19,20 @@ function allerALUrl(strUrl)
 {
     document.location.href = strUrl;
 }
+
+/*Fonction qui check si le produit n'est pas déjà coché en base et le coche*/
+function checkAndLineThrough(element)
+{
+    if($(element).is(":checked"))
+        $(element).parents(".liste-produits").addClass("checked");
+    else
+        $(element).parents(".liste-produits").removeClass("checked");
+    $.ajax({url:"http://localhost/smartliste/web/index.php/liste/coche/link/"+$(element).attr("id-link")+"/coche/"+($(element).is(":checked")?"1":"0"),success:function(response){
+            if(response != "ok")
+            {
+                $(element).parents(".liste-produits").removeClass("checked");
+                $(element).prop('checked', false);
+                alert(response);
+            }
+    }});
+}

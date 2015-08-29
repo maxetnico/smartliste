@@ -70,7 +70,7 @@
                         }?>
                     </td>
                     <td class="checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" id-link="<?php echo $modelListeProduitLink->getId() ?>" name="cb-link-<?php echo $modelListeProduitLink->getId() ?>" onclick="checkAndLineThrough(this)">
                     </td>
                 </tr>
                 <?php } ?>           
