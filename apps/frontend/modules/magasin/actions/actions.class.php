@@ -33,9 +33,14 @@ class magasinActions extends sfActions
       // faire la mise a 0 du champ magasin.id_utilisteur
       $idMagasin = $request->getParameter('magasin');
       $iduser = $this->getUser()->getModelUtilisateur()->getId();
-      MagasinPeer::UpdateIdUtilisateurEtIdListe($iduser,$idMagasin);
-    
-      $this->redirect('magasin/index');
+      $magasin = MagasinPeer::UpdateIdUtilisateurEtIdListe($iduser,$idMagasin);
+      if($magasin != null)
+      {
+            $magasin->setIdUtilisateur(null);
+            $magasin->save();
+            $this->getUser()->setFlash("warning", "Magasin retiré de votre liste.");
+            $this->redirect('magasin/index');
+      }
     }    
   }
   
@@ -63,6 +68,7 @@ class magasinActions extends sfActions
   {
     $idFav = $request->getParameter('magasin2');
     MagasinsFavorisPeer::deleteFavQuitterListe($idFav);
+    $this->getUser()->setFlash("warning", "Magasin retiré de vos favoris.");   
     $this->redirect('magasin/index');
   }
   

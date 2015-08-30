@@ -49,12 +49,12 @@ class MagasinPeer extends BaseMagasinPeer
         $crit->add(self::NOM,$nomMagasin);
         return parent::doSelect($crit);
     }
-    public static function UpdateIdUtilisateurEtIdListe($idUtilisateur,$nomMagasin) {
+    
+    public static function UpdateIdUtilisateurEtIdListe($idUtilisateur,$idMagasin) {
         $crit = new Criteria();
-        $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
-        $crit->add(self::NOM,$nomMagasin);
-        $crit->put(self::ID_UTILISATEUR,0);
-        return parent::doUpdate($crit);
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur, Criteria::EQUAL);
+        $crit->add(self::ID,$idMagasin, Criteria::EQUAL);
+        return parent::doSelectOne($crit);
     }
     
     public static function retrieveOneByListeAndProduct($idListe,$idProduct)
