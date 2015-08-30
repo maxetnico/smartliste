@@ -57,7 +57,7 @@ class listeActions extends sfActions
       if($request->hasParameter("liste") && $this->utilisateurPossedeListe($request->getParameter("liste")))
       {
           $this->liste = ListePeer::retrieveByPK($request->getParameter("liste"));
-          $produits = ProduitPeer::retrievePourUneListe($this->liste);
+          $produits = ProduitPeer::retrievePourUneListeNonCoche($this->liste);
           $this->produits = array();
           foreach ($produits as $arr) {
               $produit = $arr[0];
@@ -67,6 +67,8 @@ class listeActions extends sfActions
               }
               $this->produits[$produit->getCategorieNom()][] = $arr;
           }
+          
+          $this->magasins = MagasinPeer::retrieveTousValidePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());          
       }
       else
       {
@@ -79,6 +81,57 @@ class listeActions extends sfActions
       $idListe = $request->getParameter('liste');
       $this->getUser()->getModelUtilisateur()->quitterListe($idListe);
       $this->redirect('liste/index');
+  }
+  
+  //Fonction appelée en ajax qui vérifie et coche en base le produit
+  public function executeCoche(sfWebRequest $request)
+  {
+      $modelListeProduitLink = ListeProduitLinkPeer::retrieveByPK($request->getParameter("link"));
+      if($this->utilisateurPossedeListe($modelListeProduitLink->getIdListe()))
+      {
+          if($modelListeProduitLink->getCoche() == 1)
+          {
+              if($modelListeProduitLink->getCocheIdUtilisteur() != $this->getUser()->getModelUtilisateur()->getId())
+              {
+                  $modelUtilisateurQuiACoche = UtilisateurPeer::retrieveByPK($modelListeProduitLink->getCocheIdUtilisteur());
+                  echo $modelUtilisateurQuiACoche->getPseudo()." a déjà coché ce produit";
+              }
+              else
+              {
+                  //Si c'est le bon utilisateur qui a déjà coché précédemment la case : 
+                  if($request->getParameter("coche") == 0)
+                  {
+                      $modelListeProduitLink->setCoche(0);
+                      $modelListeProduitLink->save();                      
+                  }
+                  echo "ok";
+              }
+          }
+          else
+          {
+            if($request->getParameter("coche") == 1)
+            {
+                $modelListeProduitLink->setCoche(1);
+                $modelListeProduitLink->setCocheDate(new DateTime());
+                $modelListeProduitLink->setCocheIdUtilisteur($this->getUser()->getModelUtilisateur()->getId());
+                $modelListeProduitLink->save();
+                echo "ok";
+            }
+          }         
+      }      
+      return sfView::NONE;
+  }
+  
+  //Fonction appelée en ajax qui permet de changer de magasin
+  public function executeMagasin(sfWebRequest $request)
+  {
+      $modelListeProduitLink = ListeProduitLinkPeer::retrieveByPK($request->getParameter("link"));
+      if($this->utilisateurPossedeListe($modelListeProduitLink->getIdListe()))
+      {
+          $modelListeProduitLink->setIdMagasin($request->getParameter("magasin"));
+          $modelListeProduitLink->save();
+      }
+      return sfView::NONE;
   }
   
   protected function utilisateurPossedeListe($idListe)

@@ -65,4 +65,27 @@ class MagasinPeer extends BaseMagasinPeer
         $crit->add(ListeProduitLinkPeer::ID_PRODUIT,$idProduct,  Criteria::EQUAL);
         return parent::doSelectOne($crit);
     }
+    
+    public static function retrieveTousValidePourUnUtilisateur($idUtilisateur)
+    {
+        $crit = new Criteria();
+        $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);        
+        $crit->addJoin(self::ID_VISIBILITE, VisibilitePeer::ID); 
+       
+        
+        $criterion1 = $crit->getNewCriterion(EtatPeer::CODE,'VAL',  Criteria::EQUAL);
+        $criterion1->addAnd($crit->getNewCriterion(VisibilitePeer::CODE,'SIT',  Criteria::EQUAL));   
+        
+        
+        $criterion2 = $crit->getNewCriterion(VisibilitePeer::CODE,'MOI',  Criteria::EQUAL);
+        $criterion2->addAnd($crit->getNewCriterion(parent::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL));
+        $criterion1->addOr($criterion2);
+        
+        $crit->add($criterion1);
+        
+        //TODO récupérer les magasins des autres utilisateurs de la liste
+        
+        $crit->setDistinct();        
+        return parent::doSelect($crit);
+    }
 }
