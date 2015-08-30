@@ -43,6 +43,13 @@ class MagasinPeer extends BaseMagasinPeer
         return parent::doSelect($crit);
     }
     
+    public static function retrivePartageAvecListePourUnUtilisateur($idUtilisateur) {
+        $crit = new Criteria();
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur, Criteria::EQUAL);
+        $crit->add(self::ID_VISIBILITE,2);
+        return parent::doSelect($crit);
+    }
+    
     public static function retriveMagasinDejaPresent($idUtilisateur,$nomMagasin) {
         $crit = new Criteria();
        // $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
@@ -66,7 +73,7 @@ class MagasinPeer extends BaseMagasinPeer
         return parent::doSelectOne($crit);
     }
     
-    public static function retrieveTousValidePourUnUtilisateur($idUtilisateur)
+    public static function retrieveTousValidePourUnUtilisateurEtUneListe($idUtilisateur,$liste)
     {
         $crit = new Criteria();
         $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);        
@@ -81,11 +88,22 @@ class MagasinPeer extends BaseMagasinPeer
         $criterion2->addAnd($crit->getNewCriterion(parent::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL));
         $criterion1->addOr($criterion2);
         
-        $crit->add($criterion1);
+        $crit->add($criterion1);      
         
-        //TODO récupérer les magasins des autres utilisateurs de la liste
+        $crit->setDistinct();
+        $arrMagasinUtilisateur = parent::doSelect($crit);
         
-        $crit->setDistinct();        
-        return parent::doSelect($crit);
+        $users = UtilisateurPeer::retrieveParListe($liste);
+        foreach ($users as $user) {
+            if($user->getId() != $idUtilisateur)
+            {
+                $magasinsTEMP = self::retrivePartageAvecListePourUnUtilisateur($user->getId());
+                foreach ($magasinsTEMP as $magasin) {
+                    $arrMagasinUtilisateur[] = $magasin;
+                }
+            }
+        }
+        
+        return $arrMagasinUtilisateur;
     }
 }
