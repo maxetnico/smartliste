@@ -8,9 +8,9 @@
                     <a id="imgRecherche">Recherche image</a></br>
                     <span>image : </span><input type="text" name="lienimg" placeholder="Lien vers l'image" value="" /></br>
                     <span>Partage : </span>
-                        <input type="radio" id="parmoi" name="partage" value="MOI" checked /><label for="parmoi"><i class="par_moi fa fa-user"></i> Moi</label>
-                        <input type="radio" id="parlst" name="partage" value="LST" /><label for="parlst"><i class="par_lst fa fa-list-alt"></i> Liste</label>
-                        <input type="radio" id="parsit" name="partage" value="SIT" /><label for="parsit"><i class="par_sit fa fa-globe"></i> Site</label>
+                        <p nowrap><input type="radio" id="parmoi" name="partage" value="1" checked /><label for="parmoi"><i class="par_moi fa fa-user"></i>&nbsp;Moi</label>
+                        <input type="radio" id="parlst" name="partage" value="2" /><label for="parlst"><i class="par_lst fa fa-list-alt"></i>&nbsp;Liste</label>
+                        <input type="radio" id="parsit" name="partage" value="3" /><label for="parsit"><i class="par_sit fa fa-globe"></i>&nbsp;Site</label></p>
                         </br>
                     <button type="submit" id="bouton_valider">Ajouter</button>
                     <button type="reset" class="bouton_annuler">Annuler</button>

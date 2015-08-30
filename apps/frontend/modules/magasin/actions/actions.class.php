@@ -28,10 +28,15 @@ class magasinActions extends sfActions
     
   public function executeQuitter(sfWebRequest $request)
   {
+    if($request->getParameter('magasin') != null)
+    {
       // faire la mise a 0 du champ magasin.id_utilisteur
       $idMagasin = $request->getParameter('magasin');
-      $this->quitterMagasin($this->getUser()->getModelUtilisateur()->getId(),$idMagasin);
+      $iduser = $this->getUser()->getModelUtilisateur()->getId();
+      MagasinPeer::UpdateIdUtilisateurEtIdListe($iduser,$idMagasin);
+    
       $this->redirect('magasin/index');
+    }    
   }
   
   public function executeAjoutFavoris(sfWebRequest $request)
@@ -96,10 +101,10 @@ class magasinActions extends sfActions
                     $modelMagasin = new Magasin();
                     $modelMagasin->setNom($request->getParameter("nommag"));
                     $modelMagasin->setIdUtilisateur($iduser);
-                    $modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));//http://www.grandfrais.com/charte/base/img/visual/logo.png
+                    $modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));
                     $modelMagasin->setDateCreation(new \DateTime());
-                    $modelMagasin->setIdEtat(EtatPeer::retriveIdDuCode('ATT'));
-                    $modelMagasin->setIdVisibilite(VisibilitePeer::retriveIdDuCode($request->getParameter('partage')));
+                    $modelMagasin->setIdEtat(2);
+                    $modelMagasin->setIdVisibilite($request->getParameter('partage'));
                     $modelMagasin->save();
 
                     $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste"); 
@@ -110,7 +115,11 @@ class magasinActions extends sfActions
         {
             $this->getUser()->setFlash("warning", "Ce nom de magasin existe déjà dans votre liste");   
         }
-        $this->redirect('magasin/index'); 
     }
+    else
+    {
+        $this->getUser()->setFlash("warning", "Tous les champs sont requis.");   
+    }
+    $this->redirect('magasin/index'); 
   }
 }

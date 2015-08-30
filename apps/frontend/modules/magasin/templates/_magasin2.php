@@ -34,7 +34,6 @@
                 echo "</i></td><td>";
                 echo "<a href='".(url_for("magasin/quitter").'/magasin/'.$magasin->getId())."' title='Quitter'><i class='fa fa-share-square'></i></a>";
                 echo "</td>";
-
                 echo '</tr>';
             }
             ?>
