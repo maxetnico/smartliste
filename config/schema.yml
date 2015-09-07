@@ -54,9 +54,9 @@ propel:
   magasins_favoris:
     _attributes: { phpName: MagasinsFavoris }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
-    id_magasin: { type: BIGINT, size: '20', required: true }
-    id_utilisateur: { type: BIGINT, size: '20', required: true }
-    _indexes: { id_utilisateur: [id_utilisateur] }
+    id_magasin: { type: BIGINT, size: '20', required: true, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { id_utilisateur: [id_utilisateur], id_magasin: [id_magasin] }
   produit:
     _attributes: { phpName: Produit }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }

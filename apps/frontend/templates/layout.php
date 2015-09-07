@@ -7,6 +7,7 @@
       <?php include_http_metas() ?>
       <?php include_metas() ?>
       <?php include_title() ?>
+      <base href="http://localhost/smartliste/web/">
     </head>
     <body>
         <header>

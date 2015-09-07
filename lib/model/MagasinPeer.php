@@ -43,18 +43,25 @@ class MagasinPeer extends BaseMagasinPeer
         return parent::doSelect($crit);
     }
     
+    public static function retrivePartageAvecListePourUnUtilisateur($idUtilisateur) {
+        $crit = new Criteria();
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur, Criteria::EQUAL);
+        $crit->add(self::ID_VISIBILITE,2);
+        return parent::doSelect($crit);
+    }
+    
     public static function retriveMagasinDejaPresent($idUtilisateur,$nomMagasin) {
         $crit = new Criteria();
        // $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
         $crit->add(self::NOM,$nomMagasin);
         return parent::doSelect($crit);
     }
-    public static function UpdateIdUtilisateurEtIdListe($idUtilisateur,$nomMagasin) {
+    
+    public static function UpdateIdUtilisateurEtIdListe($idUtilisateur,$idMagasin) {
         $crit = new Criteria();
-        $crit->add(self::ID_UTILISATEUR,$idUtilisateur);
-        $crit->add(self::NOM,$nomMagasin);
-        $crit->put(self::ID_UTILISATEUR,0);
-        return parent::doUpdate($crit);
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur, Criteria::EQUAL);
+        $crit->add(self::ID,$idMagasin, Criteria::EQUAL);
+        return parent::doSelectOne($crit);
     }
     
     public static function retrieveOneByListeAndProduct($idListe,$idProduct)
@@ -64,5 +71,64 @@ class MagasinPeer extends BaseMagasinPeer
         $crit->add(ListeProduitLinkPeer::ID_LISTE,$idListe,  Criteria::EQUAL);       
         $crit->add(ListeProduitLinkPeer::ID_PRODUIT,$idProduct,  Criteria::EQUAL);
         return parent::doSelectOne($crit);
+    }
+    
+    public static function retrieveTousValidePourUnUtilisateurEtUneListe($idUtilisateur,$liste)
+    {
+        $crit = new Criteria();
+        $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);        
+        $crit->addJoin(self::ID_VISIBILITE, VisibilitePeer::ID); 
+       
+        
+        $criterion1 = $crit->getNewCriterion(EtatPeer::CODE,'VAL',  Criteria::EQUAL);
+        $criterion1->addAnd($crit->getNewCriterion(VisibilitePeer::CODE,'SIT',  Criteria::EQUAL));   
+        
+        
+        $criterion2 = $crit->getNewCriterion(VisibilitePeer::CODE,'MOI',  Criteria::EQUAL);
+        $criterion2->addAnd($crit->getNewCriterion(parent::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL));
+        $criterion1->addOr($criterion2);
+        
+        $crit->add($criterion1);      
+        
+        $crit->setDistinct();
+        $arrMagasinUtilisateur = parent::doSelect($crit);
+        
+        $users = UtilisateurPeer::retrieveParListe($liste);
+        foreach ($users as $user) {
+            if($user->getId() != $idUtilisateur)
+            {
+                $magasinsTEMP = self::retrivePartageAvecListePourUnUtilisateur($user->getId());
+                foreach ($magasinsTEMP as $magasin) {
+                    $arrMagasinUtilisateur[] = $magasin;
+                }
+            }
+        }
+        
+        return $arrMagasinUtilisateur;
+    }
+    
+    public static function retrieveValidePourUnUtilisateurFavorisEtUneListe($idUtilisateur,$liste)
+    {
+        $crit = new Criteria();        
+        $crit->addJoin(self::ID, MagasinsFavorisPeer::ID_MAGASIN);
+        $crit->add(MagasinsFavorisPeer::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL);        
+        $arrMagasinUtilisateur = parent::doSelect($crit);
+        
+        $crit = new Criteria();
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL);        
+        $arrMagasinUtilisateur = array_merge($arrMagasinUtilisateur,parent::doSelect($crit));        
+        
+        $users = UtilisateurPeer::retrieveParListe($liste);
+        foreach ($users as $user) {
+            if($user->getId() != $idUtilisateur)
+            {
+                $magasinsTEMP = self::retrivePartageAvecListePourUnUtilisateur($user->getId());
+                foreach ($magasinsTEMP as $magasin) {
+                    $arrMagasinUtilisateur[] = $magasin;
+                }
+            }
+        }
+        
+        return $arrMagasinUtilisateur;
     }
 }

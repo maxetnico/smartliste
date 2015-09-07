@@ -14,9 +14,8 @@
                 <ul><li>1er inscrit <i>27/06/2015</i></li><li>Lancement du site <i>27/06/2015</i></li></ul>
             </div>
             <div class="utile block col-xs-10 col-xs-offset-1"><h3>Liens utiles</h3>
-                <ul><li>test</li></ul>
+                <ul><li><a href="http://www.groupon.fr" target="_blank">Groupon</a></li></ul>
             </div>
         </div> 
     </div>
-
 </div>
