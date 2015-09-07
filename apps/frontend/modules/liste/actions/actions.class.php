@@ -68,7 +68,11 @@ class listeActions extends sfActions
               $this->produits[$produit->getCategorieNom()][] = $arr;
           }
           
-          $this->magasins = MagasinPeer::retrieveTousValidePourUnUtilisateurEtUneListe($this->getUser()->getModelUtilisateur()->getId(),$this->liste);          
+          $this->magasins = MagasinPeer::retrieveValidePourUnUtilisateurFavorisEtUneListe($this->getUser()->getModelUtilisateur()->getId(),$this->liste);
+          if(count($this->magasins)==0)
+          {
+            $this->magasins = MagasinPeer::retrieveTousValidePourUnUtilisateurEtUneListe($this->getUser()->getModelUtilisateur()->getId(),$this->liste);          
+          }
       }
       else
       {

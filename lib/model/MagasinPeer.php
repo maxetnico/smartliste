@@ -106,4 +106,29 @@ class MagasinPeer extends BaseMagasinPeer
         
         return $arrMagasinUtilisateur;
     }
+    
+    public static function retrieveValidePourUnUtilisateurFavorisEtUneListe($idUtilisateur,$liste)
+    {
+        $crit = new Criteria();        
+        $crit->addJoin(self::ID, MagasinsFavorisPeer::ID_MAGASIN);
+        $crit->add(MagasinsFavorisPeer::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL);        
+        $arrMagasinUtilisateur = parent::doSelect($crit);
+        
+        $crit = new Criteria();
+        $crit->add(self::ID_UTILISATEUR,$idUtilisateur,  Criteria::EQUAL);        
+        $arrMagasinUtilisateur = array_merge($arrMagasinUtilisateur,parent::doSelect($crit));        
+        
+        $users = UtilisateurPeer::retrieveParListe($liste);
+        foreach ($users as $user) {
+            if($user->getId() != $idUtilisateur)
+            {
+                $magasinsTEMP = self::retrivePartageAvecListePourUnUtilisateur($user->getId());
+                foreach ($magasinsTEMP as $magasin) {
+                    $arrMagasinUtilisateur[] = $magasin;
+                }
+            }
+        }
+        
+        return $arrMagasinUtilisateur;
+    }
 }
