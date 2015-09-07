@@ -43,6 +43,9 @@
             </div>
         </div>
     </div>
+    <div class="row ma-no-h text-center recherche-produit">
+        <span>Recherche : </span><input type="text" id="recherche-produit" onkeyup="rechercheDansLesProduits()"><div class="recherche-produit-search"><i class="fa fa-search"></i></div>
+    </div>
     <div class="row ma-no-h pa-no-h">
         <div id="mag_perso" class="mes_mag block col-sm-8 col-sm-offset-2 col-xs-12">
             <h3>Produits</h3>
@@ -63,7 +66,7 @@
                     </thead>
                     <?php                
                     foreach ($produits as $cle => $produit) { ?>
-                        <tr>
+                    <tr class="produit-ligne" data-text="<?php echo strtoupper($produit->getCategorieNom().' '.$produit->getNom()); ?>">
                             <td width='37px'>
                                 <?php echo $produit->getEtatNom()=="VAL"?"<i class='etat_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='etat_att fa fa-clock-o'></i>":"<i class='etat_ref fa fa-times-circle'></i>"); ?>
                             </td>
@@ -81,7 +84,7 @@
                             </td>
                             <?php if(isset($liste)) { ?>
                             <td>                                
-                                <input type="number" name="<?php echo $produit->getId() ?>" value="0" class="width-60">                               
+                                <input type="number" name="<?php echo $produit->getId() ?>" value="0" class="width-60 produit-number">                               
                             </td>
                             <?php }
                             else{ ?> 

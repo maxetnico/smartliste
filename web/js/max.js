@@ -46,3 +46,19 @@ function changeSelectImage(element)
     $(element).attr("style",$(element).find("option:selected").attr("style"));
      $.ajax({url:"liste/magasin/link/"+$(element).attr("id-link")+"/magasin/"+$(element).val()});
 }
+
+function rechercheDansLesProduits()
+{
+    var texteAChercher = $('#recherche-produit').val().toUpperCase();
+    $(".produit-ligne").each(function(index,element){
+       var $element = $(element);
+       if($element.attr('data-text').indexOf(texteAChercher) > -1 || $element.find(".produit-number").val() > 0)
+       {
+           $element.show();
+       }
+       else
+       {
+           $element.hide();
+       }
+    });
+}
