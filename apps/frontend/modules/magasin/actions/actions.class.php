@@ -37,6 +37,8 @@ class magasinActions extends sfActions
       if($magasin != null)
       {
             $magasin->setIdUtilisateur(null);
+            $magasin->setIdVisibilite(3);
+            $magasin->setIdEtat(3);
             $magasin->save();
             $this->getUser()->setFlash("warning", "Magasin retiré de votre liste.");
             $this->redirect('magasin/index');
