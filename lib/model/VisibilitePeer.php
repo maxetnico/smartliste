@@ -6,9 +6,9 @@ class VisibilitePeer extends BaseVisibilitePeer
     {
         return parent::doSelect(new Criteria());
     }
-    public static function retriveIdDuCode($code) {
+    public static function retriveByCode($code) {
         $crit = new Criteria;
         $crit->add(self::CODE,$code,  Criteria::EQUAL);
-        return parent::doSelect($crit);
+        return parent::doSelectOne($crit);
     }
 }

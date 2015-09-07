@@ -67,9 +67,10 @@ class produitActions extends sfActions
         $modelProduit = new Produit();
         $modelProduit->setNom($request->getParameter("nom"));
         $modelProduit->setIdUtilisateur($iduser);        
+        $modelProduit->setIdCategorie($request->getParameter("categorie"));
         //$modelProduit->setDateCreation(new \DateTime());
-        $modelProduit->setIdEtat(EtatPeer::retriveIdDuCode('VAL'));
-        $modelProduit->setIdVisibilite(VisibilitePeer::retriveIdDuCode($request->getParameter('partage')));
+        $modelProduit->setIdEtat(EtatPeer::retriveIdDuCode('VAL'));       
+        $modelProduit->setIdVisibilite(VisibilitePeer::retriveByCode($request->getParameter('partage'))->getId());
         $modelProduit->save();
                     
         if($request->getParameter('lienimg') != null)
