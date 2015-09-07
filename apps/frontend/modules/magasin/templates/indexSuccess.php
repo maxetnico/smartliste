@@ -40,8 +40,3 @@
       ?>
     </div>
 </div>
-
-<script>
-    
-
-</script>
