@@ -34,10 +34,9 @@ class MagasinsFavorisPeer extends BaseMagasinsFavorisPeer {
         
     }
     
-    public static function deleteFavQuitterListe($idUsr,$idFav) {
+    public static function deleteFavQuitterListe($idlist) {
         $crit = new Criteria();
-        $crit->add(self::ID,$idFav);
-        $crit->add(self::ID,$idUsr);
+        $crit->add(self::ID,$idlist);
         return parent::doDelete($crit);
     }
     

@@ -39,7 +39,7 @@ class magasinActions extends sfActions
         {
             $FavMagasin = new MagasinsFavoris();
             $FavMagasin->setIdUtilisateur($iduser);
-            $FavMagasin->setIdMagasin($idMagasin);
+            $FavMagasin->setIdMagasin($idmag);
             $FavMagasin->save();
         }
         $this->getUser()->setFlash("info", "Les magasins ont été ajouter à vos favoris"); 
@@ -50,8 +50,8 @@ class magasinActions extends sfActions
   { 
     $iduser = $this->getUser()->getModelUtilisateur()->getId();
     
-    $tabmesmagsel = $request->getParameter('mesmagsel');
-    $tabfavsel = $request->getParameter('favsel');
+    $tabmesmagsel = $request->hasParameter('mesmagsel') ? $request->getParameter('mesmagsel') : array();
+    $tabfavsel = $request->hasParameter('favsel') ? $request->getParameter('favsel') : array();
     $msg=null;
     
     foreach ($tabmesmagsel as $idmag)
@@ -68,9 +68,9 @@ class magasinActions extends sfActions
       }  
     }
     
-    foreach ($tabfavsel as $idmag)
+    foreach ($tabfavsel as $idlist)
     {
-        MagasinsFavorisPeer::deleteFavQuitterListe($iduser,$idmag);
+        MagasinsFavorisPeer::deleteFavQuitterListe($idlist);
         $msg .= "Magasin retiré de vos favoris.";   
     }
     if ($msg != null)

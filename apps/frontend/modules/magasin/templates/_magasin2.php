@@ -38,9 +38,7 @@
 //                echo "<div id='partmode".$magasin->getId()."' name='partageval".$magasin->getId()."' class='choixpart menu_box '><ul><li><a href='".(url_for("magasin/changePartage").'/partage/'.$magasin->getId())."' title='Changer mode'><i class='".$mode1."'></i></a></li>";
 //                echo "<li><a href='".(url_for("magasin/changePartage").'/partage/'.$magasin->getId())."' title='Changer mode'><i class='".$mode2."'></i></a></li></ul></div>";
                 echo "</i></td>";
-//                echo "<td>";
-//                echo "<a href='".(url_for("magasin/quitter").'/magasin/'.$magasin->getId())."' title='Quitter'><i class='fa fa-share-square'></i></a>";
-//                echo "</td>";
+				
                 echo '</tr>';
             }
             ?>
@@ -72,20 +70,17 @@ if( $magasinsfav->count() != null) { ?>
             <?php
             foreach ($magasinsfav as $magasin2) {
                 $mag = MagasinPeer::retrieveByPK($magasin2->getIdMagasin());
-                echo '<tr id="fav'.$mag->getId().'" class="quitter magclick produit-ligne" data-text="'.strtoupper($mag->getNom()).'">';
+                echo '<tr id="fav'.$magasin2->getId().'" class="quitter magclick produit-ligne" data-text="'.strtoupper($mag->getNom()).'">';
 
                 echo "<td>";
                 echo image_tag('magasins/'.$mag->getImg(),array("width"=>"35px"));
                 echo "</td>";
                 echo "<td>";
-                echo "<input type='checkbox' name='favsel[]' value='".$mag->getId()."' />";
+                echo "<input type='checkbox' name='favsel[]' value='".$magasin2->getId()."' />";
                 echo "</td>";
                 echo "<td>";
                 echo $mag->getNom();
                 echo "</td>";
-//                echo "<td>";
-//                echo "<a href='".(url_for("magasin/quitterFavoris").'/magasin2/'.$magasin2->getId())."' title='Quitter favoris'><i class='fa fa-share-square'></i></a>";
-//                echo "</td>";
 
                 echo '</tr>';
             }
