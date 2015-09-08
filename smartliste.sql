@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 07 Septembre 2015 à 09:48
+-- Généré le :  Mar 08 Septembre 2015 à 16:41
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `smartliste`
 --
+CREATE DATABASE IF NOT EXISTS `smartliste` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `smartliste`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `categorie`
 --
 
+DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
@@ -55,9 +58,32 @@ INSERT INTO `categorie` (`id`, `nom`, `id_parent`, `img`, `id_utilisateur`, `id_
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `droits`
+--
+
+DROP TABLE IF EXISTS `droits`;
+CREATE TABLE IF NOT EXISTS `droits` (
+  `iddroit` int(11) NOT NULL AUTO_INCREMENT,
+  `idUser` bigint(20) NOT NULL,
+  `level` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`iddroit`),
+  UNIQUE KEY `idUser` (`idUser`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `droits`
+--
+
+INSERT INTO `droits` (`iddroit`, `idUser`, `level`) VALUES
+(1, 3, 99);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `etat`
 --
 
+DROP TABLE IF EXISTS `etat`;
 CREATE TABLE IF NOT EXISTS `etat` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `code` varchar(3) NOT NULL,
@@ -80,6 +106,7 @@ INSERT INTO `etat` (`id`, `code`, `nom`) VALUES
 -- Structure de la table `liste`
 --
 
+DROP TABLE IF EXISTS `liste`;
 CREATE TABLE IF NOT EXISTS `liste` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `icone` varchar(100) DEFAULT NULL,
@@ -111,6 +138,7 @@ INSERT INTO `liste` (`id`, `icone`, `nom`, `couleur`, `id_utilisateur`, `id_part
 -- Structure de la table `liste_produit_link`
 --
 
+DROP TABLE IF EXISTS `liste_produit_link`;
 CREATE TABLE IF NOT EXISTS `liste_produit_link` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_liste` bigint(20) NOT NULL,
@@ -151,6 +179,7 @@ INSERT INTO `liste_produit_link` (`id`, `id_liste`, `id_produit`, `quantite`, `i
 -- Structure de la table `magasin`
 --
 
+DROP TABLE IF EXISTS `magasin`;
 CREATE TABLE IF NOT EXISTS `magasin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
@@ -172,11 +201,11 @@ CREATE TABLE IF NOT EXISTS `magasin` (
 --
 
 INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `date_creation`, `nb_ajout`, `id_etat`) VALUES
-(1, 'penny', 'penny.jpg', 3, 3, '2015-07-04 09:11:23', 0, 1),
-(2, 'Auchan', NULL, 2, 3, '2015-07-05 10:11:23', 0, 1),
+(1, 'penny', 'penny.jpg', NULL, 3, '2015-07-04 09:11:23', 0, 2),
+(2, 'Auchan', 'auchan.jpg', 2, 3, '2015-07-05 10:11:23', 0, 1),
 (3, 'Match', 'match.jpg', 3, 1, '2015-07-06 11:11:23', 0, 1),
 (9, 'Grand Frais', 'Grand Frais.png', 3, 1, '2015-07-09 00:06:28', 0, 1),
-(10, 'Super U', 'Super U.png', 4, 1, '2015-08-29 22:53:47', 0, 1),
+(10, 'Super U', 'Super U.png', 4, 3, '2015-08-29 22:53:47', 0, 1),
 (11, 'leroy merlin', 'leroy merlin.jpg', 4, 1, '2015-08-30 01:48:08', 0, 1),
 (12, 'cora tutu', 'cora tutu.jpg', 5, 2, '2015-08-30 21:11:03', 0, 1);
 
@@ -186,6 +215,7 @@ INSERT INTO `magasin` (`id`, `nom`, `img`, `id_utilisateur`, `id_visibilite`, `d
 -- Structure de la table `magasins_favoris`
 --
 
+DROP TABLE IF EXISTS `magasins_favoris`;
 CREATE TABLE IF NOT EXISTS `magasins_favoris` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_magasin` bigint(20) NOT NULL,
@@ -193,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `magasins_favoris` (
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_magasin` (`id_magasin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -201,6 +231,7 @@ CREATE TABLE IF NOT EXISTS `magasins_favoris` (
 -- Structure de la table `produit`
 --
 
+DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
@@ -235,6 +266,7 @@ INSERT INTO `produit` (`id`, `nom`, `img`, `id_utilisateur`, `id_categorie`, `id
 -- Structure de la table `utilisateur`
 --
 
+DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(25) NOT NULL,
@@ -252,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelastconn`) VALUES
 (1, 'Essai1', 'totor', '2015-06-25 09:05:47', 'essai@test.com', '2015-06-26 10:52:21'),
 (2, 'm', 'kkkk', '2015-06-25 11:41:06', '', '2015-06-25 11:41:06'),
-(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-07-08 21:56:37'),
+(3, 'nico', 'aaa', '2015-06-26 11:30:43', '', '2015-09-08 13:26:48'),
 (4, 'max', 'max', '2015-07-06 10:02:38', '', '2015-09-07 09:19:33'),
 (5, 'tutu', 'tutu', '2015-08-30 21:10:03', '', '2015-08-30 21:10:03');
 
@@ -262,6 +294,7 @@ INSERT INTO `utilisateur` (`id`, `pseudo`, `pwd`, `datecreate`, `mail`, `datelas
 -- Structure de la table `utilisateur_liste_link`
 --
 
+DROP TABLE IF EXISTS `utilisateur_liste_link`;
 CREATE TABLE IF NOT EXISTS `utilisateur_liste_link` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_liste` bigint(20) NOT NULL,
@@ -289,6 +322,7 @@ INSERT INTO `utilisateur_liste_link` (`id`, `id_liste`, `id_utilisateur`) VALUES
 -- Structure de la table `visibilite`
 --
 
+DROP TABLE IF EXISTS `visibilite`;
 CREATE TABLE IF NOT EXISTS `visibilite` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `code` varchar(3) NOT NULL,
