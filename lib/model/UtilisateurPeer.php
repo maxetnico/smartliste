@@ -8,6 +8,14 @@ class UtilisateurPeer extends BaseUtilisateurPeer
         return parent::doSelect($crit);
     }
     
+    public static function retrieveParListe($liste)
+    {
+        $crit = new Criteria();
+        $crit->addJoin(self::ID,  UtilisateurListeLinkPeer::ID_UTILISATEUR);
+        $crit->add(UtilisateurListeLinkPeer::ID_LISTE,$liste->getId());
+        return parent::doSelect($crit);
+    }
+    
     public static function retrieveByPseudo($pseudo)
     {
         $crit = new Criteria();

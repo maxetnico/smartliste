@@ -3,9 +3,9 @@ default:
     content-type: text/html
 
   metas:
-    title:        SmartListe
-    description:  Ma liste de course partagée
-    keywords:     SmartListe, liste, course
+    title:        "SmartListe : ma liste de course partagée"
+    #description:  symfony project
+    #keywords:     symfony, project
     language:     fr
     #robots:       index, follow
     charset:      UTF-8
@@ -14,5 +14,5 @@ default:
 
   javascripts:    [jquery-1.11.2.js, bootstrap.min.js, jquery.simplecolorpicker.js, max.js, nico.js]
 
-  has_layout:     true
+  has_layout:     on
   layout:         layout

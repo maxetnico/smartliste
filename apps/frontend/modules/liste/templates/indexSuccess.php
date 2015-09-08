@@ -1,47 +1,43 @@
-<div class="col-xs-12">
-    <button type="button" id="bouton_addliste"><span class="fa fa-plus"></span> Ajouter une liste</button>
-    <div id="menu_addliste_box" class="menu_box ma-no-v">
-        <form method="post" action="<?php echo url_for('liste/add') ?>">
-            <input type="text" class="block" name="nom" placeholder="Nom de la liste">
-            <label>Couleur :</label>
-            <select name="couleur" class="colorpicker">
-                <option value="#7bd148">Vert</option>
-                <option value="#5484ed">Bleu foncé</option>
-                <option value="#a4bdfc">Bleu</option>
-                <option value="#46d6db">Turquoise</option>
-                <option value="#7ae7bf">Vert clair</option>
-                <option value="#51b749">Vert foncé</option>
-                <option value="#fbd75b">Jaune</option>
-                <option value="#ffb878">Orange</option>
-                <option value="#ff887c">Rouge</option>
-                <option value="#dc2127">Rouge foncé</option>
-                <option value="#dbadff">Violet</option>
-                <option value="#e1e1e1">Gris</option>
-            </select>
-            
-            <label class="block">Icone :</label>
-            <input type="radio" name="icone" value="fa fa-home">
-            <span class="fa fa-home"></span>
-            <input type="radio" name="icone" checked="true" value="fa fa-beer">
-            <span class="fa fa-beer"></span>           
-            <input type="radio" name="icone" value="fa fa-ambulance">
-            <span class="fa fa-ambulance"></span>
-            <input type="radio" name="icone" value="fa fa-film">
-            <span class="fa fa-film"></span>
-            <input type="radio" name="icone" value="fa fa-music">
-            <span class="fa fa-music"></span>
-            <input type="radio" name="icone" value="fa fa-plane">
-            <span class="fa fa-plane"></span>
-            <input type="radio" name="icone" value="fa fa-users">
-            <span class="fa fa-users"></span>
-            <input type="radio" name="icone" value="fa fa-suitcase">
-            <span class="fa fa-suitcase"></span>
-            <input type="radio" name="icone" value="fa fa--money">
-            <span class="fa fa-money"></span>
-            
-            
-            <button class="block" type="submit" id="bouton_valider">Créer</button>            
-        </form>
+<div class="row ma-no-h">
+    <div class="col-md-offset-2 col-md-10 col-xs-12">
+        <button type="button" id="bouton_addliste"><span class="fa fa-plus"></span> Ajouter une liste</button>
+        <div id="menu_addliste_box" class="menu_box ma-no-v text-left-important">
+            <form method="post" action="<?php echo url_for('liste/add') ?>">
+                <div class="row ma-no-h">
+                    <span>Nom :</span>
+                    <input type="text" class="" name="nom" placeholder="Nom de la liste">
+                </div>    
+                <div class="row ma-no-h">
+                    <span>Couleur :</span>
+                    <select name="couleur" class="colorpicker">
+                        <option value="#7bd148">Vert</option>
+                        <option value="#5484ed">Bleu foncé</option>
+                        <option value="#a4bdfc">Bleu</option>
+                        <option value="#46d6db">Turquoise</option>
+                        <option value="#7ae7bf">Vert clair</option>
+                        <option value="#51b749">Vert foncé</option>
+                        <option value="#fbd75b">Jaune</option>
+                        <option value="#ffb878">Orange</option>
+                        <option value="#ff887c">Rouge</option>
+                        <option value="#dc2127">Rouge foncé</option>
+                        <option value="#dbadff">Violet</option>
+                        <option value="#e1e1e1">Gris</option>
+                    </select>
+                </div>
+                <div class="row ma-no-h">
+                    <span class="">Icone :</span>
+                    <?php $arr = ["fa fa-home", "fa fa-beer", "fa fa-ambulance","fa fa-film", "fa fa-music", "fa fa-plane", "fa fa-users", "fa fa-suitcase", "fa fa-money"];
+                        foreach ($arr as $key => $value) { ?>
+                        <input type="radio" <?php echo $key==0?"checked":"" ?> name="icone" value="<?php echo $value ?>" id="<?php echo $value ?>">
+                        <label class="<?php echo $value ?>" for="<?php echo $value ?>"></label>
+                        <?php }
+                        ?>                
+                </div>
+                <div class="row ma-no-h text-center-important">
+                    <button class="" type="submit" id="bouton_valider">Créer</button>      
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -6,11 +6,12 @@ propel:
     _attributes: { phpName: Categorie }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true, index: unique }
     nom: { type: VARCHAR, size: '128', required: true }
-    id_parent: { type: INTEGER, size: '11', required: false }
+    id_parent: { type: INTEGER, size: '11', required: false, foreignTable: categorie, foreignReference: id, onDelete: 'SET NULL', onUpdate: CASCADE }
     img: { type: LONGVARCHAR, required: false }
-    id_utilisateur: { type: INTEGER, size: '11', required: false }
-    id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '1' }
-    id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '1' }
+    id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: 'SET NULL', onUpdate: CASCADE }
+    id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: etat, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { id_parent: [id_parent], id_utilisateur: [id_utilisateur], id_etat: [id_etat], id_visibilite: [id_visibilite] }
   etat:
     _attributes: { phpName: Etat }
     id: { type: TINYINT, size: '4', primaryKey: true, autoIncrement: true, required: true }
@@ -29,33 +30,40 @@ propel:
     _indexes: { id_utilisateur_idx: [id_utilisateur] }
   liste_produit_link:
     _attributes: { phpName: ListeProduitLink }
-    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
     id_liste: { type: BIGINT, size: '20', required: true, foreignTable: liste, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    id_produit: { type: BIGINT, size: '20', required: true, foreignTable: produit, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_produit: { type: BIGINT, size: '20', required: true, foreignTable: produit, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     quantite: { type: INTEGER, size: '11', required: false }
-    id_magazin: { type: BIGINT, size: '20', required: false, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_magasin: { type: BIGINT, size: '20', required: false, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     coche: { type: TINYINT, size: '1', required: true, defaultValue: '0' }
     coche_date: { type: TIMESTAMP, required: false }
-    coche_id_utilisteur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    _indexes: { fk_lpl_magasin_idx: [id_magazin], fk_lpl_utilisateur_idx: [coche_id_utilisteur], fk_lpl_produit_idx: [id_produit], fk_lpl_liste_idx: [id_liste] }
+    coche_id_utilisteur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { fk_lpl_magasin_idx: [id_magasin], fk_lpl_utilisateur_idx: [coche_id_utilisteur], fk_lpl_produit_idx: [id_produit], fk_lpl_liste_idx: [id_liste] }
   magasin:
     _attributes: { phpName: Magasin }
-    id: { type: BIGINT, size: '20', primaryKey: true, required: true }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     nom: { type: VARCHAR, size: '128', required: true }
-    img: { type: VARCHAR, size: '45', required: false }
+    img: { type: LONGVARCHAR, required: false }
     id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '6', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     date_creation: { type: TIMESTAMP, required: false }
     nb_ajout: { type: BIGINT, size: '20', required: true, defaultValue: '0' }
     id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '5', foreignTable: etat, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     _indexes: { id_utilisateur: [id_utilisateur], id_visibilite: [id_visibilite], id_etat: [id_etat] }
+    _uniques: { id_magasin: [id] }
+  magasins_favoris:
+    _attributes: { phpName: MagasinsFavoris }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    id_magasin: { type: BIGINT, size: '20', required: true, foreignTable: magasin, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { id_utilisateur: [id_utilisateur], id_magasin: [id_magasin] }
   produit:
     _attributes: { phpName: Produit }
-    id: { type: BIGINT, size: '20', primaryKey: true, required: true, index: unique }
+    id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
     nom: { type: VARCHAR, size: '128', required: true }
     img: { type: LONGVARCHAR, required: false }
     id_utilisateur: { type: BIGINT, size: '20', required: false, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    id_categorie: { type: INTEGER, size: '11', required: false, foreignTable: categorie, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_categorie: { type: INTEGER, size: '11', required: true, defaultValue: '1', foreignTable: categorie, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: etat, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     _indexes: { id_etat_idx: [id_etat], fk_produit_utilisateur1_idx: [id_utilisateur], fk_produit_categorie1_idx: [id_categorie], fk_produit_visibilite_idx: [id_visibilite] }
@@ -70,8 +78,8 @@ propel:
   utilisateur_liste_link:
     _attributes: { phpName: UtilisateurListeLink }
     id: { type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true, index: unique }
-    id_liste: { type: BIGINT, size: '20', required: true, foreignTable: liste, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    id_utilisateur: { type: BIGINT, size: '20', required: true, foreignTable: utilisateur, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    id_liste: { type: BIGINT, size: '20', required: true }
+    id_utilisateur: { type: BIGINT, size: '20', required: true }
     _indexes: { fk_partage_utilisateur1_idx: [id_utilisateur], fk_partage_liste1_idx: [id_liste] }
   visibilite:
     _attributes: { phpName: Visibilite }

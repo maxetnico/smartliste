@@ -1,7 +1,4 @@
-rendering:
-  class: sfRenderingFilter
-  param:
-    type: rendering
+rendering: ~
 security:  ~
 
 # insert your own filters here

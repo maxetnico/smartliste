@@ -17,61 +17,149 @@ class magasinActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-        $this->getContext()->getResponse()->addMeta('description', 'liste des magasins disponibles ou a compléter');
+    if($request->getParameter('aff') == 'tous')
+    {    $this->magasins = MagasinPeer::retriveTousSaufMoi($this->getUser()->getModelUtilisateur()->getId());}
+    else
+    {
+        $this->magasins = MagasinPeer::retrivePourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
+        $this->magasinsfav = MagasinsFavorisPeer::retriveFavPourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
+    }
+  }
 
-    //$this->forward('default', 'module');
-  //  $this->magasins = MagasinPeer::retriveTous(); 
+  public function executeAddFavMagasin(sfWebRequest $request)
+  { 
+    $iduser = $this->getUser()->getModelUtilisateur()->getId();
+    
+    $tabmagsel = $request->getParameter('magsel');
+
+    foreach ($tabmagsel as $idmag)
+    {
+        $FavMagasin = MagasinsFavorisPeer::retriveFavMagasinDejaPresent($iduser,$idmag);
+        if($FavMagasin == null)
+        {
+            $FavMagasin = new MagasinsFavoris();
+            $FavMagasin->setIdUtilisateur($iduser);
+            $FavMagasin->setIdMagasin($idMagasin);
+            $FavMagasin->save();
+        }
+        $this->getUser()->setFlash("info", "Les magasins ont été ajouter à vos favoris"); 
+        $this->redirect('magasin/index/aff/tous');  
+    }
+  }
+  public function executeRetireMagasin(sfWebRequest $request)
+  { 
+    $iduser = $this->getUser()->getModelUtilisateur()->getId();
+    
+    $tabmesmagsel = $request->getParameter('mesmagsel');
+    $tabfavsel = $request->getParameter('favsel');
+    $msg=null;
+    
+    foreach ($tabmesmagsel as $idmag)
+    {
+      $magasin = MagasinPeer::UpdateIdUtilisateurEtIdListe($iduser,$idmag);
+      if($magasin != null)
+      {
+            $magasin->setIdUtilisateur(null);
+            $magasin->setIdVisibilite(3);
+            $magasin->setIdEtat(2);
+            $magasin->save();
+            $this->redirect('magasin/index');
+            $msg = "Magasin retiré de votre liste.";
+      }  
+    }
+    
+    foreach ($tabfavsel as $idmag)
+    {
+        MagasinsFavorisPeer::deleteFavQuitterListe($iduser,$idmag);
+        $msg .= "Magasin retiré de vos favoris.";   
+    }
+    if ($msg != null)
+    {$this->getUser()->setFlash("warning", $msg);}
+    $this->redirect('magasin/index');
+  }
+  public function executeAjoutFavoris(sfWebRequest $request)
+  {
+    $iduser = $this->getUser()->getModelUtilisateur()->getId();
+    
+    $idMagasin = $request->getParameter('magasin');
+    $FavMagasin = MagasinsFavorisPeer::retriveFavMagasinDejaPresent($iduser,$idMagasin);
+    if($FavMagasin == null)
+    {
+        $FavMagasin = new MagasinsFavoris();
+        $FavMagasin->setIdUtilisateur($iduser);
+        $FavMagasin->setIdMagasin($idMagasin);
+        $FavMagasin->save();
+        $this->getUser()->setFlash("info", "Les magasins ont été ajouter à vos favoris"); 
+    }
+    else
+    {
+        $this->getUser()->setFlash("warning", "Ce magasin existe déjà dans vos favoris");   
+    }
+    $this->redirect('magasin/index/aff/tous');  
   }
   
-  public function executeMag(sfWebRequest $request)
+  public function executeQuitterFavoris(sfWebRequest $request)
   {
-      
-  } 
-  
-  public function executeSearch(sfWebRequest $request)
-  {
-  //$this->forwardUnless($query = $request->getParameter('query'),'magasin', 'index');
- 
-    if (!$query = $request->getParameter('query'))
-    {
-        echo "ok2".$query;
-        return $this->forward('magasin', 'index');
-    }
-      return "ok3".$query;
-  //$this->magasins = MagasinPeer::retriveTous();
- 
-  if ($request->isXmlHttpRequest())
-  {
-    if ('*' == $query || !$this->magasins)
-    {
-      return $this->renderText('No results.');
-    }
-    //return $this->renderPartial("magasin/magasin",array("magasins" => $this->magasins));
-    return $this->renderPartial("magasin/magasin");
+    $idFav = $request->getParameter('magasin2');
+    MagasinsFavorisPeer::deleteFavQuitterListe($idFav);
+    $this->getUser()->setFlash("warning", "Magasin retiré de vos favoris.");   
+    $this->redirect('magasin/index');
   }
-}
   
   public function executeNouveauMagasin(sfWebRequest $request)
   {
-    if($request->getParameter('nommag') != null && $request->getParameter('visiblepar') != null && $request->getParameter('lienimg') != null)
+    if($request->getParameter('nommag') != null && $request->getParameter('partage') != null && $request->getParameter('lienimg') != null)
     {
         $iduser = $this->getUser()->getModelUtilisateur()->getId();
-        $modelMagasin = MagasinPeer::retriveMagasinDejaPresent($iduser,$request->hasParameter('nommag'));
+        $modelMagasin = MagasinPeer::retriveMagasinDejaPresent($iduser,$request->getParameter('nommag'));
         if($modelMagasin == null)
         {
-            $modelMagasin = new Magasin();
-            $modelMagasin->setNom($request->getParameter("nommag"));
-            $modelMagasin->setIdUtilisateur($iduser);
-            $modelMagasin->setImg($request->getParameter("lienimg"));
-            $modelMagasin->setDateCreation(getdate());
+            $arrInfoImage = getimagesize($request->getParameter("lienimg"));            
             
-            $this->getUser()->getModelUtilisateur()->ajouterALaListe($modelMagasin);
-            $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste");  
+            switch ($arrInfoImage[2]){
+                case IMAGETYPE_JPEG:$ext=".jpg";break;
+                case IMAGETYPE_PNG:$ext=".png";break;
+                case IMAGETYPE_GIF:$ext=".gif";break;
+                default:$ext="";
+            }
+            if($ext != "" )
+            {
+                $in=fopen($request->getParameter("lienimg"), "rb");
+                //$out=fopen('images/test/'.$request->getParameter("nommag").'.'.substr($request->getParameter("lienimg"),-3), "wb");
+
+                $cpt=3;$brut="";
+                while (($brut .= fread($in,8192)) && $cpt>=0 ){
+                    $cpt--;
+                }
+                fclose($in);
+                if($cpt==0) {
+                    $this->getUser()->setFlash("warning", "taille du fichier image trop grande");
+                }
+                else {
+                    file_put_contents('images/magasins/'.$request->getParameter("nommag").$ext, $brut );
+
+                    $modelMagasin = new Magasin();
+                    $modelMagasin->setNom($request->getParameter("nommag"));
+                    $modelMagasin->setIdUtilisateur($iduser);
+                    $modelMagasin->setImg(addslashes ($request->getParameter("nommag").$ext));
+                    $modelMagasin->setDateCreation(new \DateTime());
+                    $modelMagasin->setIdEtat(2);
+                    $modelMagasin->setIdVisibilite($request->getParameter('partage'));
+                    $modelMagasin->save();
+
+                    $this->getUser()->setFlash("info", "Le magasin a été ajouter à votre liste"); 
+                }   
+            }
         }
         else
         {
-            $this->getUser()->setFlash("warning", "Ce nom de magasin existe déjà dans votre liste");    
+            $this->getUser()->setFlash("warning", "Ce nom de magasin existe déjà dans votre liste");   
         }
     }
+    else
+    {
+        $this->getUser()->setFlash("warning", "Tous les champs sont requis.");   
+    }
+    $this->redirect('magasin/index'); 
   }
 }

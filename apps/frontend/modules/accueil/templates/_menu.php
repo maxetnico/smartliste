@@ -15,7 +15,7 @@
             <form method="post" action="<?php echo url_for('accueil/inscription') ?>">
                 <span>Login : </span><input type="text" name="pseudo" placeholder="Pseudo"><br>
                 <span>Password : </span><input type="password" name="mdp" placeholder="Mot de passe"><br>
-                <span>Mail : </span><input type="text" name="mail" placeholder="Mail (facultatif)"><br>
+                <!--<span>Mail : </span><input type="text" name="mail" placeholder="Mail (facultatif)"><br>-->
                 <button type="submit" id="bouton_inscrire">S'inscrire</button>
                 <button type="reset" class="bouton_annuler">Annuler</button>
             </form>

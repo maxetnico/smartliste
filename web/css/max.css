@@ -2,6 +2,12 @@
 .ma-no-v {margin-top: 0px !important; margin-bottom: 0px !important;}
 .pa-no-h {padding-left: 0px !important; padding-right:0px !important;}
 .pa-no-v {padding-top: 0px !important; padding-bottom: 0px !important;}
+.text-left-important {text-align: left !important;}
+.text-center-important {text-align: center !important;}
+.right {float:right;}
+.width-60 {width:60px;}
+
+.ma-md-h {margin-left:10px;margin-right:10px;}
 
 #menu_1 input[type=text] {color: #888;}
 
@@ -29,7 +35,30 @@
 .liste > div {height: 50px; border: 2px #984807 solid; overflow: hidden;}
 .liste .icone {border-top-left-radius: 40px; border-bottom-left-radius: 40px; min-width: 40px;}
 .liste .nom {margin-left: 2%; border-top-right-radius: 40px; border-bottom-right-radius: 40px;}
+@media only screen and (max-width : 500px)
+{
+    .liste .nom {margin-left: 0%;}
+}
 .liste .icone {text-align: right; font-size: 30px;}
+
+/* Partie des listes avec produits */
+.listes-produits {margin-top: 15px;}
+.listes-produits .conteneur {background: #fff; width:100%;}
+.listes-produits tr {width:100%; text-align: center;}
+.listes-produits td {height:31px;}
+.listes-produits .categorie {color: #fff; background:#000; text-align: center; font-size: 15px;}
+.liste-produits {border-bottom: 1px #984807 solid;}
+.listes-produits h2 {width:100%; text-align: center; color: #aaa;}
+.listes-produits .nom-produit {color:#222;}
+.listes-produits td img {max-height: 30px; max-width: 30px;}
+.listes-produits td.vignette {width:10%;}
+.listes-produits td.texte {width:65%;}
+.listes-produits td.quantite {width:10%;}
+.listes-produits td.magasin {width:10%;}
+.listes-produits td.checkbox {width:5%;padding-left:50%;}
+.liste-produits.checked * {text-decoration: line-through;}
+
+.select-image, .select-image option {background-repeat: no-repeat; background-size: 100% auto; width:50px; height:50px};
 
 .message_flash {width:90%; margin-left: 5%; margin-top: 12px;}
 .message_flash div {width: 100%; padding: 10px; border-radius: 10px; text-align: center;}
@@ -50,3 +79,14 @@
     display: block;
 }
 .invitation .menu_box form {padding-left: 10px; padding-bottom: 10px;}
+
+.simplecolorpicker {width: auto !important;}
+.simplecolorpicker .color {width: 20px !important;}
+
+.pagination li>a {color: #0A1;}
+
+td.image {min-height: 40px;}
+td.image img {max-height: 40px; max-width: 40px;}
+
+.recherche-produit-search {display: inline;background: rgb(255, 255, 255) none repeat scroll 0% 0%;height: auto;border: 1px solid rgb(51, 51, 51);border-radius: 0px 15px 15px 0px;padding: 0px 10px;}
+.recherche-produit input {border: 1px solid rgb(51, 51, 51);}

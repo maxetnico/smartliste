@@ -5,13 +5,13 @@ if($module == "liste")
 {
     $idActive = 1;
 }
-if($module == "produit")
-{
-    $idActive = 2;
-}
 if($module == "magasin")
 {
     $idActive = 3;
+}
+if($module == "produit")
+{
+    $idActive = 2;
 }
 ?>
 <div id="menu_connected">
