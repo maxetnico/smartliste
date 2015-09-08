@@ -12,4 +12,12 @@ $(document).ready(function () {
             //$('#imgRecherche').click();
         }  
     });
+    
+//    $('.magclick').on('click',function(){
+//        $(this+' input:checkbox').prop('checked',true); //value == 1);
+//    });
+    $('.magclick').on('click',function(){
+        val = '#'+$(this).prop('id')+' td :checkbox';
+        $(val).prop('checked',!$(val).prop('checked'));
+    });
 });

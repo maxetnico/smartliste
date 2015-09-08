@@ -25,30 +25,62 @@ class magasinActions extends sfActions
         $this->magasinsfav = MagasinsFavorisPeer::retriveFavPourUnUtilisateur($this->getUser()->getModelUtilisateur()->getId());
     }
   }
+
+  public function executeAddFavMagasin(sfWebRequest $request)
+  { 
+    $iduser = $this->getUser()->getModelUtilisateur()->getId();
     
-  public function executeQuitter(sfWebRequest $request)
-  {
-    if($request->getParameter('magasin') != null)
+    $tabmagsel = $request->getParameter('magsel');
+
+    foreach ($tabmagsel as $idmag)
     {
-      // faire la mise a 0 du champ magasin.id_utilisteur
-      $idMagasin = $request->getParameter('magasin');
-      $iduser = $this->getUser()->getModelUtilisateur()->getId();
-      $magasin = MagasinPeer::UpdateIdUtilisateurEtIdListe($iduser,$idMagasin);
+        $FavMagasin = MagasinsFavorisPeer::retriveFavMagasinDejaPresent($iduser,$idmag);
+        if($FavMagasin == null)
+        {
+            $FavMagasin = new MagasinsFavoris();
+            $FavMagasin->setIdUtilisateur($iduser);
+            $FavMagasin->setIdMagasin($idMagasin);
+            $FavMagasin->save();
+        }
+        $this->getUser()->setFlash("info", "Les magasins ont été ajouter à vos favoris"); 
+        $this->redirect('magasin/index/aff/tous');  
+    }
+  }
+  public function executeRetireMagasin(sfWebRequest $request)
+  { 
+    $iduser = $this->getUser()->getModelUtilisateur()->getId();
+    
+    $tabmesmagsel = $request->getParameter('mesmagsel');
+    $tabfavsel = $request->getParameter('favsel');
+    $msg=null;
+    
+    foreach ($tabmesmagsel as $idmag)
+    {
+      $magasin = MagasinPeer::UpdateIdUtilisateurEtIdListe($iduser,$idmag);
       if($magasin != null)
       {
             $magasin->setIdUtilisateur(null);
             $magasin->setIdVisibilite(3);
-            $magasin->setIdEtat(3);
+            $magasin->setIdEtat(2);
             $magasin->save();
-            $this->getUser()->setFlash("warning", "Magasin retiré de votre liste.");
             $this->redirect('magasin/index');
-      }
-    }    
+            $msg = "Magasin retiré de votre liste.";
+      }  
+    }
+    
+    foreach ($tabfavsel as $idmag)
+    {
+        MagasinsFavorisPeer::deleteFavQuitterListe($iduser,$idmag);
+        $msg .= "Magasin retiré de vos favoris.";   
+    }
+    if ($msg != null)
+    {$this->getUser()->setFlash("warning", $msg);}
+    $this->redirect('magasin/index');
   }
-  
   public function executeAjoutFavoris(sfWebRequest $request)
   {
     $iduser = $this->getUser()->getModelUtilisateur()->getId();
+    
     $idMagasin = $request->getParameter('magasin');
     $FavMagasin = MagasinsFavorisPeer::retriveFavMagasinDejaPresent($iduser,$idMagasin);
     if($FavMagasin == null)
@@ -57,7 +89,7 @@ class magasinActions extends sfActions
         $FavMagasin->setIdUtilisateur($iduser);
         $FavMagasin->setIdMagasin($idMagasin);
         $FavMagasin->save();
-        $this->getUser()->setFlash("info", "Le magasin a été ajouter à vos favoris"); 
+        $this->getUser()->setFlash("info", "Les magasins ont été ajouter à vos favoris"); 
     }
     else
     {

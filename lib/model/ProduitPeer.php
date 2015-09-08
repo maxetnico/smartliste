@@ -104,4 +104,11 @@ class ProduitPeer extends BaseProduitPeer
         $cton1->addOr($cton2);        
         return $cton1;
     }   
+    
+    public static function retriveTousEtat($idetat) {
+        $crit = new Criteria();
+        $crit->add(self::ID_ETAT,  $idetat, Criteria::EQUAL);
+        $crit->addAscendingOrderByColumn(self::NOM);
+        return parent::doSelect($crit);
+    }   
 }

@@ -34,6 +34,15 @@ class MagasinPeer extends BaseMagasinPeer
         $crit->addJoin(self::ID_VISIBILITE, VisibilitePeer::ID);
         $crit->add(VisibilitePeer::CODE,'SIT',  Criteria::EQUAL);
         $crit->add(self::ID_UTILISATEUR,$idu,  Criteria::NOT_EQUAL);
+        $crit->addOr(self::ID_UTILISATEUR,null,  Criteria::EQUAL);
+        $crit->addJoin(self::ID_ETAT,  EtatPeer::ID);
+        $crit->add(EtatPeer::CODE,'VAL',  Criteria::EQUAL);
+        return parent::doSelect($crit);
+    }
+    public static function retriveTousEtat($idetat) {
+        $crit = new Criteria();
+        $crit->add(self::ID_ETAT,  $idetat, Criteria::EQUAL);
+        $crit->addAscendingOrderByColumn(self::NOM);
         return parent::doSelect($crit);
     }
     

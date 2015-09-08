@@ -1,6 +1,7 @@
 <div class="presentation">
     <div id="menu_mag" class="menu_mag row ma-no-h pa-no-h">
-        <div class="col-sm-offset-2 col-sm-4 col-xs-12">
+        <div class="col-sm-offset-2 col-sm-3 col-xs-12">
+            
             <button id="bouton_invitation" type="button"><i class="fa fa-plus-circle"></i> Ajouter un magasin</button>
             <div id="menu_inv_box" class="menu_box">
                 <form method="post" action="<?php echo url_for('magasin/NouveauMagasin') ?>">
@@ -16,8 +17,21 @@
                     <button type="reset" class="bouton_annuler">Annuler</button>
                 </form>
             </div>
+        
         </div>
-        <div class="col-sm-offset-2 col-sm-4 col-xs-12">
+        <div class="col-sm-3 col-xs-12">
+      <?php 
+          if(isset($_GET['aff']) && $_GET['aff'] == 'tous' ) { ?>
+                <button id="bouton_magajfav" onclick="$('#formlesmag').submit();"><i class="fa fa-plus-circle"></i> Ajouter aux favoris</button>
+               
+      <?php    }
+          else { ?>
+                <button id="bouton_magquit" onclick="$('#formmesmag').submit();"><i class="fa fa-minus-circle"></i> Retirer les magasins</button>
+                
+      <?php    } 
+      ?>
+        </div>
+        <div class="col-sm-3 col-xs-12">
             <form method="get" action="<?php echo url_for('magasin/index'); ?>">
                 <?php if(isset($_GET['aff']) && $_GET['aff'] == 'tous' ) {   ?>
                 <input name="aff" type="hidden" value="mes">
