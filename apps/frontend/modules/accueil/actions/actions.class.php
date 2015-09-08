@@ -24,12 +24,16 @@ class accueilActions extends sfActions
 //      $user->setPseudo("bibi");      
 //      $user->save();     
       //var_dump($this->getUser());die;
-  }
+//      $level = DroitsPeer::retrieveByPK($this->getUser()->getModelUtilisateur()->getId())->getLevel();
+//      if($level == 99)
+//      {$this->level = "GoodLeveL";}
+          
+    }
   
   public function executeIndexdepuissecure(sfWebRequest $request)
   {
-      $this->getUser()->setFlash("error", "vous devez vous connecter pour accéder aux fonctionnalités du site");
-      $this->redirect('accueil/index');
+    $this->getUser()->setFlash("error", "vous devez vous connecter pour accéder aux fonctionnalités du site");
+    $this->redirect('accueil/index');
   }
   
   public function executeDeconnexion(sfWebRequest $request)
@@ -50,6 +54,13 @@ class accueilActions extends sfActions
             $modelUtilisateur->save();
             $this->getUser()->setModelUtilisateur($modelUtilisateur);
             $this->getUser()->setAuthenticated(true);
+            
+            $level = DroitsPeer::retrieveByPK($this->getUser()->getModelUtilisateur()->getId());
+
+            if($level != null && $level->getLevel() == "99")
+                {$this->getUser()->setLevel("GoodleveL");}
+            else 
+                {$this->getUser()->setLevel("none");}
             
             if($request->hasParameter("ticket"))
             {

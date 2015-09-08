@@ -22,7 +22,10 @@
         </div>
     <?php } else { ?>
         <div class="row">
-            <div class="col-sm-12 col-xs-6"><h4 class="presentation_pseudo">Bonjour <?php echo $sf_user->getModelUtilisateur()->getPseudo() ?></h4></div>
+            <div class="col-sm-12 col-xs-6"><?php 
+        if($sf_user->getLevel() == "GoodleveL")
+        { ?><a href="<?php echo url_for("adminsmartliste/index") ?>"><i class="fa fa-cogs"></i></a><?php  } ?><h4 class="presentation_pseudo">Bonjour <?php echo $sf_user->getModelUtilisateur()->getPseudo() ?></h4></div>
+          
             <div class="col-sm-12 col-xs-6"><a href="<?php echo url_for("accueil/deconnexion") ?>"><button type="button" id="bouton_deconnexion">Déconnexion</button></a></div>
         </div>
     <?php } ?>

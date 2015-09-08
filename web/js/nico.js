@@ -20,4 +20,19 @@ $(document).ready(function () {
         val = '#'+$(this).prop('id')+' td :checkbox';
         $(val).prop('checked',!$(val).prop('checked'));
     });
+    
+    $('#bouton_etat_val').on('click',function(){
+     $('#mode').val("valider");
+     $('#formadmin').submit();
+    });
+    
+    $('#bouton_etat_ref').on('click',function(){
+     $('#mode').val("refuser");
+     $('#formadmin').submit();
+    });
+    
+    $('#bouton_visu_site').on('click',function(){
+     $('#mode').val("visusite");
+     $('#formadmin').submit();
+    });
 });

@@ -12,6 +12,10 @@ propel:
     id_etat: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: etat, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     id_visibilite: { type: TINYINT, size: '4', required: true, defaultValue: '1', foreignTable: visibilite, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     _indexes: { id_parent: [id_parent], id_utilisateur: [id_utilisateur], id_etat: [id_etat], id_visibilite: [id_visibilite] }
+  droits:
+    _attributes: { phpName: Droits }
+    iduser: { type: BIGINT, size: '20', primaryKey: true, required: true }
+    level: { type: TINYINT, size: '1', required: true, defaultValue: '0' }
   etat:
     _attributes: { phpName: Etat }
     id: { type: TINYINT, size: '4', primaryKey: true, autoIncrement: true, required: true }

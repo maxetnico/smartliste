@@ -28,6 +28,7 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
 
   protected $credentials = null;
   protected $authenticated = null;
+  protected $droit = null;
 
   protected $timedout = false;
 

@@ -17,13 +17,21 @@ class adminsmartlisteActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-      
-    $this->magasins = MagasinPeer::retriveTousEtat(2);
-    $this->magasins2 = MagasinPeer::retriveTousEtat(3);
-    $this->magasins3 = MagasinPeer::retriveTousEtat(1);
-    $this->Produits = ProduitPeer::retriveTousEtat(2);
-    $this->Produits2 = ProduitPeer::retriveTousEtat(3);
-    $this->Produits3 = ProduitPeer::retriveTousEtat(1);
+    if($this->getUser()->getLevel() == "GoodleveL")
+    {
+        $this->magasins = MagasinPeer::retriveTousEtat(2);
+        $this->magasins2 = MagasinPeer::retriveTousEtat(3);
+        $this->magasins3 = MagasinPeer::retriveTousEtat(1);
+        $this->Produits = ProduitPeer::retriveTousEtat(2);
+        $this->Produits2 = ProduitPeer::retriveTousEtat(3);
+        $this->Produits3 = ProduitPeer::retriveTousEtat(1);
+    }
+    else {
+        $this->redirect('accueil/index');
+    }
   }
- 
+  
+  public function executeChangeParamMagasin(sfWebRequest $request)
+  {
+  }
 }

@@ -14,4 +14,5 @@ class Utilisateur extends BaseUtilisateur
         $modelUtilisateurListeLink->setIdListe($idListe);
         $modelUtilisateurListeLink->save();
     }
+    
 }

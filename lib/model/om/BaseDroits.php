@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'magasins_favoris' table.
+ * Base class that represents a row from the 'droits' table.
  *
  * 
  *
@@ -11,46 +11,31 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
+abstract class BaseDroits extends BaseObject  implements Persistent {
 
 
-  const PEER = 'MagasinsFavorisPeer';
+  const PEER = 'DroitsPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        MagasinsFavorisPeer
+	 * @var        DroitsPeer
 	 */
 	protected static $peer;
 
 	/**
-	 * The value for the id field.
+	 * The value for the iduser field.
 	 * @var        string
 	 */
-	protected $id;
+	protected $iduser;
 
 	/**
-	 * The value for the id_magasin field.
-	 * @var        string
+	 * The value for the level field.
+	 * Note: this column has a database default value of: 0
+	 * @var        int
 	 */
-	protected $id_magasin;
-
-	/**
-	 * The value for the id_utilisateur field.
-	 * @var        string
-	 */
-	protected $id_utilisateur;
-
-	/**
-	 * @var        Magasin
-	 */
-	protected $aMagasin;
-
-	/**
-	 * @var        Utilisateur
-	 */
-	protected $aUtilisateur;
+	protected $level;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -67,7 +52,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BaseMagasinsFavoris object.
+	 * Initializes internal state of BaseDroits object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -84,105 +69,68 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function applyDefaultValues()
 	{
+		$this->level = 0;
 	}
 
 	/**
-	 * Get the [id] column value.
+	 * Get the [iduser] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getId()
+	public function getIduser()
 	{
-		return $this->id;
+		return $this->iduser;
 	}
 
 	/**
-	 * Get the [id_magasin] column value.
+	 * Get the [level] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
-	public function getIdMagasin()
+	public function getLevel()
 	{
-		return $this->id_magasin;
+		return $this->level;
 	}
 
 	/**
-	 * Get the [id_utilisateur] column value.
-	 * 
-	 * @return     string
-	 */
-	public function getIdUtilisateur()
-	{
-		return $this->id_utilisateur;
-	}
-
-	/**
-	 * Set the value of [id] column.
+	 * Set the value of [iduser] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     MagasinsFavoris The current object (for fluent API support)
+	 * @return     Droits The current object (for fluent API support)
 	 */
-	public function setId($v)
+	public function setIduser($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = MagasinsFavorisPeer::ID;
+		if ($this->iduser !== $v) {
+			$this->iduser = $v;
+			$this->modifiedColumns[] = DroitsPeer::IDUSER;
 		}
 
 		return $this;
-	} // setId()
+	} // setIduser()
 
 	/**
-	 * Set the value of [id_magasin] column.
+	 * Set the value of [level] column.
 	 * 
-	 * @param      string $v new value
-	 * @return     MagasinsFavoris The current object (for fluent API support)
+	 * @param      int $v new value
+	 * @return     Droits The current object (for fluent API support)
 	 */
-	public function setIdMagasin($v)
+	public function setLevel($v)
 	{
 		if ($v !== null) {
-			$v = (string) $v;
+			$v = (int) $v;
 		}
 
-		if ($this->id_magasin !== $v) {
-			$this->id_magasin = $v;
-			$this->modifiedColumns[] = MagasinsFavorisPeer::ID_MAGASIN;
-		}
-
-		if ($this->aMagasin !== null && $this->aMagasin->getId() !== $v) {
-			$this->aMagasin = null;
+		if ($this->level !== $v || $v === 0) {
+			$this->level = $v;
+			$this->modifiedColumns[] = DroitsPeer::LEVEL;
 		}
 
 		return $this;
-	} // setIdMagasin()
-
-	/**
-	 * Set the value of [id_utilisateur] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     MagasinsFavoris The current object (for fluent API support)
-	 */
-	public function setIdUtilisateur($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->id_utilisateur !== $v) {
-			$this->id_utilisateur = $v;
-			$this->modifiedColumns[] = MagasinsFavorisPeer::ID_UTILISATEUR;
-		}
-
-		if ($this->aUtilisateur !== null && $this->aUtilisateur->getId() !== $v) {
-			$this->aUtilisateur = null;
-		}
-
-		return $this;
-	} // setIdUtilisateur()
+	} // setLevel()
 
 	/**
 	 * Indicates whether the columns in this object are only set to default values.
@@ -195,7 +143,11 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	public function hasOnlyDefaultValues()
 	{
 			// First, ensure that we don't have any columns that have been modified which aren't default columns.
-			if (array_diff($this->modifiedColumns, array())) {
+			if (array_diff($this->modifiedColumns, array(DroitsPeer::LEVEL))) {
+				return false;
+			}
+
+			if ($this->level !== 0) {
 				return false;
 			}
 
@@ -221,9 +173,8 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	{
 		try {
 
-			$this->id = ($row[$startcol + 0] !== null) ? (string) $row[$startcol + 0] : null;
-			$this->id_magasin = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-			$this->id_utilisateur = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+			$this->iduser = ($row[$startcol + 0] !== null) ? (string) $row[$startcol + 0] : null;
+			$this->level = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -233,10 +184,10 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 3; // 3 = MagasinsFavorisPeer::NUM_COLUMNS - MagasinsFavorisPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 2; // 2 = DroitsPeer::NUM_COLUMNS - DroitsPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating MagasinsFavoris object", $e);
+			throw new PropelException("Error populating Droits object", $e);
 		}
 	}
 
@@ -256,12 +207,6 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	public function ensureConsistency()
 	{
 
-		if ($this->aMagasin !== null && $this->id_magasin !== $this->aMagasin->getId()) {
-			$this->aMagasin = null;
-		}
-		if ($this->aUtilisateur !== null && $this->id_utilisateur !== $this->aUtilisateur->getId()) {
-			$this->aUtilisateur = null;
-		}
 	} // ensureConsistency
 
 	/**
@@ -285,13 +230,13 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(MagasinsFavorisPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DroitsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = MagasinsFavorisPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = DroitsPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -301,8 +246,6 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 
 		if ($deep) {  // also de-associate any related objects?
 
-			$this->aMagasin = null;
-			$this->aUtilisateur = null;
 		} // if (deep)
 	}
 
@@ -318,7 +261,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseMagasinsFavoris:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseDroits:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -333,12 +276,12 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(MagasinsFavorisPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DroitsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			MagasinsFavorisPeer::doDelete($this, $con);
+			DroitsPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -347,7 +290,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 		}
 	
 
-    foreach (sfMixer::getCallables('BaseMagasinsFavoris:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BaseDroits:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -369,7 +312,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseMagasinsFavoris:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseDroits:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -384,19 +327,19 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(MagasinsFavorisPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DroitsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BaseMagasinsFavoris:save:post') as $callable)
+    foreach (sfMixer::getCallables('BaseDroits:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			MagasinsFavorisPeer::addInstanceToPool($this);
+			DroitsPeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -421,42 +364,18 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
-			// We call the save method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aMagasin !== null) {
-				if ($this->aMagasin->isModified() || $this->aMagasin->isNew()) {
-					$affectedRows += $this->aMagasin->save($con);
-				}
-				$this->setMagasin($this->aMagasin);
-			}
-
-			if ($this->aUtilisateur !== null) {
-				if ($this->aUtilisateur->isModified() || $this->aUtilisateur->isNew()) {
-					$affectedRows += $this->aUtilisateur->save($con);
-				}
-				$this->setUtilisateur($this->aUtilisateur);
-			}
-
-			if ($this->isNew() ) {
-				$this->modifiedColumns[] = MagasinsFavorisPeer::ID;
-			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = MagasinsFavorisPeer::doInsert($this, $con);
+					$pk = DroitsPeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
 
-					$this->setId($pk);  //[IMV] update autoincrement primary key
-
 					$this->setNew(false);
 				} else {
-					$affectedRows += MagasinsFavorisPeer::doUpdate($this, $con);
+					$affectedRows += DroitsPeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
@@ -528,25 +447,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			// We call the validate method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aMagasin !== null) {
-				if (!$this->aMagasin->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aMagasin->getValidationFailures());
-				}
-			}
-
-			if ($this->aUtilisateur !== null) {
-				if (!$this->aUtilisateur->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aUtilisateur->getValidationFailures());
-				}
-			}
-
-
-			if (($retval = MagasinsFavorisPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = DroitsPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -569,7 +470,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = MagasinsFavorisPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = DroitsPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -585,13 +486,10 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getId();
+				return $this->getIduser();
 				break;
 			case 1:
-				return $this->getIdMagasin();
-				break;
-			case 2:
-				return $this->getIdUtilisateur();
+				return $this->getLevel();
 				break;
 			default:
 				return null;
@@ -612,11 +510,10 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = MagasinsFavorisPeer::getFieldNames($keyType);
+		$keys = DroitsPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getId(),
-			$keys[1] => $this->getIdMagasin(),
-			$keys[2] => $this->getIdUtilisateur(),
+			$keys[0] => $this->getIduser(),
+			$keys[1] => $this->getLevel(),
 		);
 		return $result;
 	}
@@ -633,7 +530,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = MagasinsFavorisPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = DroitsPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -649,13 +546,10 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setId($value);
+				$this->setIduser($value);
 				break;
 			case 1:
-				$this->setIdMagasin($value);
-				break;
-			case 2:
-				$this->setIdUtilisateur($value);
+				$this->setLevel($value);
 				break;
 		} // switch()
 	}
@@ -679,11 +573,10 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = MagasinsFavorisPeer::getFieldNames($keyType);
+		$keys = DroitsPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setIdMagasin($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setIdUtilisateur($arr[$keys[2]]);
+		if (array_key_exists($keys[0], $arr)) $this->setIduser($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setLevel($arr[$keys[1]]);
 	}
 
 	/**
@@ -693,11 +586,10 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(MagasinsFavorisPeer::DATABASE_NAME);
+		$criteria = new Criteria(DroitsPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(MagasinsFavorisPeer::ID)) $criteria->add(MagasinsFavorisPeer::ID, $this->id);
-		if ($this->isColumnModified(MagasinsFavorisPeer::ID_MAGASIN)) $criteria->add(MagasinsFavorisPeer::ID_MAGASIN, $this->id_magasin);
-		if ($this->isColumnModified(MagasinsFavorisPeer::ID_UTILISATEUR)) $criteria->add(MagasinsFavorisPeer::ID_UTILISATEUR, $this->id_utilisateur);
+		if ($this->isColumnModified(DroitsPeer::IDUSER)) $criteria->add(DroitsPeer::IDUSER, $this->iduser);
+		if ($this->isColumnModified(DroitsPeer::LEVEL)) $criteria->add(DroitsPeer::LEVEL, $this->level);
 
 		return $criteria;
 	}
@@ -712,9 +604,9 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(MagasinsFavorisPeer::DATABASE_NAME);
+		$criteria = new Criteria(DroitsPeer::DATABASE_NAME);
 
-		$criteria->add(MagasinsFavorisPeer::ID, $this->id);
+		$criteria->add(DroitsPeer::IDUSER, $this->iduser);
 
 		return $criteria;
 	}
@@ -725,18 +617,18 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 */
 	public function getPrimaryKey()
 	{
-		return $this->getId();
+		return $this->getIduser();
 	}
 
 	/**
-	 * Generic method to set the primary key (id column).
+	 * Generic method to set the primary key (iduser column).
 	 *
 	 * @param      string $key Primary key.
 	 * @return     void
 	 */
 	public function setPrimaryKey($key)
 	{
-		$this->setId($key);
+		$this->setIduser($key);
 	}
 
 	/**
@@ -745,21 +637,19 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of MagasinsFavoris (or compatible) type.
+	 * @param      object $copyObj An object of Droits (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setIdMagasin($this->id_magasin);
+		$copyObj->setIduser($this->iduser);
 
-		$copyObj->setIdUtilisateur($this->id_utilisateur);
+		$copyObj->setLevel($this->level);
 
 
 		$copyObj->setNew(true);
-
-		$copyObj->setId(NULL); // this is a auto-increment column, so set to default value
 
 	}
 
@@ -772,7 +662,7 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     MagasinsFavoris Clone of current object.
+	 * @return     Droits Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -791,116 +681,14 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     MagasinsFavorisPeer
+	 * @return     DroitsPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new MagasinsFavorisPeer();
+			self::$peer = new DroitsPeer();
 		}
 		return self::$peer;
-	}
-
-	/**
-	 * Declares an association between this object and a Magasin object.
-	 *
-	 * @param      Magasin $v
-	 * @return     MagasinsFavoris The current object (for fluent API support)
-	 * @throws     PropelException
-	 */
-	public function setMagasin(Magasin $v = null)
-	{
-		if ($v === null) {
-			$this->setIdMagasin(NULL);
-		} else {
-			$this->setIdMagasin($v->getId());
-		}
-
-		$this->aMagasin = $v;
-
-		// Add binding for other direction of this n:n relationship.
-		// If this object has already been added to the Magasin object, it will not be re-added.
-		if ($v !== null) {
-			$v->addMagasinsFavoris($this);
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Get the associated Magasin object
-	 *
-	 * @param      PropelPDO Optional Connection object.
-	 * @return     Magasin The associated Magasin object.
-	 * @throws     PropelException
-	 */
-	public function getMagasin(PropelPDO $con = null)
-	{
-		if ($this->aMagasin === null && (($this->id_magasin !== "" && $this->id_magasin !== null))) {
-			$c = new Criteria(MagasinPeer::DATABASE_NAME);
-			$c->add(MagasinPeer::ID, $this->id_magasin);
-			$this->aMagasin = MagasinPeer::doSelectOne($c, $con);
-			/* The following can be used additionally to
-			   guarantee the related object contains a reference
-			   to this object.  This level of coupling may, however, be
-			   undesirable since it could result in an only partially populated collection
-			   in the referenced object.
-			   $this->aMagasin->addMagasinsFavoriss($this);
-			 */
-		}
-		return $this->aMagasin;
-	}
-
-	/**
-	 * Declares an association between this object and a Utilisateur object.
-	 *
-	 * @param      Utilisateur $v
-	 * @return     MagasinsFavoris The current object (for fluent API support)
-	 * @throws     PropelException
-	 */
-	public function setUtilisateur(Utilisateur $v = null)
-	{
-		if ($v === null) {
-			$this->setIdUtilisateur(NULL);
-		} else {
-			$this->setIdUtilisateur($v->getId());
-		}
-
-		$this->aUtilisateur = $v;
-
-		// Add binding for other direction of this n:n relationship.
-		// If this object has already been added to the Utilisateur object, it will not be re-added.
-		if ($v !== null) {
-			$v->addMagasinsFavoris($this);
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Get the associated Utilisateur object
-	 *
-	 * @param      PropelPDO Optional Connection object.
-	 * @return     Utilisateur The associated Utilisateur object.
-	 * @throws     PropelException
-	 */
-	public function getUtilisateur(PropelPDO $con = null)
-	{
-		if ($this->aUtilisateur === null && (($this->id_utilisateur !== "" && $this->id_utilisateur !== null))) {
-			$c = new Criteria(UtilisateurPeer::DATABASE_NAME);
-			$c->add(UtilisateurPeer::ID, $this->id_utilisateur);
-			$this->aUtilisateur = UtilisateurPeer::doSelectOne($c, $con);
-			/* The following can be used additionally to
-			   guarantee the related object contains a reference
-			   to this object.  This level of coupling may, however, be
-			   undesirable since it could result in an only partially populated collection
-			   in the referenced object.
-			   $this->aUtilisateur->addMagasinsFavoriss($this);
-			 */
-		}
-		return $this->aUtilisateur;
 	}
 
 	/**
@@ -917,16 +705,14 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
 		if ($deep) {
 		} // if ($deep)
 
-			$this->aMagasin = null;
-			$this->aUtilisateur = null;
 	}
 
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BaseMagasinsFavoris:'.$method))
+    if (!$callable = sfMixer::getCallable('BaseDroits:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BaseMagasinsFavoris::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BaseDroits::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -935,4 +721,4 @@ abstract class BaseMagasinsFavoris extends BaseObject  implements Persistent {
   }
 
 
-} // BaseMagasinsFavoris
+} // BaseDroits
