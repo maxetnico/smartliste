@@ -1,17 +1,24 @@
 <div class="presentation">
     <div id="menu_mag" class="menu_mag row ma-no-h pa-no-h">
-        <div class="col-sm-offset-2 col-sm-4 col-xs-12">
-            <button id="bouton_etat_val" type="button" ><i class="fa fa-plus-circle"></i> Valider</button>
-            <button id="bouton_etat_ref" type="button"><i class="fa fa-plus-circle"></i> Refuser</button>
-            <button id="bouton_visu_site" type="button"><i class="fa fa-plus-circle"></i> Site</button>
+        <div class="col-sm-offset-2 col-sm-8 col-xs-12">
+<!--			<div class="block col-sm-6 col-xs-12">Etat : -->
+				<button id="bouton_etat_val" type="button"><i class="fa fa-plus-circle"></i> Valider</button>
+				<button id="bouton_etat_att" type="button"><i class="fa fa-plus-circle"></i> Attente</button>
+				<button id="bouton_etat_ref" type="button"><i class="fa fa-plus-circle"></i> Refuser</button>
+<!--			</div>
+			<div class="block col-sm-offset-1 col-sm-4 col-xs-12">Partage :
+				<button id="bouton_visu_site" type="button"><i class="fa fa-plus-circle"></i> Site</button>
+				<button id="bouton_visu_perso" type="button"><i class="fa fa-plus-circle"></i> Perso</button>
+			</div> -->
         </div>
     </div>
     <div class="row ma-no-h text-center recherche-produit">
         <span>Recherche : </span><input type="text" id="recherche-produit" onkeyup="rechercheDansLesProduits()"><div class="recherche-produit-search"><i class="fa fa-search"></i></div>
     </div>
     <div class="row ma-no-h pa-no-h">
-    <form id="formadmin" method="post" action="<?php echo url_for('adminsmartliste/changeParamMagasin') ?>">
-    <input name="mode" type="hidden" value="none">
+    <form id="formadmin" method="post" action="<?php echo url_for('adminsmartliste/ChangeParamMagasin') ?>">
+    <input name="mode" id="mode" type="hidden" value="none">
+    <input name="mode" id="mode2" type="hidden" value="none">
     <div id="mag_perso" class="mes_mag block col-sm-4 col-sm-offset-2 col-xs-12">
             
             <h3>Administration des magasins</h3>
@@ -168,13 +175,13 @@
                 </thead>
                 <?php
                 foreach ($Produits as $produit) {
-                    echo "<tr id='mag".$produit->getId()."' class='quitter magclick produit-ligne' data-text='".strtoupper($produit->getNom())."'>";
+                    echo "<tr id='prod".$produit->getId()."' class='quitter magclick produit-ligne' data-text='".strtoupper($produit->getNom())."'>";
                     
                     echo "<td>";
                     echo $produit->getEtatNom()=="VAL"?"<i class='etat_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='etat_att fa fa-clock-o'></i>":"<i class='etat_ref fa fa-times-circle'></i>");
                     echo "</td>";
                     echo "<td>";
-                    echo "<input type='checkbox' name='magsel[]' value='".$produit->getId()."' />";
+                    echo "<input type='checkbox' name='prodsel[]' value='".$produit->getId()."' />";
                     echo "</td>";
                     echo "<td>";
                     echo image_tag($produit->getImg(),array("width"=>"35px"));
@@ -210,13 +217,13 @@
                 </thead>
                 <?php
                 foreach ($Produits2 as $produit) {
-                    echo "<tr id='mag".$produit->getId()."' class='quitter magclick produit-ligne' data-text='".strtoupper($produit->getNom())."'>";
+                    echo "<tr id='prod".$produit->getId()."' class='quitter magclick produit-ligne' data-text='".strtoupper($produit->getNom())."'>";
                     
                     echo "<td>";
                     echo $produit->getEtatNom()=="VAL"?"<i class='etat_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='etat_att fa fa-clock-o'></i>":"<i class='etat_ref fa fa-times-circle'></i>");
                     echo "</td>";
                     echo "<td>";
-                    echo "<input type='checkbox' name='magsel[]' value='".$produit->getId()."' />";
+                    echo "<input type='checkbox' name='prodsel[]' value='".$produit->getId()."' />";
                     echo "</td>";
                     echo "<td>";
                     echo image_tag($produit->getImg(),array("width"=>"35px"));
@@ -253,13 +260,13 @@
                 </thead>
                 <?php
                 foreach ($Produits3 as $produit) {
-                    echo "<tr id='mag".$produit->getId()."' class='quitter magclick produit-ligne' data-text='".strtoupper($produit->getNom())."'>";
+                    echo "<tr id='prod".$produit->getId()."' class='quitter magclick produit-ligne' data-text='".strtoupper($produit->getNom())."'>";
                     
                     echo "<td>";
                     echo $produit->getEtatNom()=="VAL"?"<i class='etat_val fa fa-check-circle'></i>":($produit->getEtatNom()=="ATT"?"<i class='etat_att fa fa-clock-o'></i>":"<i class='etat_ref fa fa-times-circle'></i>");
                     echo "</td>";
                     echo "<td>";
-                    echo "<input type='checkbox' name='magsel[]' value='".$produit->getId()."' />";
+                    echo "<input type='checkbox' name='prodsel[]' value='".$produit->getId()."' />";
                     echo "</td>";
                     echo "<td>";
                     echo image_tag($produit->getImg(),array("width"=>"35px"));

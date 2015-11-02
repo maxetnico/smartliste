@@ -33,5 +33,37 @@ class adminsmartlisteActions extends sfActions
   
   public function executeChangeParamMagasin(sfWebRequest $request)
   {
+	  if($request->getParameter('mode') == "valider")
+	  {
+		$valeur = 1;		  	  
+	  }
+	  else if($request->getParameter('mode') == "attente")
+	  {
+		$valeur = 2;
+	  }
+	  else if($request->getParameter('mode') == "refuser")
+	  {
+		$valeur = 3;
+	  }
+	  if($request->hasParameter('magsel'))
+	  {
+		  $mags = $request->getParameter('magsel');
+		  foreach($mags as $mag)
+		  {
+				$tmp = MagasinPeer::retriveByPK($mag);
+				$tmp->setIdEtat($valeur);
+				$tmp->save();
+		  }
+	  }  
+	  if($request->hasParameter('prodsel'))
+	  {
+		  foreach($prods as $prod)
+		  {
+				$tmp = ProduitPeer::retriveByPK($prod);
+				$tmp->setIdEtat($valeur);
+				$tmp->save();
+		  }
+	  }  	
+      $this->redirect('adminsmartliste/index');
   }
 }

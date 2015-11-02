@@ -23,16 +23,31 @@ $(document).ready(function () {
     
     $('#bouton_etat_val').on('click',function(){
      $('#mode').val("valider");
+     $('#mode2').val("etat");
+     $('#formadmin').submit();
+    });
+    
+    $('#bouton_etat_att').on('click',function(){
+     $('#mode').val("attente");
+     $('#mode2').val("etat");
      $('#formadmin').submit();
     });
     
     $('#bouton_etat_ref').on('click',function(){
      $('#mode').val("refuser");
+     $('#mode2').val("etat");
      $('#formadmin').submit();
     });
     
     $('#bouton_visu_site').on('click',function(){
-     $('#mode').val("visusite");
+     $('#mode').val("perso");
+     $('#mode2').val("visu");
+     $('#formadmin').submit();
+    });
+	
+    $('#bouton_visu_perso').on('click',function(){
+     $('#mode').val("site");
+     $('#mode2').val("visu");
      $('#formadmin').submit();
     });
 });
